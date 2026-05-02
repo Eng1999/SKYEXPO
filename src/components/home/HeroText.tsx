@@ -75,8 +75,8 @@ export function HeroText() {
         <span className="text-[10px] tracking-[0.4em] uppercase text-white/40">05</span>
       </div>
 
-      {/* ── Main content block — responsive padding ── */}
-      <div className="absolute bottom-0 left-0 right-0 px-5 sm:px-10 md:px-16 pb-10 md:pb-16 flex flex-col gap-3">
+      {/* ── Main content block — left-center safe zone ── */}
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 px-5 sm:px-10 md:px-16 flex flex-col gap-3" style={{ maxWidth: "65vw" }}>
 
         {/* Small eyebrow label */}
         <div style={fadeUp("eyebrow")}>
@@ -89,37 +89,23 @@ export function HeroText() {
         <div
           className="font-bold tracking-tight uppercase mb-5 md:mb-8"
           style={{
-            fontSize: isAr ? "clamp(2.4rem,8vw,8rem)" : "clamp(2.8rem,10vw,10rem)",
-            lineHeight: isAr ? 1.15 : 0.9,
+            fontSize: isAr ? "clamp(2rem,6vw,6rem)" : "clamp(2.2rem,7.5vw,7.5rem)",
+            lineHeight: isAr ? 1.15 : 0.92,
+            textShadow: "0 2px 30px rgba(0,0,0,0.7)",
           }}
         >
-          <span
-            className="block"
-            style={{
-              ...fadeUp("title1"),
-              color: "transparent",
-              WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
-            }}
-          >
+          <span className="block text-white" style={fadeUp("title1")}>
             {isAr ? "حيث" : "Where"}
           </span>
-          <span
-            className="block"
-            style={{
-              ...fadeUp("title2"),
-              color: "transparent",
-              WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
-            }}
-          >
+          <span className="block" style={{ ...fadeUp("title2"), color: "var(--accent)" }}>
             {isAr ? "تتحول" : "Moments"}
           </span>
           <span
             className="block"
             style={{
               ...fadeUp("title3"),
-              color: "transparent",
-              WebkitTextStroke: isAr ? "1px rgba(255,255,255,0.6)" : "1.5px rgba(255,255,255,0.6)",
-              fontSize: isAr ? "clamp(1.4rem,5vw,5rem)" : undefined,
+              color: "rgba(255,255,255,0.80)",
+              fontSize: isAr ? "clamp(1.2rem,4vw,4rem)" : undefined,
             }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}
