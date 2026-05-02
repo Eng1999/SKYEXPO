@@ -8,7 +8,7 @@ import { ClientLogos } from "@/components/shared/ClientLogos";
 const ITEMS = [
   { id: 1,  ratio: "4/5",  labelEn: "SIRC Event",                       labelAr: "فعالية SIRC",                         year: "2024", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/sirc.mp4" },
   { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
-  { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olaya",                   labelAr: "أبراج العلية",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
+  { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olya",                    labelAr: "أبراج العليا",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
   { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },
   { id: 5,  ratio: "1/1",  labelEn: "King Abdullah City for Energy",    labelAr: "مدينة الملك عبد الله للطاقة",          year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#231650", video: "/videos/kacare.mp4" },
   { id: 6,  ratio: "4/5",  labelEn: "ANB Celebration",                  labelAr: "احتفالية بنك العربي الوطني",           year: "2024", catEn: "Corporate",   catAr: "شركات",     color: "#B83A14", video: "/videos/anb-celebration.mp4" },
