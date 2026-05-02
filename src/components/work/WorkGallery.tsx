@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { ClientLogos } from "@/components/shared/ClientLogos";
 
