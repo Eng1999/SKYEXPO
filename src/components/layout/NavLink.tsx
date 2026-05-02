@@ -9,23 +9,37 @@ interface NavLinkProps {
   labelEn: string;
   labelAr: string;
   lang: "en" | "ar";
+  color: string;
 }
 
-export function NavLink({ href, labelEn, labelAr, lang }: NavLinkProps) {
+export function NavLink({ href, labelEn, labelAr, lang, color }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
+  const label = lang === "en" ? labelEn : labelAr;
 
   return (
     <Link
       href={href}
       className={cn(
-        "relative text-sm tracking-widest uppercase transition-colors duration-500 pb-1",
-        isActive ? "text-white text-glow-accent" : "text-white/50 hover:text-white"
+        "nav-link-item relative text-xs tracking-[0.25em] uppercase pb-1 transition-colors duration-500",
+        isActive ? "text-white" : "text-white/40"
       )}
+      style={
+        {
+          "--link-color": color,
+        } as React.CSSProperties
+      }
       data-cursor-hover
     >
-      {lang === "en" ? labelEn : labelAr}
-      <span className={cn("nav-underline", isActive && "scale-x-100")} />
+      {label}
+      {/* Active/hover underline with link-specific color */}
+      <span
+        className="nav-underline"
+        style={{
+          background: color,
+          transform: isActive ? "scaleX(1)" : undefined,
+        }}
+      />
     </Link>
   );
 }

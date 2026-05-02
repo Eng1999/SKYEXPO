@@ -1,28 +1,27 @@
-import { ParallaxDepth } from "@/components/our-story/ParallaxDepth";
+import { OurStoryScroll } from "@/components/our-story/OurStoryScroll";
+import { OurStoryStats } from "@/components/our-story/OurStoryStats";
+import { OurStoryValues } from "@/components/our-story/OurStoryValues";
+import { ClientLogos } from "@/components/shared/ClientLogos";
 
 export const metadata = {
   title: "Our Story — Sky Expo",
+  description: "Founded in Riyadh in 2009, Sky Expo crafts world-class exhibitions and events.",
 };
 
 export default function OurStoryPage() {
   return (
     <>
-      <ParallaxDepth />
+      {/* Main: 3-panel 3D scroll with real video */}
+      <OurStoryScroll videoSrc="/videos/skyexpo-work-2025.mp4" />
 
-      {/* Additional story sections */}
-      <section className="min-h-screen bg-black flex items-center justify-center px-8">
-        <div className="max-w-3xl text-center">
-          <h3
-            className="text-3xl md:text-5xl font-light leading-relaxed"
-            style={{ color: "#FED172" }}
-          >
-            &ldquo;We don&apos;t build booths.<br />We build moments.&rdquo;
-          </h3>
-          <p className="mt-8 text-white/30 text-sm tracking-widest">
-            — Sky Expo Founding Vision
-          </p>
-        </div>
-      </section>
+      {/* Stats strip */}
+      <OurStoryStats />
+
+      {/* Client logos */}
+      <ClientLogos />
+
+      {/* Values + quote + CTA */}
+      <OurStoryValues />
     </>
   );
 }

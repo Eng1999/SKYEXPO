@@ -1,14 +1,10 @@
-import { CapabilitiesGrid } from "@/components/capabilities/CapabilitiesGrid";
+import { CapabilitiesSlide } from "@/components/capabilities/CapabilitiesSlide";
 
 export const metadata = {
   title: "Capabilities — Sky Expo",
+  description: "A fully integrated creative ecosystem — events, branding, media, exhibitions and more.",
 };
 
 export default function CapabilitiesPage() {
-  return (
-    <>
-      <div className="h-24 bg-black" /> {/* Navbar spacer */}
-      <CapabilitiesGrid />
-    </>
-  );
+  return <CapabilitiesSlide />;
 }
