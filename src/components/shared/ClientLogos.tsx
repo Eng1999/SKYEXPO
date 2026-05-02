@@ -1,7 +1,5 @@
 "use client";
 
-import { useLanguage } from "@/context/LanguageContext";
-
 /* ── All client logos ──────────────────────────────────────────────────── */
 const LOGOS = [
   { src: "/images/clients/stc.png",               alt: "stc" },
@@ -30,7 +28,6 @@ const LOGOS = [
   { src: "/images/clients/al-murshid.png",        alt: "Al Murshid" },
   { src: "/images/clients/cbahi.svg",             alt: "CBAHI" },
   { src: "/images/clients/ejar.svg",              alt: "Ejar" },
-  { src: "/images/clients/foreign-affairs.svg",   alt: "Ministry of Foreign Affairs" },
 ];
 
 /* Duplicate for seamless infinite scroll */
@@ -38,124 +35,121 @@ const TICKER = [...LOGOS, ...LOGOS];
 
 /* ── Component ─────────────────────────────────────────────────────────── */
 export function ClientLogos({ showLabel = true }: { showLabel?: boolean }) {
-  const { lang } = useLanguage();
-  const isAr = lang === "ar";
-
   return (
+    /* Force LTR regardless of page language — logos and ticker
+       must always scroll left-to-right so the seamless loop works */
     <section
       className="relative overflow-hidden"
-      dir={isAr ? "rtl" : "ltr"}
-      style={{ background: "#f8f8f6" }}   /* light warm white — logos look natural */
+      dir="ltr"
+      style={{ background: "#f8f8f6" }}
     >
       {/* Top border accent */}
-      <div className="h-px w-full" style={{ background: "rgba(0,0,0,0.06)" }} />
+      <div className="h-px w-full" style={{ background: "rgba(0,0,0,0.08)" }} />
 
-      <div className="py-14">
+      <div className="py-16">
         {/* Section label */}
         {showLabel && (
-          <p className="text-center text-[9px] tracking-[0.55em] uppercase mb-10"
-             style={{ color: "rgba(0,0,0,0.3)" }}>
-            {isAr ? "عملاؤنا الذين وثقوا بنا" : "Trusted by Saudi Arabia's leading organisations"}
+          <p
+            className="text-center mb-12 font-medium tracking-[0.5em] uppercase"
+            style={{ fontSize: "0.65rem", color: "rgba(0,0,0,0.4)" }}
+          >
+            Trusted by Saudi Arabia&apos;s leading organisations
           </p>
         )}
 
-        {/* Ticker row 1 — forward */}
+        {/* ── Row 1 — forward ── */}
         <div
-          className="relative flex"
+          className="relative flex overflow-hidden"
           style={{
-            maskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
           }}
         >
           <div
-            className="flex items-center gap-12 shrink-0 animate-[ticker_45s_linear_infinite]"
-            style={{ paddingRight: "3rem" }}
+            className="flex items-center gap-14 shrink-0"
+            style={{
+              animation: "ticker 50s linear infinite",
+              paddingRight: "3.5rem",
+              willChange: "transform",
+            }}
           >
             {TICKER.map((logo, i) => (
-              <div
-                key={i}
-                className="shrink-0 flex items-center justify-center"
-                style={{ width: 110, height: 56 }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  style={{
-                    maxWidth: "110px",
-                    maxHeight: "52px",
-                    width: "auto",
-                    height: "auto",
-                    objectFit: "contain",
-                    opacity: 0.55,
-                    transition: "opacity 0.4s ease, transform 0.4s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLImageElement;
-                    el.style.opacity = "1";
-                    el.style.transform = "scale(1.08)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLImageElement;
-                    el.style.opacity = "0.55";
-                    el.style.transform = "scale(1)";
-                  }}
-                />
-              </div>
+              <LogoItem key={i} logo={logo} />
             ))}
           </div>
         </div>
 
-        {/* Ticker row 2 — reverse */}
+        {/* ── Row 2 — reverse ── */}
         <div
-          className="relative flex mt-8"
+          className="relative flex overflow-hidden mt-10"
           style={{
-            maskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
           }}
         >
           <div
-            className="flex items-center gap-12 shrink-0 animate-[ticker_55s_linear_infinite_reverse]"
-            style={{ paddingRight: "3rem" }}
+            className="flex items-center gap-14 shrink-0"
+            style={{
+              animation: "ticker_reverse 60s linear infinite",
+              paddingRight: "3.5rem",
+              willChange: "transform",
+            }}
           >
             {[...TICKER].reverse().map((logo, i) => (
-              <div
-                key={i}
-                className="shrink-0 flex items-center justify-center"
-                style={{ width: 110, height: 56 }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  style={{
-                    maxWidth: "110px",
-                    maxHeight: "52px",
-                    width: "auto",
-                    height: "auto",
-                    objectFit: "contain",
-                    opacity: 0.4,
-                    transition: "opacity 0.4s ease, transform 0.4s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLImageElement;
-                    el.style.opacity = "1";
-                    el.style.transform = "scale(1.08)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLImageElement;
-                    el.style.opacity = "0.4";
-                    el.style.transform = "scale(1)";
-                  }}
-                />
-              </div>
+              <LogoItem key={i} logo={logo} dimmer />
             ))}
           </div>
         </div>
       </div>
 
       {/* Bottom border */}
-      <div className="h-px w-full" style={{ background: "rgba(0,0,0,0.06)" }} />
+      <div className="h-px w-full" style={{ background: "rgba(0,0,0,0.08)" }} />
     </section>
+  );
+}
+
+/* ── Single logo item ──────────────────────────────────────────────────── */
+function LogoItem({
+  logo,
+  dimmer = false,
+}: {
+  logo: { src: string; alt: string };
+  dimmer?: boolean;
+}) {
+  return (
+    <div
+      className="shrink-0 flex items-center justify-center"
+      style={{ width: 130, height: 64 }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={logo.src}
+        alt={logo.alt}
+        style={{
+          maxWidth: "120px",
+          maxHeight: "58px",
+          width: "auto",
+          height: "auto",
+          objectFit: "contain",
+          opacity: dimmer ? 0.5 : 0.7,
+          transition: "opacity 0.35s ease, transform 0.35s ease",
+          display: "block",
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLImageElement;
+          el.style.opacity = "1";
+          el.style.transform = "scale(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLImageElement;
+          el.style.opacity = dimmer ? "0.5" : "0.7";
+          el.style.transform = "scale(1)";
+        }}
+      />
+    </div>
   );
 }
