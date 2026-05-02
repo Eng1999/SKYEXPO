@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { CONTACT } from "@/lib/social";
 
 /* ── Why SKY EXPO ─────────────────────────────────────────────────────── */
 const WHY = [
@@ -40,80 +38,7 @@ const WHY = [
   },
 ];
 
-/* ── Open roles ───────────────────────────────────────────────────────── */
-const ROLES = [
-  { dept: "Production", deptAr: "الإنتاج",      titleEn: "Senior Event Producer",         titleAr: "منتج فعاليات أول",          type: "Full-time", loc: "Riyadh" },
-  { dept: "Creative",   deptAr: "الإبداع",       titleEn: "Art Director — Exhibitions",    titleAr: "مدير فني — معارض",           type: "Full-time", loc: "Riyadh" },
-  { dept: "Tech",       deptAr: "التقنية",       titleEn: "AV & Lighting Specialist",      titleAr: "متخصص صوت وصورة وإضاءة",    type: "Full-time", loc: "Jeddah" },
-  { dept: "Media",      deptAr: "الإعلام",       titleEn: "Videographer & Editor",         titleAr: "مصور ومونتير",              type: "Full-time", loc: "Riyadh" },
-  { dept: "Design",     deptAr: "التصميم",       titleEn: "Motion Graphics Designer",      titleAr: "مصمم جرافيك متحرك",         type: "Contract", loc: "Remote" },
-  { dept: "Operations", deptAr: "العمليات",     titleEn: "Project Coordinator",           titleAr: "منسق مشاريع",               type: "Full-time", loc: "Riyadh" },
-];
-
 const ACCENT = "#231650";
-
-/* ── Role card ────────────────────────────────────────────────────────── */
-function RoleCard({ role, isAr }: { role: typeof ROLES[0]; isAr: boolean }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="group border-b border-white/[0.06] py-6 px-4 cursor-pointer transition-all duration-400"
-      style={{
-        background: hovered ? `${ACCENT}08` : "transparent",
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      data-cursor-hover
-    >
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-6 min-w-0">
-          {/* Dept badge */}
-          <span
-            className="text-[9px] tracking-[0.4em] uppercase shrink-0 px-2 py-1 rounded"
-            style={{
-              color: ACCENT,
-              background: `${ACCENT}18`,
-              border: `1px solid ${ACCENT}25`,
-            }}
-          >
-            {isAr ? role.deptAr : role.dept}
-          </span>
-
-          {/* Title */}
-          <p
-            className="text-sm font-light text-white/60 transition-colors duration-300 truncate"
-            style={{ color: hovered ? "#fff" : undefined }}
-          >
-            {isAr ? role.titleAr : role.titleEn}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-6 shrink-0">
-          <span className="text-[10px] tracking-widest text-white/25 uppercase hidden sm:block">
-            {role.type}
-          </span>
-          <span className="text-[10px] tracking-widest text-white/25 uppercase hidden sm:block">
-            {role.loc}
-          </span>
-
-          {/* Arrow */}
-          <div
-            className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-400"
-            style={{
-              borderColor: hovered ? `${ACCENT}60` : "rgba(255,255,255,0.08)",
-              transform: hovered ? "translateX(3px)" : "translateX(0)",
-            }}
-          >
-            <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke={hovered ? ACCENT : "rgba(255,255,255,0.3)"} strokeWidth="1.5">
-              <path d="M1 7h12M8 2l5 5-5 5" />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ── Main ─────────────────────────────────────────────────────────────── */
 export function JoinSection() {
@@ -206,78 +131,8 @@ export function JoinSection() {
         </div>
       </div>
 
-      {/* ── Open positions ────────────────────────────────────────────── */}
-      <div className="px-16 py-24 border-t border-white/[0.06]">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <p className="text-[10px] tracking-[0.6em] uppercase text-white/20 mb-4">
-              {isAr ? "الوظائف المتاحة" : "Open Positions"}
-            </p>
-            <h2
-              className="text-3xl font-extralight text-white"
-            >
-              {isAr ? "وظائف مفتوحة" : "Current openings"}
-            </h2>
-          </div>
-          <p className="text-xs text-white/25 font-light">
-            {isAr ? `${ROLES.length} وظائف` : `${ROLES.length} roles`}
-          </p>
-        </div>
-
-        {/* Table header */}
-        <div className="grid grid-cols-3 pb-4 border-b border-white/[0.06] mb-2">
-          <p className="text-[9px] tracking-[0.4em] uppercase text-white/20 col-span-2">
-            {isAr ? "الدور" : "Role"}
-          </p>
-          <p className="text-[9px] tracking-[0.4em] uppercase text-white/20 text-right hidden sm:block">
-            {isAr ? "النوع / الموقع" : "Type / Location"}
-          </p>
-        </div>
-
-        <div>
-          {ROLES.map((role) => (
-            <a
-              key={role.titleEn}
-              href={`mailto:${CONTACT.email}?subject=Application: ${role.titleEn}`}
-              className="block"
-            >
-              <RoleCard role={role} isAr={isAr} />
-            </a>
-          ))}
-        </div>
-
-        {/* Open application */}
-        <div className="mt-16 pt-12 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div>
-            <p className="text-sm text-white/50 font-light mb-2">
-              {isAr ? "لم تجد ما يناسبك؟" : "Don't see a fit?"}
-            </p>
-            <p className="text-xs text-white/25 font-light">
-              {isAr
-                ? "أرسل لنا ملفك الشخصي — نحن دائماً نبحث عن مواهب استثنائية."
-                : "Send us your profile — we're always looking for exceptional people."}
-            </p>
-          </div>
-          <a
-            href={`mailto:${CONTACT.email}?subject=General Application — SKY EXPO`}
-            className="group inline-flex items-center gap-4 text-xs tracking-[0.4em] uppercase text-white/40 hover:text-white border border-white/10 hover:border-white/20 px-8 py-4 transition-all duration-500 shrink-0"
-            data-cursor-hover
-          >
-            {isAr ? "تقديم مفتوح" : "Open Application"}
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 14 14"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              className="transition-transform duration-500 group-hover:translate-x-1"
-            >
-              <path d="M1 7h12M8 2l5 5-5 5" />
-            </svg>
-          </a>
-        </div>
-      </div>
+      {/* ── Team placeholder — content coming soon ─────────────────────── */}
+      {/* Team section will be added here once assets are provided */}
 
       {/* ── Quote strip ───────────────────────────────────────────────── */}
       <div
