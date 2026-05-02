@@ -176,67 +176,60 @@ function ServiceCard({
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
         style={{
-          opacity: isActive ? 0.55 : 0.2,
+          opacity: isActive ? 0.6 : 0.25,
           transition: "opacity 0.6s ease",
         }}
       />
 
-      {/* Gradient overlays — strong for text legibility */}
+      {/* Permanent heavy dark scrim — text always readable */}
       <div
         className="absolute inset-0"
         style={{
-          background: isActive
-            ? `linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.15) 100%)`
-            : `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.25) 100%)`,
-          transition: "background 0.5s ease",
+          background: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 35%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,0.3) 100%)",
         }}
       />
 
-      {/* Accent color bloom on active */}
+      {/* Active: accent bloom */}
       {isActive && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `radial-gradient(ellipse at 50% 30%, ${svc.color}15 0%, transparent 65%)`,
+            background: `radial-gradient(ellipse at 50% 20%, ${svc.color}20 0%, transparent 60%)`,
           }}
         />
       )}
 
       {/* Service label — bottom, always visible */}
-      <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10"
+      <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12"
         style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 100%)",
+          background: "linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 100%)",
         }}
       >
+        {/* Index number tiny */}
+        <span
+          className="block text-[10px] tracking-[0.4em] uppercase mb-1.5 font-light"
+          style={{ color: svc.color, opacity: 0.8 }}
+        >
+          {String(svc.id + 1).padStart(2, "0")}
+        </span>
         <p
-          className="font-normal leading-snug whitespace-pre-line"
+          className="font-semibold leading-snug whitespace-pre-line"
           style={{
-            color: isActive ? svc.color : "rgba(255,255,255,0.92)",
-            fontSize: "clamp(0.82rem, 1.4vw, 1.05rem)",
-            textShadow: "0 1px 8px rgba(0,0,0,1), 0 2px 20px rgba(0,0,0,0.9)",
-            transition: "color 0.4s ease",
-            letterSpacing: "0.03em",
+            color: "#ffffff",
+            fontSize: "clamp(0.88rem, 1.5vw, 1.1rem)",
+            textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,1)",
+            letterSpacing: "0.01em",
           }}
         >
           {isAr ? svc.titleAr : svc.titleEn}
         </p>
+        {isActive && (
+          <div
+            className="mt-2 h-px w-8"
+            style={{ background: svc.color }}
+          />
+        )}
       </div>
-
-      {/* Top: active indicator */}
-      {isActive && (
-        <div className="absolute top-4 left-4">
-          <span
-            className="text-[8px] tracking-[0.4em] uppercase px-2.5 py-1 rounded-full font-light"
-            style={{
-              background: `${svc.color}22`,
-              color: svc.color,
-              border: `1px solid ${svc.color}40`,
-            }}
-          >
-            {isAr ? "نشط" : "Active"}
-          </span>
-        </div>
-      )}
     </div>
   );
 }
@@ -290,20 +283,23 @@ export function CapabilitiesSlide() {
     >
       {/* ── Page heading ──────────────────────────────────────────── */}
       <div className="pt-32 pb-12 px-16 max-w-6xl">
-        <p className="text-[10px] tracking-[0.6em] uppercase text-white/25 mb-5">
+        <p className="text-[11px] tracking-[0.6em] uppercase mb-5 font-medium"
+           style={{ color: "#F3742B" }}>
           {isAr ? "ما نقدّمه" : "What we deliver"}
         </p>
         <h1
-          className="font-extralight leading-[0.88] uppercase mb-5"
-          style={{ fontSize: "clamp(3rem,6vw,6.5rem)", color: "#F3742B" }}
+          className="font-bold leading-[0.9] uppercase mb-6"
+          style={{ fontSize: "clamp(3rem,6vw,6.5rem)", color: "#ffffff",
+                   textShadow: "0 2px 30px rgba(0,0,0,0.8)" }}
         >
           {isAr ? "منظومة" : "A Complete"}
           <br />
-          <span style={{ color: "#F3742B", opacity: 0.65 }}>
+          <span style={{ color: "#F3742B" }}>
             {isAr ? "إبداعية متكاملة" : "Creative Ecosystem"}
           </span>
         </h1>
-        <p className="text-sm font-light text-white/35 max-w-lg leading-relaxed">
+        <p className="text-base font-light max-w-lg leading-relaxed"
+           style={{ color: "rgba(255,255,255,0.75)" }}>
           {isAr
             ? "منظومة داخلية متكاملة تجمع بين الاستراتيجية والتصميم والإنتاج والتنفيذ."
             : "In-house ecosystem — strategy, design, production, and execution in one seamless process."}
@@ -531,11 +527,11 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
 
         {/* Title */}
         <h2
-          className="font-light leading-tight whitespace-pre-line -mt-6 mb-5"
+          className="font-bold leading-tight whitespace-pre-line -mt-6 mb-5"
           style={{
-            fontSize: "clamp(1.8rem,3vw,2.8rem)",
-            color: service.color,
-            textShadow: `0 0 40px ${service.color}30`,
+            fontSize: "clamp(2rem,3.2vw,3rem)",
+            color: "#ffffff",
+            textShadow: `0 2px 20px rgba(0,0,0,0.8), 0 0 60px ${service.color}40`,
             transition: "color 0.6s ease",
           }}
         >
@@ -544,18 +540,18 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
 
         {/* Divider */}
         <div
-          className="w-10 h-px mb-6"
-          style={{ background: service.color, transition: "background 0.6s ease" }}
+          className="w-10 h-0.5 mb-6"
+          style={{ background: service.color, transition: "background 0.6s ease",
+                   boxShadow: `0 0 12px ${service.color}` }}
         />
 
         {/* Description */}
         <p
-          className="font-light leading-relaxed mb-8"
+          className="font-normal leading-relaxed mb-8"
           style={{
-            fontSize: "clamp(0.9rem,1.3vw,1.05rem)",
-            color: "rgba(255,255,255,0.82)",
-            lineHeight: 1.85,
-            textShadow: "0 1px 4px rgba(0,0,0,0.6)",
+            fontSize: "clamp(0.95rem,1.35vw,1.1rem)",
+            color: "rgba(255,255,255,0.9)",
+            lineHeight: 1.9,
           }}
         >
           {isAr ? service.descAr : service.descEn}
