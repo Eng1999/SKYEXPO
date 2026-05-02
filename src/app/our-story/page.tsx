@@ -13,7 +13,7 @@ export default function OurStoryPage() {
     <>
       {/* Main: 3-panel 3D scroll — one video per panel */}
       <OurStoryScroll videos={[
-        "/videos/abraj-alolaya.mp4",    // Panel 01 — The Blueprint
+        "/videos/oxford-center.mp4",    // Panel 01 — The Blueprint
         "/videos/mawhiba.mp4",          // Panel 02 — A Culture of Excellence
         "/videos/roshn.mp4",            // Panel 03 — A Vision Forward
       ]} />

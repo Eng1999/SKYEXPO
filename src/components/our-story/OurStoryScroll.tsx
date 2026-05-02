@@ -105,6 +105,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
         const isActive = i === activeIdx;
         panel.style.opacity = isActive ? "1" : "0";
         panel.style.transform = "none";
+        panel.style.transition = "opacity 0.9s ease";
         panel.style.pointerEvents = isActive ? "auto" : "none";
       });
     };
@@ -172,7 +173,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
               className="absolute inset-0 flex items-end pb-10 md:pb-20 px-5 sm:px-8 md:px-16"
               style={{
                 opacity: i === 0 ? 1 : 0,
-                transition: "opacity 0.5s ease",
+                transition: "opacity 0.9s ease",
               }}
             >
               <div className="w-full grid md:grid-cols-2 gap-12 items-end">
