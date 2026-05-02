@@ -2,7 +2,6 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 
-/* ── Why SKY EXPO ─────────────────────────────────────────────────────── */
 const WHY = [
   {
     numEn: "01", numAr: "٠١",
@@ -24,16 +23,14 @@ const WHY = [
   },
   {
     numEn: "04", numAr: "٠٤",
-    titleEn: "Culture of excellence",titleAr: "ثقافة التميّز",
+    titleEn: "Culture of excellence", titleAr: "ثقافة التميّز",
     bodyEn: "A disciplined, precise environment where quality is non-negotiable.",
     bodyAr: "بيئة منضبطة ودقيقة، الجودة فيها ليست خياراً.",
   },
 ];
 
-/* Visible accent — cyan-blue from the SKY EXPO logo */
 const ACCENT = "#4CC8E8";
 
-/* ── Main ─────────────────────────────────────────────────────────────── */
 export function JoinSection() {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
@@ -42,7 +39,7 @@ export function JoinSection() {
     <div className="bg-black min-h-screen" dir={isAr ? "rtl" : "ltr"}>
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <div className="relative min-h-[70vh] flex flex-col justify-end px-16 pb-24 pt-36 overflow-hidden">
+      <div className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col justify-end px-5 sm:px-8 lg:px-16 pb-12 md:pb-24 pt-24 md:pt-36 overflow-hidden">
         {/* Subtle glow */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: `radial-gradient(ellipse at 50% 0%, rgba(76,200,232,0.08) 0%, transparent 60%)` }} />
@@ -58,17 +55,17 @@ export function JoinSection() {
         </svg>
 
         <div className="relative z-10">
-          {/* Eyebrow — visible cyan */}
-          <p className="text-[11px] tracking-[0.6em] uppercase font-semibold mb-6"
+          {/* Eyebrow */}
+          <p className="text-[11px] tracking-[0.6em] uppercase font-semibold mb-5 md:mb-6"
              style={{ color: ACCENT }}>
             {isAr ? "الانضمام إلى سكاي اكسبو" : "Join SKY EXPO"}
           </p>
 
-          {/* Big heading — WHITE, each line as block span for tight control */}
+          {/* Big heading */}
           <div
-            className="font-bold mb-10"
+            className="font-bold mb-6 md:mb-10"
             style={{
-              fontSize: isAr ? "clamp(3rem,8.5vw,9.5rem)" : "clamp(3.5rem,9vw,10rem)",
+              fontSize: isAr ? "clamp(2.8rem,8.5vw,9.5rem)" : "clamp(3rem,9vw,10rem)",
               textShadow: "0 2px 40px rgba(0,0,0,0.6)",
               lineHeight: isAr ? 1.15 : 0.92,
             }}
@@ -88,8 +85,8 @@ export function JoinSection() {
             )}
           </div>
 
-          {/* Description — visible white */}
-          <p className="text-base max-w-lg font-light leading-relaxed"
+          {/* Description */}
+          <p className="text-sm md:text-base max-w-lg font-light leading-relaxed"
              style={{ color: "rgba(255,255,255,0.75)" }}>
             {isAr
               ? "لسنا مجرد شركة فعاليات — نحن بيت إبداعي يصنع لحظات تبقى في الذاكرة. إذا كنت تؤمن بالتميّز، فمكانك هنا."
@@ -99,50 +96,44 @@ export function JoinSection() {
       </div>
 
       {/* ── Why join ──────────────────────────────────────────────────── */}
-      <div className="px-16 py-24 border-t border-white/[0.06]">
-
-        {/* Section label — visible */}
-        <p className="text-[12px] tracking-[0.55em] uppercase font-semibold mb-16"
+      <div className="px-5 sm:px-8 lg:px-16 py-12 md:py-24 border-t border-white/[0.06]">
+        <p className="text-[12px] tracking-[0.55em] uppercase font-semibold mb-10 md:mb-16"
            style={{ color: ACCENT }}>
           {isAr ? "لماذا سكاي اكسبو؟" : "Why SKY EXPO"}
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {WHY.map((w) => (
             <div key={w.numEn}>
-              {/* Number */}
-              <p className="text-[13px] tracking-[0.35em] font-bold mb-5"
+              <p className="text-[13px] tracking-[0.35em] font-bold mb-4 md:mb-5"
                  style={{ color: ACCENT }}>
                 {isAr ? w.numAr : w.numEn}
               </p>
-              {/* Title — full white */}
               <p className="text-lg font-semibold text-white mb-3 leading-snug">
                 {isAr ? w.titleAr : w.titleEn}
               </p>
-              {/* Body — visible grey */}
               <p className="text-sm leading-relaxed font-light"
                  style={{ color: "rgba(255,255,255,0.70)" }}>
                 {isAr ? w.bodyAr : w.bodyEn}
               </p>
-              {/* Thin accent line */}
-              <div className="mt-5 h-px w-8" style={{ background: ACCENT, opacity: 0.5 }} />
+              <div className="mt-4 md:mt-5 h-px w-8" style={{ background: ACCENT, opacity: 0.5 }} />
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── Team placeholder ────────────────────────────────────────────── */}
+      {/* ── Team placeholder ── */}
       {/* Team section will be added here once assets are provided */}
 
       {/* ── Quote strip ───────────────────────────────────────────────── */}
-      <div className="px-16 py-20 border-t border-white/[0.06]"
+      <div className="px-5 sm:px-8 lg:px-16 py-14 md:py-20 border-t border-white/[0.06]"
            style={{ background: "rgba(76,200,232,0.04)" }}>
-        <p className="text-2xl md:text-4xl font-light text-center leading-relaxed text-white">
+        <p className="text-xl sm:text-2xl md:text-4xl font-light text-center leading-relaxed text-white">
           {isAr
             ? '"نحن لا نبني فعاليات — نحن نبني ذكريات لا تُنسى."'
             : '"We don\'t build events — we build memories."'}
         </p>
-        <p className="text-center text-[11px] tracking-[0.55em] uppercase mt-6 font-medium"
+        <p className="text-center text-[11px] tracking-[0.55em] uppercase mt-5 md:mt-6 font-medium"
            style={{ color: ACCENT }}>
           — SKY EXPO
         </p>

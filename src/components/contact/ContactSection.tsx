@@ -4,12 +4,11 @@ import { useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { CONTACT, SOCIAL } from "@/lib/social";
 
-const ACCENT = "#C0392B"; /* vivid red-rose accent — visible on black */
+const ACCENT = "#C0392B";
 
-/* ── Geometric SVG element ─────────────────────────────────────────────── */
 function GeometricElement() {
   return (
-    <svg width="220" height="220" viewBox="0 0 260 260" fill="none"
+    <svg width="160" height="160" viewBox="0 0 260 260" fill="none"
       xmlns="http://www.w3.org/2000/svg" className="opacity-15" aria-hidden>
       <circle cx="130" cy="130" r="128" stroke="white" strokeWidth="0.5" />
       <circle cx="130" cy="130" r="96"  stroke="white" strokeWidth="0.5" />
@@ -29,7 +28,6 @@ function GeometricElement() {
   );
 }
 
-/* ── Contact form ──────────────────────────────────────────────────────── */
 function ContactForm({ isAr }: { isAr: boolean }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -45,7 +43,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
 
   if (sent) {
     return (
-      <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
+      <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center">
         <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center mb-8">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="2">
             <path d="M20 6L9 17l-5-5" />
@@ -66,7 +64,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
     "w-full bg-transparent border-b border-white/20 focus:border-white/60 outline-none text-white text-sm font-light py-4 placeholder-white/30 transition-colors duration-400";
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-10">
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-10">
       <div>
         <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
           {isAr ? "الاسم الكامل" : "Full Name"}
@@ -75,7 +73,8 @@ function ContactForm({ isAr }: { isAr: boolean }) {
           className={inputClass} dir={isAr ? "rtl" : "ltr"} />
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
+      {/* Email + Phone: stack on mobile, side-by-side on md+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
         <div>
           <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
             {isAr ? "البريد الإلكتروني" : "Email"}
@@ -95,7 +94,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
         <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
           {isAr ? "رسالتك" : "Message"}
         </label>
-        <textarea required rows={5}
+        <textarea required rows={4}
           placeholder={isAr ? "أخبرنا عن مشروعك..." : "Tell us about your project..."}
           className={`${inputClass} resize-none leading-relaxed`} dir={isAr ? "rtl" : "ltr"} />
       </div>
@@ -118,7 +117,6 @@ function ContactForm({ isAr }: { isAr: boolean }) {
   );
 }
 
-/* ── Main component ─────────────────────────────────────────────────────── */
 export function ContactSection() {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
@@ -129,21 +127,23 @@ export function ContactSection() {
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse at ${isAr ? "80%" : "20%"} 40%, rgba(192,57,43,0.08) 0%, transparent 55%)` }} />
 
-      <div className="relative z-10 grid md:grid-cols-2 min-h-screen">
+      {/* Stack on mobile, 2-col on md+ */}
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 min-h-screen">
+
         {/* ── LEFT PANEL ── */}
-        <div className="flex flex-col justify-between px-12 pt-36 pb-16 border-r border-white/[0.06]">
+        <div className="flex flex-col justify-between px-5 sm:px-8 md:px-12 pt-24 md:pt-36 pb-10 md:pb-16 border-b md:border-b-0 md:border-r border-white/[0.06]">
           <div>
             {/* Eyebrow */}
-            <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-12"
+            <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-8 md:mb-12"
                style={{ color: ACCENT }}>
               {isAr ? "تواصل معنا" : "Let's Connect"}
             </p>
 
-            {/* Giant headline — block spans for precise line spacing */}
+            {/* Giant headline */}
             <div
-              className="font-bold mb-14"
+              className="font-bold mb-8 md:mb-14"
               style={{
-                fontSize: isAr ? "clamp(3rem,6.5vw,6.5rem)" : "clamp(3.5rem,7vw,7rem)",
+                fontSize: isAr ? "clamp(2.5rem,6.5vw,6.5rem)" : "clamp(2.8rem,7vw,7rem)",
                 textShadow: "0 2px 30px rgba(0,0,0,0.5)",
                 lineHeight: isAr ? 1.2 : 0.9,
               }}
@@ -163,8 +163,8 @@ export function ContactSection() {
               )}
             </div>
 
-            {/* Geometric element */}
-            <div className="mb-14 relative inline-block">
+            {/* Geometric element — hide on small mobile */}
+            <div className="hidden sm:block mb-10 md:mb-14 relative inline-block">
               <GeometricElement />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                 <p className="text-[9px] tracking-[0.5em] uppercase text-white/40 font-medium">SKY EXPO</p>
@@ -172,7 +172,7 @@ export function ContactSection() {
             </div>
 
             {/* Contact info */}
-            <div className="flex flex-col gap-5 mb-12">
+            <div className="flex flex-col gap-4 md:gap-5 mb-8 md:mb-12">
               {[
                 { href: `mailto:${CONTACT.email}`, label: CONTACT.email, icon: <path d="M2 7l10 7 10-7" />, box: true },
                 { href: `tel:${CONTACT.phone1.replace(/\s/g,"")}`, label: CONTACT.phone1, icon: <path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.08 4.18 2 2 0 015.09 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />, box: false },
@@ -181,7 +181,7 @@ export function ContactSection() {
                 <a key={i} href={item.href}
                   className="flex items-center gap-4 text-sm font-light text-white/70 hover:text-white transition-colors duration-400"
                   data-cursor-hover>
-                  <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                  <span className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center shrink-0">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5">
                       {item.box && <rect x="2" y="4" width="20" height="16" rx="2" />}
                       {item.icon}
@@ -193,10 +193,10 @@ export function ContactSection() {
             </div>
 
             {/* Social */}
-            <div className="flex items-center gap-3 mb-16">
+            <div className="flex items-center gap-3 mb-8 md:mb-16">
               {SOCIAL.map((s) => (
                 <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                  className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center
+                  className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center
                     text-white/50 hover:text-white hover:border-white/40 transition-all duration-400"
                   data-cursor-hover>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -208,7 +208,7 @@ export function ContactSection() {
           </div>
 
           {/* City strip */}
-          <div className="flex gap-8 border-t border-white/[0.06] pt-8">
+          <div className="flex flex-wrap gap-6 md:gap-8 border-t border-white/[0.06] pt-6 md:pt-8">
             {CONTACT.locations.map((loc) => (
               <div key={loc.cityEn}>
                 <p className="text-[10px] tracking-[0.4em] uppercase font-medium mb-1"
@@ -222,8 +222,8 @@ export function ContactSection() {
         </div>
 
         {/* ── RIGHT PANEL ── */}
-        <div className="flex flex-col justify-center px-12 pt-36 pb-16">
-          <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-12"
+        <div className="flex flex-col justify-center px-5 sm:px-8 md:px-12 py-12 md:pt-36 md:pb-16">
+          <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-8 md:mb-12"
              style={{ color: "rgba(255,255,255,0.45)" }}>
             {isAr ? "أرسل رسالة" : "Send a message"}
           </p>

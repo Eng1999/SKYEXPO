@@ -151,7 +151,7 @@ export function HomeFeaturedWork() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-black py-24 px-8 md:px-16"
+      className="relative bg-black py-12 md:py-24 px-4 sm:px-8 md:px-16"
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* Header */}
@@ -167,7 +167,7 @@ export function HomeFeaturedWork() {
           <p className="text-[10px] tracking-[0.6em] uppercase text-white/55 mb-3">
             {isAr ? "من أعمالنا" : "Selected Work"}
           </p>
-          <h2 className="text-4xl md:text-5xl font-extralight text-white leading-none">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extralight text-white leading-none">
             {isAr ? "لحظات حقيقية" : "Real Moments"}
           </h2>
         </div>
@@ -181,30 +181,30 @@ export function HomeFeaturedWork() {
         </a>
       </div>
 
-      {/* Grid — row 1: wide + narrow */}
+      {/* Grid — row 1: wide + narrow (stack on mobile) */}
       <div
-        className="grid grid-cols-12 gap-3 mb-3"
+        className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3"
         style={{
           opacity: inView ? 1 : 0,
           transform: inView ? "translateY(0)" : "translateY(30px)",
           transition: "opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s",
         }}
       >
-        <div className="col-span-7"><FeaturedCard item={FEATURED[0]} /></div>
-        <div className="col-span-5"><FeaturedCard item={FEATURED[1]} /></div>
+        <div className="md:col-span-7"><FeaturedCard item={FEATURED[0]} /></div>
+        <div className="md:col-span-5"><FeaturedCard item={FEATURED[1]} /></div>
       </div>
 
-      {/* Grid — row 2: narrow + wide */}
+      {/* Grid — row 2: narrow + wide (stack on mobile) */}
       <div
-        className="grid grid-cols-12 gap-3"
+        className="grid grid-cols-1 md:grid-cols-12 gap-3"
         style={{
           opacity: inView ? 1 : 0,
           transform: inView ? "translateY(0)" : "translateY(40px)",
           transition: "opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s",
         }}
       >
-        <div className="col-span-5"><FeaturedCard item={FEATURED[2]} /></div>
-        <div className="col-span-7"><FeaturedCard item={FEATURED[3]} /></div>
+        <div className="md:col-span-5"><FeaturedCard item={FEATURED[2]} /></div>
+        <div className="md:col-span-7"><FeaturedCard item={FEATURED[3]} /></div>
       </div>
 
       {/* CTA strip */}
@@ -217,7 +217,7 @@ export function HomeFeaturedWork() {
       >
         <a
           href="/work"
-          className="group inline-flex items-center gap-6 text-xs tracking-[0.5em] uppercase text-white/30 hover:text-white border border-white/[0.08] hover:border-white/20 px-12 py-5 transition-all duration-700"
+          className="group inline-flex items-center gap-4 md:gap-6 text-xs tracking-[0.5em] uppercase text-white/30 hover:text-white border border-white/[0.08] hover:border-white/20 px-6 md:px-12 py-4 md:py-5 transition-all duration-700"
           data-cursor-hover
         >
           {isAr ? "استكشف كل مشاريعنا" : "Explore All Projects"}

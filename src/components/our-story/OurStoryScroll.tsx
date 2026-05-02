@@ -199,12 +199,12 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
         <AccentOverlay />
 
         {/* ── Panel stack ────────────────────────────────────────── */}
-        <div className="absolute inset-0 flex items-end pb-20 px-16" style={{ perspective: "1200px" }}>
+        <div className="absolute inset-0 flex items-end pb-10 md:pb-20 px-5 sm:px-8 md:px-16" style={{ perspective: "1200px" }}>
           {PANELS.map((panel, i) => (
             <div
               key={i}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-end pb-20 px-16 will-change-transform"
+              className="absolute inset-0 flex items-end pb-10 md:pb-20 px-5 sm:px-8 md:px-16 will-change-transform"
               style={{
                 // Panel 0 starts visible; others start hidden below
                 opacity: i === 0 ? 1 : 0,
@@ -219,8 +219,8 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
                 <div>
                   {/* Number */}
                   <span
-                    className="block text-[10rem] font-extralight leading-none select-none mb-0"
-                    style={{ color: panel.color, opacity: 0.1, lineHeight: 1 }}
+                    className="block font-extralight leading-none select-none mb-0"
+                    style={{ color: panel.color, opacity: 0.1, lineHeight: 1, fontSize: "clamp(4rem, 15vw, 10rem)" }}
                   >
                     {isAr ? panel.numAr : panel.numEn}
                   </span>
@@ -269,7 +269,7 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
         </div>
 
         {/* ── Top bar: logo area already in Navbar, skip. Add panel counter ── */}
-        <div className="absolute top-28 left-16 flex items-center gap-4" style={{ right: isAr ? "auto" : undefined }}>
+        <div className="absolute top-20 md:top-28 left-5 md:left-16 flex items-center gap-4" style={{ right: isAr ? "auto" : undefined }}>
           <span
             className="text-xs tracking-[0.4em] uppercase text-white/55"
           >
@@ -282,7 +282,7 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
         </div>
 
         {/* ── Vertical side: section count ── */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3">
+        <div className="hidden md:flex absolute right-5 md:right-8 top-1/2 -translate-y-1/2 flex-col items-center gap-3">
           {PANELS.map((p, i) => (
             <div
               key={i}

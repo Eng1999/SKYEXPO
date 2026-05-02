@@ -31,7 +31,7 @@ export function OurStoryHero() {
 
   return (
     <section
-      className="relative min-h-screen flex items-end pb-20 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-end pb-12 md:pb-20 overflow-hidden bg-black"
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* Background gradient */}
@@ -63,7 +63,7 @@ export function OurStoryHero() {
         }}
       />
 
-      <div className="relative z-10 w-full px-16">
+      <div className="relative z-10 w-full px-5 sm:px-8 lg:px-16">
         {/* Page label */}
         <div style={in1}>
           <p className="text-xs tracking-[0.5em] uppercase text-white/30 mb-8">
@@ -107,7 +107,7 @@ export function OurStoryHero() {
 
         {/* Scroll indicator */}
         <div
-          className="absolute bottom-8 right-16 flex flex-col items-center gap-2"
+          className="hidden md:flex absolute bottom-8 right-8 lg:right-16 flex-col items-center gap-2"
           style={{ opacity: vis ? 0.3 : 0, transition: "opacity 2s ease 1s" }}
         >
           <span className="text-[10px] tracking-[0.4em] uppercase text-white">

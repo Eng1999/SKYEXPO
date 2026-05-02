@@ -52,7 +52,7 @@ export function OurStoryTimeline() {
 
   return (
     <section
-      className="relative bg-black py-24 px-16"
+      className="relative bg-black py-12 md:py-24 px-5 sm:px-8 lg:px-16"
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* Section label */}
@@ -69,7 +69,7 @@ export function OurStoryTimeline() {
       <div className="max-w-6xl mx-auto relative">
         {/* Vertical line */}
         <div
-          className="absolute top-0 bottom-0 w-px bg-white/[0.06]"
+          className="hidden md:block absolute top-0 bottom-0 w-px bg-white/[0.06]"
           style={{ left: isAr ? "auto" : "5rem", right: isAr ? "5rem" : "auto" }}
         />
 
@@ -109,7 +109,7 @@ function TimelineItem({
   return (
     <div
       ref={ref}
-      className="relative flex gap-16 py-12 border-b border-white/[0.05]"
+      className="relative flex gap-6 md:gap-16 py-8 md:py-12 border-b border-white/[0.05]"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateX(0)" : `translateX(${isAr ? 30 : -30}px)`,

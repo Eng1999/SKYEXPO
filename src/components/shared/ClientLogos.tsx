@@ -46,7 +46,7 @@ export function ClientLogos({ showLabel = true }: { showLabel?: boolean }) {
       {/* Top border accent */}
       <div className="h-px w-full" style={{ background: "rgba(0,0,0,0.08)" }} />
 
-      <div className="py-16">
+      <div className="py-10 md:py-16">
         {/* Section label */}
         {showLabel && (
           <p
@@ -123,15 +123,15 @@ function LogoItem({
   return (
     <div
       className="shrink-0 flex items-center justify-center"
-      style={{ width: 130, height: 64 }}
+      style={{ width: "clamp(90px, 20vw, 130px)", height: 56 }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={logo.src}
         alt={logo.alt}
         style={{
-          maxWidth: "120px",
-          maxHeight: "58px",
+          maxWidth: "clamp(80px, 18vw, 120px)",
+          maxHeight: "52px",
           width: "auto",
           height: "auto",
           objectFit: "contain",
