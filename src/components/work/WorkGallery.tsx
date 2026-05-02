@@ -26,14 +26,16 @@ function GalleryCard({ item, isAr, soundOn }: {
   isAr: boolean;
   soundOn: boolean;
 }) {
-  const cardRef    = useRef<HTMLDivElement>(null);
-  const videoRef   = useRef<HTMLVideoElement>(null);
-  const rafRef     = useRef<number>(0);
-  const [tilt, setTilt]       = useState({ x: 0, y: 0, px: 50, py: 50 });
-  const [hovered, setHovered] = useState(false);
-  const [loaded, setLoaded]   = useState(false);
+  const cardRef      = useRef<HTMLDivElement>(null);
+  const videoRef     = useRef<HTMLVideoElement>(null);
+  const expandedRef  = useRef<HTMLVideoElement>(null);
+  const rafRef       = useRef<number>(0);
+  const [tilt, setTilt]         = useState({ x: 0, y: 0, px: 50, py: 50 });
+  const [hovered, setHovered]   = useState(false);
+  const [loaded, setLoaded]     = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  /* Lazy-load video when card enters viewport */
+  /* Lazy-load when card enters viewport */
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -45,11 +47,11 @@ function GalleryCard({ item, isAr, soundOn }: {
     return () => obs.disconnect();
   }, []);
 
-  /* Play / pause on hover + sync mute state */
+  /* Play / pause thumbnail video on hover */
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !loaded) return;
-    if (hovered) {
+    if (hovered && !expanded) {
       v.muted = !soundOn;
       v.play().catch(() => {});
     } else {
@@ -57,9 +59,22 @@ function GalleryCard({ item, isAr, soundOn }: {
       v.pause();
       v.currentTime = 0;
     }
-  }, [hovered, loaded, soundOn]);
+  }, [hovered, loaded, soundOn, expanded]);
 
-  /* Throttled tilt via rAF */
+  /* Sync mute on expanded video */
+  useEffect(() => {
+    const v = expandedRef.current;
+    if (!v) return;
+    v.muted = !soundOn;
+  }, [soundOn]);
+
+  /* Lock body scroll when expanded */
+  useEffect(() => {
+    document.body.style.overflow = expanded ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [expanded]);
+
+  /* Throttled tilt */
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
@@ -80,6 +95,71 @@ function GalleryCard({ item, isAr, soundOn }: {
   }, []);
 
   return (
+    <>
+    {/* ── Expanded lightbox ─────────────────────────────────────── */}
+    {expanded && (
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center"
+        style={{
+          background: "rgba(0,0,0,0.88)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          animation: "fadeIn 0.35s ease",
+        }}
+        onMouseLeave={() => setExpanded(false)}
+        onClick={() => setExpanded(false)}
+      >
+        <div
+          className="relative flex flex-col"
+          style={{
+            width: "min(82vw, 1280px)",
+            maxHeight: "82vh",
+            animation: "scaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1)",
+          }}
+          onClick={e => e.stopPropagation()}
+          onMouseLeave={() => setExpanded(false)}
+        >
+          {/* Video */}
+          <video
+            ref={expandedRef}
+            src={item.video}
+            autoPlay
+            muted={!soundOn}
+            loop
+            playsInline
+            className="w-full rounded-2xl"
+            style={{
+              maxHeight: "74vh",
+              objectFit: "contain",
+              background: "#000",
+              boxShadow: `0 40px 120px rgba(0,0,0,0.9), 0 0 0 1px ${item.color}25`,
+            }}
+          />
+
+          {/* Info bar */}
+          <div className="flex items-center justify-between mt-4 px-1">
+            <div className="flex items-center gap-3">
+              <span
+                className="text-[9px] tracking-[0.4em] uppercase px-2 py-1 rounded"
+                style={{ background: `${item.color}20`, color: item.color, border: `1px solid ${item.color}40` }}
+              >
+                {isAr ? item.catAr : item.catEn}
+              </span>
+              <span className="text-[10px] tracking-widest text-white/40">{item.year}</span>
+            </div>
+            <p className="text-sm font-light" style={{ color: item.color }}>
+              {isAr ? item.labelAr : item.labelEn}
+            </p>
+          </div>
+
+          {/* Close hint */}
+          <p className="text-center text-[10px] tracking-[0.4em] uppercase text-white/25 mt-3">
+            {isAr ? "حرّك الماوس للخارج للإغلاق" : "Move mouse out to close"}
+          </p>
+        </div>
+      </div>
+    )}
+
     <div
       ref={cardRef}
       className="relative cursor-none group"
@@ -87,6 +167,7 @@ function GalleryCard({ item, isAr, soundOn }: {
       onMouseMove={onMouseMove}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onClick={() => setExpanded(true)}
       data-cursor-hover
     >
       <div
@@ -106,13 +187,12 @@ function GalleryCard({ item, isAr, soundOn }: {
           willChange: "transform",
         }}
       >
-        {/* Video — lazy-loaded, plays on hover only */}
+        {/* Thumbnail video */}
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
           src={loaded ? item.video : undefined}
-          muted loop playsInline
-          preload="none"
+          muted loop playsInline preload="none"
           style={{ filter: "brightness(0.7) saturate(0.85)" }}
         />
 
@@ -158,22 +238,23 @@ function GalleryCard({ item, isAr, soundOn }: {
           </p>
         </div>
 
-        {/* Plus icon */}
+        {/* Expand icon on hover */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500"
           style={{ opacity: hovered ? 1 : 0, transform: hovered ? "scale(1)" : "scale(0.6)" }}
         >
           <div
-            className="w-10 h-10 rounded-full border flex items-center justify-center backdrop-blur-sm"
-            style={{ borderColor: `${item.color}50`, background: `${item.color}10` }}
+            className="w-11 h-11 rounded-full border flex items-center justify-center backdrop-blur-sm"
+            style={{ borderColor: `${item.color}60`, background: `${item.color}15` }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={item.color} strokeWidth="1.5">
-              <path d="M7 1v12M1 7h12" />
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={item.color} strokeWidth="1.8" strokeLinecap="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
             </svg>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
 
