@@ -99,68 +99,13 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
         }
       });
 
+      // Text panels: static position, just fade active one in/out
       panelRefs.current.forEach((panel, i) => {
         if (!panel) return;
-
-        // Progress within this panel's segment [0..1]
-        const segStart = i * segSize;
-        const segEnd = (i + 1) * segSize;
-        // Clamp p to [-0.5 .. 1.5] so panels fully enter/exit
-        const p = (raw - segStart) / segSize; // -∞ to +∞, clamped next
-
-        let opacity = 0;
-        let translateY = 0;
-        let translateZ = 0;
-        let rotateX = 0;
-        let scale = 1;
-
-        if (p < -0.15) {
-          // Panel hasn't arrived yet — sitting at depth below
-          const t = Math.max(-1, p + 0.15); // -0.85..0
-          opacity = 0;
-          translateZ = t * 200;
-          rotateX = t * 16;
-          translateY = -t * 50;
-          scale = 1 + t * 0.05;
-        } else if (p < 0) {
-          // Entrance zone — panel rises from depth as prev exits
-          const t = (p + 0.15) / 0.15; // 0→1
-          opacity = t;
-          translateZ = (1 - t) * 200 * -1; // -200→0
-          rotateX = (1 - t) * 16 * -1;     // -16→0
-          translateY = (1 - t) * 50;        // 50→0
-          scale = 1 - (1 - t) * 0.05;
-        } else if (p <= 0.75) {
-          // Panel is fully active
-          opacity = 1;
-          translateZ = 0;
-          rotateX = 0;
-          translateY = 0;
-          scale = 1;
-        } else if (p <= 1) {
-          // Exit zone — panel rises and shrinks into distance
-          const t = (p - 0.75) / 0.25; // 0→1
-          opacity = 1 - t;
-          translateZ = t * -180;
-          rotateX = t * -12;
-          translateY = t * -30;
-          scale = 1 - t * 0.04;
-        } else {
-          // Panel has passed
-          opacity = 0;
-          translateZ = -180;
-          translateY = -30;
-        }
-
-        panel.style.opacity = String(Math.max(0, Math.min(1, opacity)));
-        panel.style.transform = `
-          perspective(1200px)
-          translateZ(${translateZ}px)
-          translateY(${translateY}px)
-          rotateX(${rotateX}deg)
-          scale(${scale})
-        `;
-        panel.style.pointerEvents = p >= 0 && p <= 1 ? "auto" : "none";
+        const isActive = i === activeIdx;
+        panel.style.opacity = isActive ? "1" : "0";
+        panel.style.transform = "none";
+        panel.style.pointerEvents = isActive ? "auto" : "none";
       });
     };
 
@@ -224,14 +169,10 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
             <div
               key={i}
               ref={(el) => { panelRefs.current[i] = el; }}
-              className="absolute inset-0 flex items-end pb-10 md:pb-20 px-5 sm:px-8 md:px-16 will-change-transform"
+              className="absolute inset-0 flex items-end pb-10 md:pb-20 px-5 sm:px-8 md:px-16"
               style={{
-                // Panel 0 starts visible; others start hidden below
                 opacity: i === 0 ? 1 : 0,
-                transform: i === 0
-                  ? "perspective(1200px) translateZ(0px) translateY(0px) rotateX(0deg) scale(1)"
-                  : "perspective(1200px) translateZ(-200px) translateY(50px) rotateX(-16deg) scale(0.95)",
-                transformStyle: "preserve-3d",
+                transition: "opacity 0.5s ease",
               }}
             >
               <div className="w-full grid md:grid-cols-2 gap-12 items-end">
