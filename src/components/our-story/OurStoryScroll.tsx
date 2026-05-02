@@ -71,6 +71,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
   const panelRefs   = useRef<(HTMLDivElement | null)[]>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const counterRef  = useRef<HTMLSpanElement>(null);
+  const rafRef      = useRef<number>(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -79,7 +80,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
     const TOTAL   = PANELS.length;
     const segSize = 1 / TOTAL;
 
-    const onScroll = () => {
+    const update = () => {
       const rect        = section.getBoundingClientRect();
       const totalHeight = section.offsetHeight - window.innerHeight;
       const raw         = Math.max(0, Math.min(1, -rect.top / totalHeight));
@@ -155,9 +156,18 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
       });
     };
 
+    /* RAF-throttled scroll handler */
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    update(); // init
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
   }, [isAr]);
 
   /* ── single video src (videoSrc prop) or per-panel (videos prop) ── */
@@ -180,7 +190,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
               ref={bgVideoRef}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: "brightness(0.6) saturate(0.8)" }}
-              autoPlay muted loop playsInline
+              autoPlay muted loop playsInline preload="metadata"
             >
               <source src={bgSrc} type="video/mp4" />
             </video>

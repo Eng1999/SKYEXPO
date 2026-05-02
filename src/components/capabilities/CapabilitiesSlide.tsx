@@ -167,13 +167,14 @@ function ServiceCard({
       onClick={onClick}
       data-cursor-hover
     >
-      {/* Real video */}
+      {/* Video — preload none, play only when active */}
       <video
         ref={videoRef}
         src={svc.video}
         muted
         loop
         playsInline
+        preload="none"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           opacity: isActive ? 0.6 : 0.25,

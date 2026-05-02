@@ -25,21 +25,52 @@ function GalleryCard({ item, isAr }: {
   item: typeof ITEMS[0];
   isAr: boolean;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0, px: 50, py: 50 });
+  const cardRef    = useRef<HTMLDivElement>(null);
+  const videoRef   = useRef<HTMLVideoElement>(null);
+  const rafRef     = useRef<number>(0);
+  const [tilt, setTilt]       = useState({ x: 0, y: 0, px: 50, py: 50 });
   const [hovered, setHovered] = useState(false);
+  const [loaded, setLoaded]   = useState(false);
 
-  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  /* Lazy-load video when card enters viewport */
+  useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const cx = (e.clientX - rect.left) / rect.width;
-    const cy = (e.clientY - rect.top)  / rect.height;
-    setTilt({ x: (cy - 0.5) * -16, y: (cx - 0.5) * 16, px: cx * 100, py: cy * 100 });
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setLoaded(true); obs.disconnect(); } },
+      { rootMargin: "200px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Play / pause on hover */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !loaded) return;
+    if (hovered) v.play().catch(() => {});
+    else { v.pause(); v.currentTime = 0; }
+  }, [hovered, loaded]);
+
+  /* Throttled tilt via rAF */
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const el = cardRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width;
+      const cy = (e.clientY - rect.top)  / rect.height;
+      setTilt({ x: (cy - 0.5) * -12, y: (cx - 0.5) * 12, px: cx * 100, py: cy * 100 });
+    });
   }, []);
 
   const onEnter = useCallback(() => setHovered(true), []);
-  const onLeave = useCallback(() => { setHovered(false); setTilt({ x: 0, y: 0, px: 50, py: 50 }); }, []);
+  const onLeave = useCallback(() => {
+    cancelAnimationFrame(rafRef.current);
+    setHovered(false);
+    setTilt({ x: 0, y: 0, px: 50, py: 50 });
+  }, []);
 
   return (
     <div
@@ -68,11 +99,13 @@ function GalleryCard({ item, isAr }: {
           willChange: "transform",
         }}
       >
-        {/* Video */}
+        {/* Video — lazy-loaded, plays on hover only */}
         <video
+          ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src={item.video}
-          muted loop playsInline autoPlay
+          src={loaded ? item.video : undefined}
+          muted loop playsInline
+          preload="none"
           style={{ filter: "brightness(0.7) saturate(0.85)" }}
         />
 

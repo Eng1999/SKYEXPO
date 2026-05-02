@@ -128,6 +128,8 @@ function LogoItem({
       <img
         src={logo.src}
         alt={logo.alt}
+        loading="lazy"
+        decoding="async"
         style={{
           maxWidth: "clamp(80px, 18vw, 120px)",
           maxHeight: "52px",
