@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 export function HomeIntro() {
   const { lang } = useLanguage();
@@ -79,22 +80,22 @@ export function HomeIntro() {
               : "Sky Expo is a Saudi company specializing in designing and executing international exhibitions and events to exceptional global standards. We don't produce events — we craft moments that endure."}
           </p>
 
-          {/* Stat row */}
-          <div className="flex gap-10">
+          {/* Stat row — animated counters */}
+          <div className="flex gap-12">
             {[
-              { n: "15+", label: isAr ? "عاماً" : "Years" },
-              { n: "60+", label: isAr ? "عميل" : "Clients" },
-              { n: "70+", label: isAr ? "متخصص" : "Experts" },
-            ].map(({ n, label }) => (
-              <div key={n}>
-                <span
-                  className="block text-2xl font-light"
-                  style={{ color: "var(--accent)", transition: "color 0.8s ease" }}
-                >
-                  {n}
-                </span>
-                <span className="text-xs tracking-widest uppercase font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>{label}</span>
-              </div>
+              { value: 15,  suffix: "+", labelEn: "Years",   labelAr: "عاماً",   color: "#4CC8E8", delay: 0   },
+              { value: 60,  suffix: "+", labelEn: "Clients",  labelAr: "عميل",   color: "#F3742B", delay: 150 },
+              { value: 70,  suffix: "+", labelEn: "Experts",  labelAr: "متخصص",  color: "#FED172", delay: 300 },
+            ].map((s) => (
+              <AnimatedStat
+                key={s.labelEn}
+                value={s.value}
+                suffix={s.suffix}
+                label={isAr ? s.labelAr : s.labelEn}
+                color={s.color}
+                delay={s.delay}
+                inView={inView}
+              />
             ))}
           </div>
 
