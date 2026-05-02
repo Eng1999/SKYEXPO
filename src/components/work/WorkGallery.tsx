@@ -4,24 +4,27 @@ import { useRef, useState, useCallback } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { ClientLogos } from "@/components/shared/ClientLogos";
 
-/* ── Gallery items — placeholders until real photos are added ──────── */
+/* ── Gallery items ─────────────────────────────────────────────────── */
 const ITEMS = [
-  { id: 1,  ratio: "4/5",  label: "SIRC Event",                  year: "2024", cat: "Conference",  color: "#B83A14", video: "/videos/sirc.mp4" },
-  { id: 2,  ratio: "1/1",  label: "SKY EXPO Showreel 2025",      year: "2025", cat: "Production",  color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
-  { id: 3,  ratio: "16/9", label: "Abraj Al Olaya",              year: "2024", cat: "Exhibition",  color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
-  { id: 4,  ratio: "3/4",  label: "Promo Reel",                  year: "2024", cat: "Media",       color: "#612E37", video: "/videos/promo-alt.mp4" },
-  { id: 5,  ratio: "1/1",  label: "Flynas Event",                year: "2024", cat: "Event",       color: "#231650", video: "/videos/flynas-event.mp4" },
-  { id: 6,  ratio: "4/5",  label: "ANB Celebration",             year: "2024", cat: "Corporate",   color: "#B83A14", video: "/videos/anb-celebration.mp4" },
-  { id: 7,  ratio: "9/16", label: "Flag Ceremony",               year: "2024", cat: "Event",       color: "#FED172", video: "/videos/flag.mp4" },
-  { id: 8,  ratio: "16/9", label: "Fairmont Ramadan",            year: "2024", cat: "Hospitality", color: "#F3742B", video: "/videos/fairmont-ramadan.mp4" },
-  { id: 9,  ratio: "3/4",  label: "Misk MGF 25",                 year: "2025", cat: "Conference",  color: "#612E37", video: "/videos/misk-mgf25.mp4" },
-  { id: 10, ratio: "1/1",  label: "SKY EXPO Team Culture",       year: "2024", cat: "Culture",     color: "#231650", video: "/videos/sirc.mp4" },
-  { id: 11, ratio: "4/5",  label: "Saudi Vision Production",     year: "2025", cat: "Exhibition",  color: "#B83A14", video: "/videos/skyexpo-work-2025.mp4" },
-  { id: 12, ratio: "16/9", label: "Corporate Events 2024",       year: "2024", cat: "Corporate",   color: "#FED172", video: "/videos/promo-alt.mp4" },
+  { id: 1,  ratio: "4/5",  labelEn: "SIRC Event",                       labelAr: "فعالية SIRC",                         year: "2024", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/sirc.mp4" },
+  { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
+  { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olaya",                   labelAr: "أبراج العلية",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
+  { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },
+  { id: 5,  ratio: "1/1",  labelEn: "King Abdullah City for Energy",    labelAr: "مدينة الملك عبد الله للطاقة",          year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#231650", video: "/videos/kacare.mp4" },
+  { id: 6,  ratio: "4/5",  labelEn: "ANB Celebration",                  labelAr: "احتفالية بنك العربي الوطني",           year: "2024", catEn: "Corporate",   catAr: "شركات",     color: "#B83A14", video: "/videos/anb-celebration.mp4" },
+  { id: 7,  ratio: "9/16", labelEn: "Flag Ceremony",                    labelAr: "حفل العلم",                            year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/flag.mp4" },
+  { id: 8,  ratio: "16/9", labelEn: "Fairmont Ramadan",                 labelAr: "فيرمونت رمضان",                        year: "2024", catEn: "Hospitality", catAr: "ضيافة",     color: "#F3742B", video: "/videos/fairmont-ramadan.mp4" },
+  { id: 9,  ratio: "3/4",  labelEn: "Misk MGF 25",                      labelAr: "منتدى مسك MGF 25",                     year: "2025", catEn: "Conference",  catAr: "مؤتمر",     color: "#612E37", video: "/videos/misk-mgf25.mp4" },
+  { id: 10, ratio: "1/1",  labelEn: "Mawhiba",                          labelAr: "موهبة",                                year: "2024", catEn: "Corporate",   catAr: "شركات",     color: "#231650", video: "/videos/mawhiba.mp4" },
+  { id: 11, ratio: "4/5",  labelEn: "Oxford Center",                    labelAr: "مركز أكسفورد",                         year: "2024", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/oxford-center.mp4" },
+  { id: 12, ratio: "16/9", labelEn: "Roshn",                            labelAr: "واجهة روشن",                           year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/roshn.mp4" },
 ];
 
 /* ── Tilt card ─────────────────────────────────────────────────────── */
-function GalleryCard({ item }: { item: { id: number; ratio: string; label: string; year: string; cat: string; color: string; video: string } }) {
+function GalleryCard({ item, isAr }: {
+  item: typeof ITEMS[0];
+  isAr: boolean;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0, px: 50, py: 50 });
   const [hovered, setHovered] = useState(false);
@@ -30,11 +33,9 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
     const el = cardRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const cx = (e.clientX - rect.left) / rect.width;   // 0–1
-    const cy = (e.clientY - rect.top)  / rect.height;  // 0–1
-    const rx =  (cy - 0.5) * -16;  // tilt X axis  (up/down tilt)
-    const ry =  (cx - 0.5) *  16;  // tilt Y axis  (left/right tilt)
-    setTilt({ x: rx, y: ry, px: cx * 100, py: cy * 100 });
+    const cx = (e.clientX - rect.left) / rect.width;
+    const cy = (e.clientY - rect.top)  / rect.height;
+    setTilt({ x: (cy - 0.5) * -16, y: (cx - 0.5) * 16, px: cx * 100, py: cy * 100 });
   }, []);
 
   const onEnter = useCallback(() => setHovered(true), []);
@@ -44,16 +45,12 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
     <div
       ref={cardRef}
       className="relative cursor-none group"
-      style={{
-        aspectRatio: item.ratio,
-        perspective: "800px",
-      }}
+      style={{ aspectRatio: item.ratio, perspective: "800px" }}
       onMouseMove={onMouseMove}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       data-cursor-hover
     >
-      {/* Card inner — tilts */}
       <div
         className="relative w-full h-full rounded-xl overflow-hidden bg-[#0a0a0a]"
         style={{
@@ -71,18 +68,15 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
           willChange: "transform",
         }}
       >
-        {/* Real video background */}
+        {/* Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
           src={item.video}
-          muted
-          loop
-          playsInline
-          autoPlay
+          muted loop playsInline autoPlay
           style={{ filter: "brightness(0.7) saturate(0.85)" }}
         />
 
-        {/* Shimmer highlight — follows cursor */}
+        {/* Cursor shimmer */}
         <div
           className="absolute inset-0 pointer-events-none transition-opacity duration-300"
           style={{
@@ -91,15 +85,13 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
           }}
         />
 
-        {/* Dark overlay */}
+        {/* Gradient */}
         <div
           className="absolute inset-0"
-          style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
-          }}
+          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)" }}
         />
 
-        {/* Category badge — top */}
+        {/* Category badge */}
         <div
           className="absolute top-3 left-3 flex items-center gap-2 transition-all duration-400"
           style={{ opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(-6px)" }}
@@ -108,12 +100,12 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
             className="text-[9px] tracking-[0.35em] uppercase px-2 py-1 rounded"
             style={{ background: `${item.color}20`, color: item.color, border: `1px solid ${item.color}30` }}
           >
-            {item.cat}
+            {isAr ? item.catAr : item.catEn}
           </span>
           <span className="text-[9px] tracking-widest text-white/40">{item.year}</span>
         </div>
 
-        {/* Label — bottom */}
+        {/* Label */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <p
             className="text-sm font-light leading-tight transition-all duration-400"
@@ -122,11 +114,11 @@ function GalleryCard({ item }: { item: { id: number; ratio: string; label: strin
               transform: hovered ? "translateY(0)" : "translateY(4px)",
             }}
           >
-            {item.label}
+            {isAr ? item.labelAr : item.labelEn}
           </p>
         </div>
 
-        {/* Floating plus icon — center on hover */}
+        {/* Plus icon */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500"
           style={{ opacity: hovered ? 1 : 0, transform: hovered ? "scale(1)" : "scale(0.6)" }}
@@ -152,19 +144,20 @@ export function WorkGallery() {
 
   return (
     <div className="bg-black min-h-screen" dir={isAr ? "rtl" : "ltr"}>
+
       {/* Header */}
-      <div className="pt-32 pb-12 px-16">
+      <div className="pt-28 md:pt-32 pb-10 md:pb-12 px-5 sm:px-8 md:px-16">
         <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-4">
           {isAr ? "معرض الأعمال" : "Portfolio"}
         </p>
-        <div className="flex items-end justify-between">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <h1
             className="text-[clamp(3rem,8vw,8rem)] font-extralight uppercase leading-none"
             style={{ color: "#B83A14" }}
           >
             {isAr ? "أعمالنا" : "Our Work"}
           </h1>
-          <p className="text-sm text-white/30 max-w-xs font-light leading-relaxed pb-2">
+          <p className="text-sm text-white/30 max-w-xs font-light leading-relaxed md:pb-2">
             {isAr
               ? "لحظات حقيقية من مشاريع SKY EXPO — من المفهوم إلى التنفيذ."
               : "Real moments from SKY EXPO projects — from concept to execution."}
@@ -172,70 +165,36 @@ export function WorkGallery() {
         </div>
       </div>
 
-      {/* Gallery grid — organic masonry-like layout */}
-      <div className="px-8 pb-24">
+      {/* Gallery grid */}
+      <div className="px-3 sm:px-5 md:px-8 pb-24">
         {/* Row 1 */}
-        <div className="grid grid-cols-12 gap-3 mb-3">
-          <div className="col-span-4"><GalleryCard item={ITEMS[0]} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[2]} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[1]} /></div>
+        <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
+          <div className="col-span-4"><GalleryCard item={ITEMS[0]}  isAr={isAr} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[2]}  isAr={isAr} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[1]}  isAr={isAr} /></div>
         </div>
         {/* Row 2 */}
-        <div className="grid grid-cols-12 gap-3 mb-3">
-          <div className="col-span-3"><GalleryCard item={ITEMS[4]} /></div>
-          <div className="col-span-4"><GalleryCard item={ITEMS[3]} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[7]} /></div>
+        <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
+          <div className="col-span-3"><GalleryCard item={ITEMS[4]}  isAr={isAr} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[3]}  isAr={isAr} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[7]}  isAr={isAr} /></div>
         </div>
         {/* Row 3 */}
-        <div className="grid grid-cols-12 gap-3 mb-3">
-          <div className="col-span-5"><GalleryCard item={ITEMS[5]} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[6]} /></div>
-          <div className="col-span-4"><GalleryCard item={ITEMS[8]} /></div>
+        <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
+          <div className="col-span-5"><GalleryCard item={ITEMS[5]}  isAr={isAr} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[6]}  isAr={isAr} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[8]}  isAr={isAr} /></div>
         </div>
         {/* Row 4 */}
-        <div className="grid grid-cols-12 gap-3">
-          <div className="col-span-4"><GalleryCard item={ITEMS[9]} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[11]} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[10]} /></div>
+        <div className="grid grid-cols-12 gap-2 md:gap-3">
+          <div className="col-span-4"><GalleryCard item={ITEMS[9]}  isAr={isAr} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[10]} isAr={isAr} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[11]} isAr={isAr} /></div>
         </div>
       </div>
 
-      {/* Real client logos strip */}
+      {/* Client logos */}
       <ClientLogos />
-    </div>
-  );
-}
-
-/* ── Scrolling client logos ─────────────────────────────────────────── */
-const CLIENTS = [
-  "ALSAYEGH WORLDWIDE", "VISION 2030", "NEOM", "RED SEA GLOBAL",
-  "ARAMCO", "SABIC", "STC", "SAMBA", "PIF", "DIRIYAH",
-  "ALSAYEGH WORLDWIDE", "VISION 2030", "NEOM", "RED SEA GLOBAL",
-  "ARAMCO", "SABIC", "STC", "SAMBA", "PIF", "DIRIYAH",
-];
-
-function ClientsStrip({ isAr }: { isAr: boolean }) {
-  return (
-    <div className="border-t border-white/[0.06] py-10 overflow-hidden">
-      <p className="text-[10px] tracking-[0.5em] uppercase text-white/55 text-center mb-8">
-        {isAr ? "عملاؤنا" : "Trusted by"}
-      </p>
-      {/* Auto-scrolling ticker */}
-      <div className="relative flex overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
-        <div
-          className="flex items-center gap-16 shrink-0 animate-[ticker_30s_linear_infinite]"
-          style={{ paddingRight: "4rem" }}
-        >
-          {CLIENTS.map((c, i) => (
-            <span
-              key={i}
-              className="text-xs tracking-[0.5em] uppercase text-white/55 whitespace-nowrap font-light hover:text-white/60 transition-colors duration-300 cursor-default"
-            >
-              {c}
-            </span>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
