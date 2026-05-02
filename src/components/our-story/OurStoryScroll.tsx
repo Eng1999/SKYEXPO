@@ -53,7 +53,7 @@ const PANELS = [
 ];
 
 /* ─── Component ───────────────────────────────────────────────────────── */
-export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
+export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos?: string[] }) {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
 
@@ -89,6 +89,15 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
           ? PANELS[activeIdx].numAr
           : PANELS[activeIdx].numEn;
       }
+
+      // Switch active video: bring active panel's video to front, fade others
+      PANELS.forEach((_, vi) => {
+        const vid = document.getElementById(`story-video-${vi}`) as HTMLVideoElement | null;
+        if (vid) {
+          vid.style.zIndex = String(vi === activeIdx ? 5 : vi);
+          vid.style.opacity = vi === activeIdx ? "1" : "0";
+        }
+      });
 
       panelRefs.current.forEach((panel, i) => {
         if (!panel) return;
@@ -170,18 +179,29 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
       {/* ── Sticky container ──────────────────────────────────────── */}
       <div className="sticky top-0 h-screen overflow-hidden">
 
-        {/* Video / gradient background */}
+        {/* Video / gradient background — one video per panel */}
         <div className="absolute inset-0">
-          {videoSrc ? (
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.55) saturate(0.75)" }}
-              autoPlay muted loop playsInline
-            >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
-          ) : (
-            /* Cinematic gradient stand-in */
+          {PANELS.map((_, i) => {
+            const src = videos?.[i] ?? (i === 0 ? videoSrc : undefined);
+            return src ? (
+              <video
+                key={src + i}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+                style={{
+                  filter: "brightness(0.5) saturate(0.75)",
+                  opacity: 1,
+                  zIndex: i,
+                  // Each video layered; active panel's video on top via JS below
+                }}
+                autoPlay muted loop playsInline
+                id={`story-video-${i}`}
+              >
+                <source src={src} type="video/mp4" />
+              </video>
+            ) : null;
+          })}
+          {/* Gradient fallback if no video */}
+          {!videoSrc && !videos?.length && (
             <>
               <div className="absolute inset-0" style={{ background: "linear-gradient(160deg,#0a0a0a 0%,#080808 100%)" }} />
               <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 50% 70% at 55% 0%,rgba(160,120,60,0.16) 0%,transparent 65%)" }} />
