@@ -87,30 +87,43 @@ export function HeroText() {
         </div>
 
         {/* BIG cinematic title — staggered lines */}
-        <div className="overflow-hidden mb-1">
+        {/* No overflow-hidden — Arabic glyphs extend beyond em-box and get clipped */}
+        <div className="mb-1 pb-2">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-bold leading-[0.9] tracking-tight uppercase text-white"
-            style={{ ...fadeUp("title1"), textShadow: "0 2px 30px rgba(0,0,0,0.7)" }}
+            className="font-bold leading-[1.05] tracking-tight uppercase text-white"
+            style={{
+              ...fadeUp("title1"),
+              fontSize: isAr ? "clamp(3rem,8vw,8rem)" : "clamp(3.5rem,10vw,10rem)",
+              textShadow: "0 2px 30px rgba(0,0,0,0.7)",
+              wordBreak: "keep-all",
+            }}
           >
             {isAr ? "حيث" : "Where"}
           </h1>
         </div>
-        <div className="overflow-hidden mb-1">
+        <div className="mb-1 pb-2">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-bold leading-[0.9] tracking-tight uppercase"
+            className="font-bold leading-[1.05] tracking-tight uppercase"
             style={{
               ...fadeUp("title2"),
+              fontSize: isAr ? "clamp(3rem,8vw,8rem)" : "clamp(3.5rem,10vw,10rem)",
               color: "var(--accent)",
               textShadow: "0 2px 40px rgba(0,0,0,0.5)",
+              wordBreak: "keep-all",
             }}
           >
             {isAr ? "تتحول" : "Moments"}
           </h1>
         </div>
-        <div className="overflow-hidden mb-8">
+        <div className="mb-8 pb-2">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-light leading-[0.9] tracking-tight uppercase text-white/80"
-            style={{ ...fadeUp("title3"), textShadow: "0 2px 30px rgba(0,0,0,0.7)" }}
+            className="font-light leading-[1.05] tracking-tight uppercase text-white/80"
+            style={{
+              ...fadeUp("title3"),
+              fontSize: isAr ? "clamp(2rem,5.5vw,5.5rem)" : "clamp(3.5rem,10vw,10rem)",
+              textShadow: "0 2px 30px rgba(0,0,0,0.7)",
+              wordBreak: "keep-all",
+            }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}
           </h1>
