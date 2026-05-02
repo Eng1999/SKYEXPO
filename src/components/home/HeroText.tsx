@@ -75,8 +75,17 @@ export function HeroText() {
         <span className="text-[10px] tracking-[0.4em] uppercase text-white/40">05</span>
       </div>
 
-      {/* ── Main content block — left-center safe zone ── */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 px-5 sm:px-10 md:px-16 flex flex-col gap-3" style={{ maxWidth: "65vw" }}>
+      {/* ── Main content block ── */}
+      <div
+        className="absolute top-1/2 -translate-y-1/2 flex flex-col gap-3"
+        style={{
+          left:     isAr ? "auto" : 0,
+          right:    isAr ? 0 : "auto",
+          maxWidth: isAr ? "58vw" : "62vw",
+          padding:  isAr ? "0 clamp(1.25rem,5vw,4rem) 0 0" : "0 0 0 clamp(1.25rem,5vw,4rem)",
+          textAlign: isAr ? "right" : "left",
+        }}
+      >
 
         {/* Small eyebrow label */}
         <div style={fadeUp("eyebrow")}>
@@ -87,10 +96,10 @@ export function HeroText() {
 
         {/* BIG cinematic title */}
         <div
-          className="font-bold tracking-tight uppercase mb-5 md:mb-8"
+          className="font-bold tracking-tight uppercase mb-4 md:mb-6"
           style={{
-            fontSize: isAr ? "clamp(2rem,6vw,6rem)" : "clamp(2.2rem,7.5vw,7.5rem)",
-            lineHeight: isAr ? 1.15 : 0.92,
+            fontSize: isAr ? "clamp(1.8rem,4.5vw,4.8rem)" : "clamp(2.2rem,7.5vw,7.5rem)",
+            lineHeight: isAr ? 1.18 : 0.92,
             textShadow: "0 2px 30px rgba(0,0,0,0.7)",
           }}
         >
@@ -105,7 +114,7 @@ export function HeroText() {
             style={{
               ...fadeUp("title3"),
               color: "rgba(255,255,255,0.80)",
-              fontSize: isAr ? "clamp(1.2rem,4vw,4rem)" : undefined,
+              fontSize: isAr ? "clamp(1.1rem,3vw,3.2rem)" : undefined,
             }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}
@@ -113,9 +122,9 @@ export function HeroText() {
         </div>
 
         {/* Bottom row: description + play button */}
-        <div className="flex items-end justify-between gap-4">
+        <div className={`flex items-end gap-4 ${isAr ? "flex-row-reverse justify-end" : "justify-between"}`}>
           {/* Description */}
-          <div className="max-w-[260px] md:max-w-xs" style={fadeUp("desc")}>
+          <div className="max-w-[240px] md:max-w-xs" style={fadeUp("desc")}>
             <p className="text-xs md:text-sm font-normal leading-relaxed"
                style={{ color: "rgba(255,255,255,0.75)", textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>
               {isAr
@@ -126,7 +135,6 @@ export function HeroText() {
 
           {/* Play button + scroll hint */}
           <div className="flex flex-col items-end gap-4 md:gap-6" style={fadeUp("cta")}>
-            {/* Circular play button — 44px minimum touch target */}
             <button
               className="group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/30 hover:border-white/80 transition-all duration-500"
               data-cursor-video
@@ -141,7 +149,6 @@ export function HeroText() {
               </svg>
             </button>
 
-            {/* Scroll indicator — hidden on mobile to reduce clutter */}
             <div className="hidden md:flex flex-col items-center gap-2">
               <span className="text-[10px] tracking-[0.4em] uppercase text-white/30">
                 {isAr ? "اسحب" : "Scroll"}
