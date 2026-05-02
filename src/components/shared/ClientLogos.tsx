@@ -27,7 +27,6 @@ const LOGOS = [
   { src: "/images/clients/kadanah.png",           alt: "Kadanah" },
   { src: "/images/clients/al-murshid.png",        alt: "Al Murshid" },
   { src: "/images/clients/cbahi.svg",             alt: "CBAHI" },
-  { src: "/images/clients/ejar.svg",              alt: "Ejar" },
 ];
 
 /* Duplicate for seamless infinite scroll */
