@@ -64,18 +64,29 @@ export function JoinSection() {
             {isAr ? "الانضمام إلى سكاي اكسبو" : "Join SKY EXPO"}
           </p>
 
-          {/* Big heading — WHITE */}
-          <h1
-            className="font-bold uppercase leading-[0.92] mb-10"
-            style={{ fontSize: "clamp(3.5rem, 9vw, 10rem)", color: "#ffffff",
-                     textShadow: "0 2px 40px rgba(0,0,0,0.6)" }}
+          {/* Big heading — WHITE, each line as block span for tight control */}
+          <div
+            className="font-bold mb-10"
+            style={{
+              fontSize: isAr ? "clamp(3rem,8.5vw,9.5rem)" : "clamp(3.5rem,9vw,10rem)",
+              textShadow: "0 2px 40px rgba(0,0,0,0.6)",
+              lineHeight: isAr ? 1.15 : 0.92,
+            }}
           >
             {isAr ? (
-              <> اصنع<br /><span style={{ color: ACCENT }}>شيئاً</span><br />يدوم </>
+              <>
+                <span className="block text-white">اصنع</span>
+                <span className="block" style={{ color: ACCENT }}>شيئاً</span>
+                <span className="block text-white">يدوم</span>
+              </>
             ) : (
-              <> BUILD<br /><span style={{ color: ACCENT }}>WHAT</span><br />LASTS </>
+              <>
+                <span className="block text-white uppercase tracking-tight">BUILD</span>
+                <span className="block uppercase tracking-tight" style={{ color: ACCENT }}>WHAT</span>
+                <span className="block text-white uppercase tracking-tight">LASTS</span>
+              </>
             )}
-          </h1>
+          </div>
 
           {/* Description — visible white */}
           <p className="text-base max-w-lg font-light leading-relaxed"

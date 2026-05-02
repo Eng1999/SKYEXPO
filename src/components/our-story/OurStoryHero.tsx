@@ -73,21 +73,27 @@ export function OurStoryHero() {
 
         {/* Big headline */}
         <div style={in2}>
-          <h1 className="text-[clamp(3rem,8vw,9rem)] font-extralight leading-[0.9] tracking-tight uppercase text-white mb-6">
+          <div
+            className="font-extralight tracking-tight uppercase text-white mb-6"
+            style={{
+              fontSize: "clamp(3rem,8vw,9rem)",
+              lineHeight: isAr ? 1.2 : 0.9,
+            }}
+          >
             {isAr ? (
               <>
-                صنّاع<br />
-                <span style={{ color: "#FED172" }}>اللحظات</span><br />
-                <span className="text-white/50">منذ ٢٠٠٩</span>
+                <span className="block">صنّاع</span>
+                <span className="block" style={{ color: "#FED172" }}>اللحظات</span>
+                <span className="block" style={{ color: "rgba(255,255,255,0.65)" }}>منذ ٢٠٠٩</span>
               </>
             ) : (
               <>
-                Crafting<br />
-                <span style={{ color: "#FED172" }}>Moments</span><br />
-                <span className="text-white/50">Since 2009</span>
+                <span className="block">Crafting</span>
+                <span className="block" style={{ color: "#FED172" }}>Moments</span>
+                <span className="block" style={{ color: "rgba(255,255,255,0.65)" }}>Since 2009</span>
               </>
             )}
-          </h1>
+          </div>
         </div>
 
         {/* Sub-description */}

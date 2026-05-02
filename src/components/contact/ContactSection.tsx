@@ -139,28 +139,29 @@ export function ContactSection() {
               {isAr ? "تواصل معنا" : "Let's Connect"}
             </p>
 
-            {/* Giant headline — WHITE */}
-            <h1 className="font-bold uppercase leading-[0.88] mb-14"
-              style={{ fontSize: "clamp(3.5rem,7vw,7rem)", color: "#ffffff",
-                       textShadow: "0 2px 30px rgba(0,0,0,0.5)" }}>
+            {/* Giant headline — block spans for precise line spacing */}
+            <div
+              className="font-bold mb-14"
+              style={{
+                fontSize: isAr ? "clamp(3rem,6.5vw,6.5rem)" : "clamp(3.5rem,7vw,7rem)",
+                textShadow: "0 2px 30px rgba(0,0,0,0.5)",
+                lineHeight: isAr ? 1.2 : 0.9,
+              }}
+            >
               {isAr ? (
                 <>
-                  لنبدأ
-                  <br />
-                  <span style={{ color: ACCENT }}>حديثًا</span>
-                  <br />
-                  حقيقيًا
+                  <span className="block text-white">لنبدأ</span>
+                  <span className="block" style={{ color: ACCENT }}>حديثًا</span>
+                  <span className="block text-white">حقيقيًا</span>
                 </>
               ) : (
                 <>
-                  LET&apos;S
-                  <br />
-                  <span style={{ color: ACCENT }}>GET IN</span>
-                  <br />
-                  TOUCH
+                  <span className="block text-white uppercase tracking-tight">LET&apos;S</span>
+                  <span className="block uppercase tracking-tight" style={{ color: ACCENT }}>GET IN</span>
+                  <span className="block text-white uppercase tracking-tight">TOUCH</span>
                 </>
               )}
-            </h1>
+            </div>
 
             {/* Geometric element */}
             <div className="mb-14 relative inline-block">
