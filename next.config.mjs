@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   compress: true,
   eslint: {
-    // ESLint runs separately via `npm run lint`; skip during production builds
     ignoreDuringBuilds: true,
   },
   images: {
-    formats: ["image/webp", "image/avif"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    minimumCacheTTL: 60 * 60 * 24 * 30,
+    unoptimized: true,
   },
   experimental: {
     optimizePackageImports: ["gsap"],
