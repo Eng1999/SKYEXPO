@@ -437,121 +437,124 @@ export function CapabilitiesSlide() {
   );
 }
 
-/* ── Detail panel ─────────────────────────────────────────────────────── */
+/* ── Detail panel — video fills entire frame, text overlaid ──────────── */
 function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
+    const v = videoRef.current;
+    if (!v) return;
+    v.currentTime = 0;
+    v.play().catch(() => {});
   }, [service.id]);
 
   return (
     <div
-      className="relative mx-8 mt-10 mb-16 rounded-2xl overflow-hidden"
+      className="relative mx-4 md:mx-8 mt-10 mb-16 rounded-2xl overflow-hidden"
       style={{
-        background: service.lightBg,
-        border: `1px solid ${service.color}22`,
-        minHeight: "40vh",
-        transition: "background 0.7s ease, border-color 0.7s ease",
+        minHeight: "clamp(260px, 42vh, 520px)",
+        border: `1px solid ${service.color}30`,
+        boxShadow: `0 0 100px ${service.color}18, 0 40px 80px rgba(0,0,0,0.8)`,
+        transition: "border-color 0.7s ease, box-shadow 0.7s ease",
       }}
+      dir={isAr ? "rtl" : "ltr"}
     >
-      {/* Gradient overlay left */}
-      <div
-        className="absolute inset-0"
+      {/* ── Full-bleed video background ── */}
+      <video
+        ref={videoRef}
+        key={service.video}
+        src={service.video}
+        muted
+        loop
+        playsInline
+        autoPlay
+        className="absolute inset-0 w-full h-full object-cover"
         style={{
-          background: "linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.15) 100%)",
+          filter: "brightness(0.55) saturate(0.85)",
+          transition: "filter 0.7s ease",
         }}
       />
 
-      {/* Video panel — right side */}
+      {/* ── Cinematic gradient scrims — bottom heavy for text legibility ── */}
       <div
-        className="absolute rounded-xl overflow-hidden border"
+        className="absolute inset-0"
         style={{
-          right: isAr ? "auto" : "3rem",
-          left: isAr ? "3rem" : "auto",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "clamp(260px,38%,500px)",
-          aspectRatio: "16/9",
-          borderColor: `${service.color}30`,
-          boxShadow: `0 0 80px ${service.color}18, 0 20px 60px rgba(0,0,0,0.7)`,
+          background: `
+            linear-gradient(to top,  rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.1) 100%),
+            linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)
+          `,
         }}
-      >
-        <video
-          ref={videoRef}
-          key={service.video}
-          src={service.video}
-          muted
-          loop
-          playsInline
-          autoPlay
-          className="w-full h-full object-cover"
-          style={{ filter: "brightness(0.75) saturate(0.9)" }}
-        />
-        {/* Overlay gradient on video */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, transparent 70%),
-                         linear-gradient(to right, rgba(0,0,0,0.3) 0%, transparent 40%)`,
-          }}
-        />
-        {/* Video label */}
-        <div className="absolute bottom-0 left-0 right-0 px-5 py-4">
-          <p
-            className="text-xs tracking-[0.3em] uppercase font-light"
-            style={{ color: service.color, textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}
-          >
-            {isAr ? service.titleAr.replace("\n", " ") : service.titleEn.replace("\n", " ")}
-          </p>
-          <p className="text-[10px] text-white/45 mt-0.5 font-light">
-            {isAr ? "لمشاهدة" : "Preview"}
-          </p>
-        </div>
-      </div>
+      />
 
-      {/* Left content */}
-      <div className="relative z-10 p-10 md:p-14 max-w-lg">
-        {/* Big number */}
+      {/* ── Accent color bloom (bottom) ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 20% 100%, ${service.color}22 0%, transparent 55%)`,
+          transition: "background 0.7s ease",
+        }}
+      />
+
+      {/* ── Text content overlay — bottom-left ── */}
+      <div className="relative z-10 flex flex-col justify-end h-full p-7 md:p-12" style={{ minHeight: "inherit" }}>
+
+        {/* Big ghost number — top decoration */}
         <span
-          className="block font-extralight leading-none select-none mb-3"
+          className="absolute select-none font-extralight leading-none"
           style={{
-            fontSize: "clamp(4rem,8vw,7rem)",
+            fontSize: "clamp(5rem, 14vw, 11rem)",
             color: service.color,
-            opacity: 0.12,
+            opacity: 0.09,
+            top: "-0.15em",
+            [isAr ? "right" : "left"]: "0.3rem",
+            lineHeight: 1,
             transition: "color 0.6s ease",
           }}
         >
           {String(service.id + 1).padStart(2, "0")}
         </span>
 
+        {/* Index label */}
+        <span
+          className="block text-[11px] tracking-[0.5em] uppercase font-medium mb-3"
+          style={{ color: service.color, opacity: 0.9 }}
+        >
+          {String(service.id + 1).padStart(2, "0")}
+        </span>
+
         {/* Title */}
         <h2
-          className="font-bold leading-tight whitespace-pre-line -mt-6 mb-5"
+          className="font-bold leading-tight whitespace-pre-line mb-4"
           style={{
-            fontSize: "clamp(2rem,3.2vw,3rem)",
+            fontSize: "clamp(1.8rem, 3.5vw, 3.2rem)",
             color: "#ffffff",
-            textShadow: `0 2px 20px rgba(0,0,0,0.8), 0 0 60px ${service.color}40`,
+            textShadow: `0 2px 24px rgba(0,0,0,0.9), 0 0 60px ${service.color}30`,
             transition: "color 0.6s ease",
           }}
         >
           {isAr ? service.titleAr : service.titleEn}
         </h2>
 
-        {/* Divider */}
+        {/* Accent divider */}
         <div
-          className="w-10 h-0.5 mb-6"
-          style={{ background: service.color, transition: "background 0.6s ease",
-                   boxShadow: `0 0 12px ${service.color}` }}
+          className="mb-4"
+          style={{
+            width: "2.5rem",
+            height: "2px",
+            background: service.color,
+            boxShadow: `0 0 10px ${service.color}`,
+            transition: "background 0.6s ease",
+          }}
         />
 
         {/* Description */}
         <p
-          className="font-normal leading-relaxed mb-8"
+          className="mb-7 max-w-xl"
           style={{
-            fontSize: "clamp(0.95rem,1.35vw,1.1rem)",
-            color: "rgba(255,255,255,0.9)",
-            lineHeight: 1.9,
+            fontSize: "clamp(0.88rem, 1.3vw, 1.05rem)",
+            color: "rgba(255,255,255,0.82)",
+            lineHeight: 1.85,
+            textShadow: "0 1px 6px rgba(0,0,0,0.8)",
           }}
         >
           {isAr ? service.descAr : service.descEn}
@@ -560,8 +563,8 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
         {/* CTA */}
         <a
           href="/contact"
-          className="inline-flex items-center gap-4 text-xs tracking-[0.35em] uppercase group transition-colors duration-300"
-          style={{ color: `${service.color}85` }}
+          className="inline-flex items-center gap-4 text-xs tracking-[0.35em] uppercase group transition-colors duration-300 self-start"
+          style={{ color: service.color }}
           data-cursor-hover
         >
           {isAr ? "تواصل معنا" : "Start a project"}
