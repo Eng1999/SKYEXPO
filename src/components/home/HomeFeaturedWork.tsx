@@ -5,44 +5,44 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const FEATURED = [
   {
-    video: "/videos/skyexpo-work-2025.mp4",
-    labelEn: "SKY EXPO Showreel 2025",
-    labelAr: "شوريل SKY EXPO 2025",
-    catEn: "Production",
-    catAr: "إنتاج",
+    video: "/videos/shuhada-fund.mp4",
+    labelEn: "Martyrs & Wounded Fund",
+    labelAr: "صندوق الشهداء والمصابين",
+    catEn: "Event",
+    catAr: "فعالية",
     color: "#FED172",
     span: "col-span-7",
   },
   {
-    video: "/videos/abraj-alolaya.mp4",
-    labelEn: "Abraj Al Olaya",
-    labelAr: "أبراج العلية",
+    video: "/videos/kacare.mp4",
+    labelEn: "King Abdullah City for Energy",
+    labelAr: "مدينة الملك عبد الله للطاقة",
     catEn: "Exhibition",
     catAr: "معرض",
     color: "#F3742B",
     span: "col-span-5",
   },
   {
-    video: "/videos/misk-mgf25.mp4",
-    labelEn: "Misk MGF 25",
-    labelAr: "منتدى مسك 25",
+    video: "/videos/oxford-center.mp4",
+    labelEn: "Oxford Center",
+    labelAr: "مركز أكسفورد",
     catEn: "Conference",
     catAr: "مؤتمر",
     color: "#B83A14",
     span: "col-span-5",
   },
   {
-    video: "/videos/flynas-event.mp4",
-    labelEn: "Flynas Event",
-    labelAr: "فعالية فلاي ناس",
+    video: "/videos/roshn.mp4",
+    labelEn: "Roshn",
+    labelAr: "واجهة روشن",
     catEn: "Event",
     catAr: "فعالية",
-    color: "#612E37",
+    color: "#231650",
     span: "col-span-7",
   },
 ];
 
-function FeaturedCard({ item }: { item: typeof FEATURED[0] }) {
+function FeaturedCard({ item, isAr }: { item: typeof FEATURED[0]; isAr: boolean }) {
   const [hovered, setHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -99,7 +99,7 @@ function FeaturedCard({ item }: { item: typeof FEATURED[0] }) {
           className="text-[9px] tracking-[0.4em] uppercase px-2 py-1 rounded"
           style={{ background: `${item.color}20`, color: item.color, border: `1px solid ${item.color}30` }}
         >
-          {item.catEn}
+          {isAr ? item.catAr : item.catEn}
         </span>
       </div>
 
@@ -109,7 +109,7 @@ function FeaturedCard({ item }: { item: typeof FEATURED[0] }) {
           className="text-sm font-light transition-colors duration-500"
           style={{ color: hovered ? item.color : "rgba(255,255,255,0.55)" }}
         >
-          {item.labelEn}
+          {isAr ? item.labelAr : item.labelEn}
         </p>
       </div>
 
@@ -190,8 +190,8 @@ export function HomeFeaturedWork() {
           transition: "opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s",
         }}
       >
-        <div className="md:col-span-7"><FeaturedCard item={FEATURED[0]} /></div>
-        <div className="md:col-span-5"><FeaturedCard item={FEATURED[1]} /></div>
+        <div className="md:col-span-7"><FeaturedCard item={FEATURED[0]} isAr={isAr} /></div>
+        <div className="md:col-span-5"><FeaturedCard item={FEATURED[1]} isAr={isAr} /></div>
       </div>
 
       {/* Grid — row 2: narrow + wide (stack on mobile) */}
@@ -203,8 +203,8 @@ export function HomeFeaturedWork() {
           transition: "opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s",
         }}
       >
-        <div className="md:col-span-5"><FeaturedCard item={FEATURED[2]} /></div>
-        <div className="md:col-span-7"><FeaturedCard item={FEATURED[3]} /></div>
+        <div className="md:col-span-5"><FeaturedCard item={FEATURED[2]} isAr={isAr} /></div>
+        <div className="md:col-span-7"><FeaturedCard item={FEATURED[3]} isAr={isAr} /></div>
       </div>
 
       {/* CTA strip */}
