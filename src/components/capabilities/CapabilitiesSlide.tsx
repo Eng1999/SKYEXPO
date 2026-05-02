@@ -186,8 +186,8 @@ function ServiceCard({
         className="absolute inset-0"
         style={{
           background: isActive
-            ? `linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%)`
-            : `linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%)`,
+            ? `linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.15) 100%)`
+            : `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.25) 100%)`,
           transition: "background 0.5s ease",
         }}
       />
@@ -203,15 +203,19 @@ function ServiceCard({
       )}
 
       {/* Service label — bottom, always visible */}
-      <div className="absolute bottom-0 left-0 right-0 p-5">
+      <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10"
+        style={{
+          background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 100%)",
+        }}
+      >
         <p
-          className="font-light leading-snug whitespace-pre-line"
+          className="font-normal leading-snug whitespace-pre-line"
           style={{
-            color: isActive ? svc.color : "rgba(255,255,255,0.75)",
-            fontSize: "clamp(0.72rem, 1.2vw, 1rem)",
-            textShadow: "0 2px 12px rgba(0,0,0,0.9)",
+            color: isActive ? svc.color : "rgba(255,255,255,0.92)",
+            fontSize: "clamp(0.82rem, 1.4vw, 1.05rem)",
+            textShadow: "0 1px 8px rgba(0,0,0,1), 0 2px 20px rgba(0,0,0,0.9)",
             transition: "color 0.4s ease",
-            letterSpacing: "0.02em",
+            letterSpacing: "0.03em",
           }}
         >
           {isAr ? svc.titleAr : svc.titleEn}
@@ -548,9 +552,10 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
         <p
           className="font-light leading-relaxed mb-8"
           style={{
-            fontSize: "clamp(0.85rem,1.2vw,1rem)",
-            color: "rgba(255,255,255,0.6)",
-            lineHeight: 1.8,
+            fontSize: "clamp(0.9rem,1.3vw,1.05rem)",
+            color: "rgba(255,255,255,0.82)",
+            lineHeight: 1.85,
+            textShadow: "0 1px 4px rgba(0,0,0,0.6)",
           }}
         >
           {isAr ? service.descAr : service.descEn}

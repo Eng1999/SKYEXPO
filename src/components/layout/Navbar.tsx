@@ -38,39 +38,7 @@ export function Navbar() {
           : "bg-gradient-to-b from-black/70 to-transparent"
       )}
     >
-      {/* Real Sky Expo Logo */}
-      <a href="/" className="flex items-center shrink-0" data-cursor-hover>
-        <Image
-          src="/images/skyexpo-logo.png"
-          alt="Sky Expo"
-          width={160}
-          height={60}
-          className="object-contain"
-          style={{
-            height: "44px",
-            width: "auto",
-            filter: "brightness(0) invert(1)",
-            opacity: 0.95,
-          }}
-          priority
-        />
-      </a>
-
-      {/* Nav links */}
-      <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.href}
-            href={item.href}
-            labelEn={item.labelEn}
-            labelAr={item.labelAr}
-            lang={lang}
-            color={item.color}
-          />
-        ))}
-      </nav>
-
-      {/* Right side */}
+      {/* Left side: social + search + language */}
       <div className="flex items-center gap-5">
         {/* Social icons */}
         <div className="hidden lg:flex items-center gap-3">
@@ -120,6 +88,38 @@ export function Navbar() {
           <span className="block w-3 h-px bg-white/60" />
         </button>
       </div>
+
+      {/* Centre: Nav links */}
+      <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+        {NAV_ITEMS.map((item) => (
+          <NavLink
+            key={item.href}
+            href={item.href}
+            labelEn={item.labelEn}
+            labelAr={item.labelAr}
+            lang={lang}
+            color={item.color}
+          />
+        ))}
+      </nav>
+
+      {/* Right: Logo */}
+      <a href="/" className="flex items-center shrink-0" data-cursor-hover>
+        <Image
+          src="/images/skyexpo-logo.png"
+          alt="Sky Expo"
+          width={160}
+          height={60}
+          className="object-contain"
+          style={{
+            height: "44px",
+            width: "auto",
+            filter: "brightness(0) invert(1)",
+            opacity: 0.95,
+          }}
+          priority
+        />
+      </a>
     </header>
   );
 }
