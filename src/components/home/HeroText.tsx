@@ -91,20 +91,34 @@ export function HeroText() {
           style={{
             fontSize: isAr ? "clamp(2.4rem,8vw,8rem)" : "clamp(2.8rem,10vw,10rem)",
             lineHeight: isAr ? 1.15 : 0.9,
-            textShadow: "0 2px 30px rgba(0,0,0,0.7)",
           }}
         >
-          <span className="block text-white" style={fadeUp("title1")}>
+          <span
+            className="block"
+            style={{
+              ...fadeUp("title1"),
+              color: "transparent",
+              WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
+            }}
+          >
             {isAr ? "حيث" : "Where"}
           </span>
-          <span className="block" style={{ ...fadeUp("title2"), color: "var(--accent)" }}>
+          <span
+            className="block"
+            style={{
+              ...fadeUp("title2"),
+              color: "transparent",
+              WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
+            }}
+          >
             {isAr ? "تتحول" : "Moments"}
           </span>
           <span
             className="block"
             style={{
               ...fadeUp("title3"),
-              color: "rgba(255,255,255,0.80)",
+              color: "transparent",
+              WebkitTextStroke: isAr ? "1px rgba(255,255,255,0.6)" : "1.5px rgba(255,255,255,0.6)",
               fontSize: isAr ? "clamp(1.4rem,5vw,5rem)" : undefined,
             }}
           >
