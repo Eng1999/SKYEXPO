@@ -89,28 +89,28 @@ export function HeroText() {
         {/* BIG cinematic title — staggered lines */}
         <div className="overflow-hidden mb-1">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-extralight leading-[0.9] tracking-tight uppercase text-white"
-            style={fadeUp("title1", ", color 0.6s ease")}
+            className="text-[clamp(3.5rem,10vw,10rem)] font-bold leading-[0.9] tracking-tight uppercase text-white"
+            style={{ ...fadeUp("title1"), textShadow: "0 2px 30px rgba(0,0,0,0.7)" }}
           >
             {isAr ? "حيث" : "Where"}
           </h1>
         </div>
         <div className="overflow-hidden mb-1">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-extralight leading-[0.9] tracking-tight uppercase"
+            className="text-[clamp(3.5rem,10vw,10rem)] font-bold leading-[0.9] tracking-tight uppercase"
             style={{
               ...fadeUp("title2"),
               color: "var(--accent)",
-              transition: `${fadeUp("title2").transition}, color 0.8s ease`,
+              textShadow: "0 2px 40px rgba(0,0,0,0.5)",
             }}
           >
             {isAr ? "تتحول" : "Moments"}
           </h1>
         </div>
-        <div className="overflow-hidden mb-6">
+        <div className="overflow-hidden mb-8">
           <h1
-            className="text-[clamp(3.5rem,10vw,10rem)] font-extralight leading-[0.9] tracking-tight uppercase text-white/70"
-            style={fadeUp("title3")}
+            className="text-[clamp(3.5rem,10vw,10rem)] font-light leading-[0.9] tracking-tight uppercase text-white/80"
+            style={{ ...fadeUp("title3"), textShadow: "0 2px 30px rgba(0,0,0,0.7)" }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}
           </h1>
@@ -123,7 +123,8 @@ export function HeroText() {
             className="max-w-xs"
             style={fadeUp("desc")}
           >
-            <p className="text-sm font-light leading-relaxed text-white/50">
+            <p className="text-sm font-normal leading-relaxed"
+               style={{ color: "rgba(255,255,255,0.75)", textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>
               {isAr
                 ? "شركة سعودية رائدة في المعارض والفعاليات منذ ٢٠٠٩ — نصنع اللحظات."
                 : "Saudi Arabia's premier exhibitions & events company since 2009 — crafting moments."}

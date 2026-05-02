@@ -46,16 +46,25 @@ export function HeroSection() {
           pointerEvents: "none",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/skyexpo-logo.png"
-          alt="Sky Expo"
+        {/* Logo on white pill — real brand colours visible on black hero */}
+        <span
           style={{
-            height: 110,
-            width: "auto",
-            filter: "drop-shadow(0 0 40px rgba(76,200,232,0.5)) drop-shadow(0 0 80px rgba(61,61,168,0.35))",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(255,255,255,0.97)",
+            borderRadius: "12px",
+            padding: "10px 20px",
+            boxShadow: "0 0 60px rgba(76,200,232,0.25), 0 8px 40px rgba(0,0,0,0.6)",
           }}
-        />
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/skyexpo-logo.png"
+            alt="Sky Expo"
+            style={{ height: 90, width: "auto", display: "block" }}
+          />
+        </span>
       </div>
 
       {/* Main hero content */}
