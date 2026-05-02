@@ -78,11 +78,11 @@ export function HeroText() {
       {/* ── Main content block — responsive padding ── */}
       <div className="absolute bottom-0 left-0 right-0 px-5 sm:px-10 md:px-16 pb-10 md:pb-16 flex flex-col gap-3">
 
-        {/* Small eyebrow label */}
-        <div style={fadeUp("eyebrow")}>
-          <p className="text-xs tracking-[0.5em] uppercase text-white/40 mb-3 md:mb-4">
-            {isAr ? "سكاي إكسبو" : "Sky Expo"}
-          </p>
+        {/* Logo eyebrow */}
+        <div style={fadeUp("eyebrow")} className="mb-3 md:mb-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/skyexpo-logo.png" alt="Sky Expo"
+            style={{ height: "32px", width: "auto", opacity: 0.6 }} />
         </div>
 
         {/* BIG cinematic title */}

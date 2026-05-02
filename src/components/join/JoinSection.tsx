@@ -133,10 +133,12 @@ export function JoinSection() {
             ? '"نحن لا نبني فعاليات — نحن نبني ذكريات لا تُنسى."'
             : '"We don\'t build events — we build memories."'}
         </p>
-        <p className="text-center text-[11px] tracking-[0.55em] uppercase mt-5 md:mt-6 font-medium"
-           style={{ color: ACCENT }}>
-          — SKY EXPO
-        </p>
+        <div className="flex items-center justify-center gap-3 mt-5 md:mt-6">
+          <span style={{ color: ACCENT, fontSize: "0.75rem" }}>—</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/skyexpo-logo.png" alt="Sky Expo"
+            style={{ height: "22px", width: "auto", opacity: 0.85 }} />
+        </div>
       </div>
     </div>
   );
