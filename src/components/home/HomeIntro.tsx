@@ -4,110 +4,118 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
+const STATS = [
+  { value: 15,   suffix: "+", labelEn: "Years",   labelAr: "عاماً",  color: "#4CC8E8" },
+  { value: 60,   suffix: "+", labelEn: "Clients",  labelAr: "عميل",  color: "#F3742B" },
+  { value: 70,   suffix: "+", labelEn: "Experts",  labelAr: "متخصص", color: "#FED172" },
+];
+
 export function HomeIntro() {
   const { lang } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
+  const isAr = lang === "ar";
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.3 }
+      ([e]) => { if (e.isIntersecting) setInView(true); },
+      { threshold: 0.25 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  const isAr = lang === "ar";
+  const fadeIn = (delay = 0): React.CSSProperties => ({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(32px)",
+    transition: `opacity 1.2s cubic-bezier(0.77,0,0.175,1) ${delay}s,
+                 transform 1.2s cubic-bezier(0.77,0,0.175,1) ${delay}s`,
+  });
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative bg-black overflow-hidden"
       dir={isAr ? "rtl" : "ltr"}
     >
-      {/* Background accent gradient */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 70%)",
-          transition: "background 1.4s ease",
-        }}
-      />
+      {/* Subtle radial glow */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(76,200,232,0.05) 0%, transparent 70%)" }} />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
-        {/* Left: big number + label */}
-        <div
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateX(0)" : "translateX(-40px)",
-            transition: "opacity 1.4s cubic-bezier(0.77,0,0.175,1), transform 1.4s cubic-bezier(0.77,0,0.175,1)",
-          }}
-        >
-          <span
-            className="block text-[10rem] md:text-[14rem] font-extralight leading-none select-none"
-            style={{ color: "var(--accent)", opacity: 0.12, transition: "color 0.8s ease" }}
+      {/* ── TOP: text block ─────────────────────────────────────────────── */}
+      <div className="relative z-10 max-w-6xl mx-auto px-12 pt-28 pb-16
+                      grid md:grid-cols-2 gap-16 items-end border-b border-white/[0.06]">
+
+        {/* Left */}
+        <div style={fadeIn(0)}>
+          <p className="text-[11px] tracking-[0.55em] uppercase font-semibold mb-5"
+             style={{ color: "#4CC8E8" }}>
+            {isAr ? "قصتنا" : "Our Story"}
+          </p>
+          <h2
+            className="font-bold text-white leading-[1.05]"
+            style={{ fontSize: "clamp(2.4rem,4.5vw,4rem)" }}
           >
-            {isAr ? "١" : "1"}
-          </span>
-          <div className="-mt-8">
-            <p className="text-xs tracking-[0.5em] uppercase text-white/30 mb-3">
-              {isAr ? "قصتنا" : "Our Story"}
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extralight text-white leading-tight">
-              {isAr
-                ? <>تجارب تتجاوز<br /><span style={{ color: "var(--accent)", transition: "color 0.8s ease" }}>الحدود</span></>
-                : <>Experiences that<br /><span style={{ color: "var(--accent)", transition: "color 0.8s ease" }}>transcend borders</span></>
-              }
-            </h2>
-          </div>
+            {isAr ? (
+              <>تجارب تتجاوز<br /><span style={{ color: "#4CC8E8" }}>الحدود</span></>
+            ) : (
+              <>Experiences that<br /><span style={{ color: "#4CC8E8" }}>transcend borders</span></>
+            )}
+          </h2>
         </div>
 
-        {/* Right: description */}
-        <div
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateX(0)" : "translateX(40px)",
-            transition: "opacity 1.4s cubic-bezier(0.77,0,0.175,1) 0.3s, transform 1.4s cubic-bezier(0.77,0,0.175,1) 0.3s",
-          }}
-        >
-          <p className="text-base font-light leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.75)" }}>
+        {/* Right */}
+        <div style={fadeIn(0.2)}>
+          <p className="text-base font-light leading-relaxed mb-8"
+             style={{ color: "rgba(255,255,255,0.72)" }}>
             {isAr
-              ? "سكاي إكسبو شركة سعودية متخصصة في تصميم وتنفيذ المعارض والفعاليات الدولية بمعايير عالمية استثنائية. نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."
-              : "Sky Expo is a Saudi company specializing in designing and executing international exhibitions and events to exceptional global standards. We don't produce events — we craft moments that endure."}
+              ? "سكاي إكسبو شركة سعودية رائدة في تصميم وتنفيذ المعارض والفعاليات الدولية. نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."
+              : "Sky Expo — Saudi Arabia's premier exhibitions and events company. We don't produce events, we craft moments that endure."}
           </p>
+          <a href="/our-story"
+            className="inline-flex items-center gap-4 text-xs tracking-[0.35em] uppercase font-semibold
+                       text-white/60 hover:text-white transition-colors duration-400 group"
+            data-cursor-hover>
+            {isAr ? "اكتشف قصتنا" : "Discover our story"}
+            <span className="block w-8 h-px bg-current transition-all duration-400 group-hover:w-16" />
+          </a>
+        </div>
+      </div>
 
-          {/* Stat row — animated counters */}
-          <div className="flex gap-12">
-            {[
-              { value: 15,  suffix: "+", labelEn: "Years",   labelAr: "عاماً",   color: "#4CC8E8", delay: 0   },
-              { value: 60,  suffix: "+", labelEn: "Clients",  labelAr: "عميل",   color: "#F3742B", delay: 150 },
-              { value: 70,  suffix: "+", labelEn: "Experts",  labelAr: "متخصص",  color: "#FED172", delay: 300 },
-            ].map((s) => (
+      {/* ── BOTTOM: creative stats row ───────────────────────────────────── */}
+      <div className="relative z-10 max-w-6xl mx-auto px-12 py-20">
+
+        {/* Decorative label */}
+        <p className="text-[10px] tracking-[0.65em] uppercase font-medium mb-14"
+           style={{ color: "rgba(255,255,255,0.35)", ...fadeIn(0.35) }}>
+          {isAr ? "بالأرقام" : "By the numbers"}
+        </p>
+
+        {/* Stats grid */}
+        <div
+          className="grid grid-cols-3 gap-0"
+          style={fadeIn(0.45)}
+        >
+          {STATS.map((s, i) => (
+            <div
+              key={s.labelEn}
+              className="relative px-8 first:ps-0"
+              style={{
+                borderInlineStart: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+              }}
+            >
               <AnimatedStat
-                key={s.labelEn}
                 value={s.value}
                 suffix={s.suffix}
                 label={isAr ? s.labelAr : s.labelEn}
                 color={s.color}
-                delay={s.delay}
+                delay={i * 180}
                 inView={inView}
               />
-            ))}
-          </div>
-
-          {/* CTA */}
-          <a
-            href="/our-story"
-            className="inline-flex items-center gap-3 mt-10 text-xs tracking-[0.3em] uppercase text-white/50 hover:text-white transition-colors duration-400 group"
-            data-cursor-hover
-          >
-            {isAr ? "اكتشف قصتنا" : "Discover our story"}
-            <span className="block w-8 h-px bg-current transition-all duration-400 group-hover:w-14" />
-          </a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
