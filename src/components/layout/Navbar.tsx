@@ -42,25 +42,15 @@ export function Navbar() {
     >
       {/* ── Logo — first in DOM: LEFT in LTR (EN), RIGHT in RTL (AR) ── */}
       <a href="/" className="flex items-center shrink-0" data-cursor-hover>
-        {/* White pill so the coloured logo shows on dark backgrounds */}
-        <span
-          className="flex items-center justify-center rounded-lg overflow-hidden"
-          style={{
-            background: "rgba(255,255,255,0.96)",
-            padding: "5px 10px",
-            boxShadow: "0 2px 16px rgba(0,0,0,0.35)",
-          }}
-        >
-          <Image
-            src="/images/skyexpo-logo.png"
-            alt="Sky Expo"
-            width={140}
-            height={52}
-            className="object-contain"
-            style={{ height: "38px", width: "auto", display: "block" }}
-            priority
-          />
-        </span>
+        <Image
+          src="/images/skyexpo-logo.png"
+          alt="Sky Expo"
+          width={160}
+          height={60}
+          className="object-contain"
+          style={{ height: "46px", width: "auto", display: "block" }}
+          priority
+        />
       </a>
 
       {/* ── Centre: Nav links ── */}
