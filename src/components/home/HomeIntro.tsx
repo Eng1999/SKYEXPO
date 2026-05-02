@@ -73,7 +73,7 @@ export function HomeIntro() {
             transition: "opacity 1.4s cubic-bezier(0.77,0,0.175,1) 0.3s, transform 1.4s cubic-bezier(0.77,0,0.175,1) 0.3s",
           }}
         >
-          <p className="text-base font-light leading-relaxed text-white/50 mb-8">
+          <p className="text-base font-light leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.75)" }}>
             {isAr
               ? "سكاي إكسبو شركة سعودية متخصصة في تصميم وتنفيذ المعارض والفعاليات الدولية بمعايير عالمية استثنائية. نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."
               : "Sky Expo is a Saudi company specializing in designing and executing international exhibitions and events to exceptional global standards. We don't produce events — we craft moments that endure."}
@@ -93,7 +93,7 @@ export function HomeIntro() {
                 >
                   {n}
                 </span>
-                <span className="text-xs tracking-widest uppercase text-white/30">{label}</span>
+                <span className="text-xs tracking-widest uppercase font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>{label}</span>
               </div>
             ))}
           </div>
