@@ -134,7 +134,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
                 key={src + i}
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
                 style={{
-                  filter: "brightness(0.5) saturate(0.75)",
+                  filter: "brightness(0.65) saturate(0.85)",
                   opacity: 1,
                   zIndex: i,
                   // Each video layered; active panel's video on top via JS below
@@ -157,7 +157,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
           )}
 
           {/* Gradients for text legibility */}
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.15) 70%,rgba(0,0,0,0.55) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.1) 70%,rgba(0,0,0,0.45) 100%)" }} />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right,rgba(0,0,0,0.5) 0%,transparent 35%,transparent 65%,rgba(0,0,0,0.4) 100%)" }} />
         </div>
 
@@ -205,7 +205,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
                   {/* Tagline */}
                   <p
                     className="mt-6 text-sm font-light tracking-wide italic"
-                    style={{ color: "rgba(255,255,255,0.35)" }}
+                    style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}
                   >
                     {isAr ? panel.taglineAr : panel.taglineEn}
                   </p>
@@ -220,7 +220,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
                   />
                   <p
                     className="text-base font-light leading-relaxed"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    style={{ color: "rgba(255,255,255,0.88)", textShadow: "0 1px 12px rgba(0,0,0,0.9)" }}
                   >
                     {isAr ? panel.bodyAr : panel.bodyEn}
                   </p>
