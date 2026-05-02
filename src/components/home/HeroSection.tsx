@@ -46,17 +46,14 @@ export function HeroSection() {
           pointerEvents: "none",
         }}
       >
-        {/* White logo — transparent PNG looks clean on black */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/skyexpo-logo.png"
           alt="Sky Expo"
           style={{
-            height: 90,
+            height: 110,
             width: "auto",
-            filter: "brightness(0) invert(1)",
-            opacity: 0.92,
-            dropShadow: "0 0 40px rgba(255,255,255,0.15)",
+            filter: "drop-shadow(0 0 40px rgba(76,200,232,0.5)) drop-shadow(0 0 80px rgba(61,61,168,0.35))",
           }}
         />
       </div>

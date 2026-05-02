@@ -19,6 +19,7 @@ const NAV_ITEMS = [
 
 export function Navbar() {
   const { lang } = useLanguage();
+  const isAr = lang === "ar";
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
@@ -31,6 +32,7 @@ export function Navbar() {
   return (
     <header
       ref={navRef}
+      dir={isAr ? "rtl" : "ltr"}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-all duration-700",
         scrolled
@@ -38,7 +40,39 @@ export function Navbar() {
           : "bg-gradient-to-b from-black/70 to-transparent"
       )}
     >
-      {/* Left side: social + search + language */}
+      {/* Logo — first in DOM: left in LTR (EN), right in RTL (AR) */}
+      <a href="/" className="flex items-center shrink-0" data-cursor-hover>
+        <Image
+          src="/images/skyexpo-logo.png"
+          alt="Sky Expo"
+          width={180}
+          height={70}
+          className="object-contain"
+          style={{
+            height: "48px",
+            width: "auto",
+            /* Show real brand colours — no white filter */
+            filter: "drop-shadow(0 0 12px rgba(76,200,232,0.25))",
+          }}
+          priority
+        />
+      </a>
+
+      {/* Centre: Nav links */}
+      <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+        {NAV_ITEMS.map((item) => (
+          <NavLink
+            key={item.href}
+            href={item.href}
+            labelEn={item.labelEn}
+            labelAr={item.labelAr}
+            lang={lang}
+            color={item.color}
+          />
+        ))}
+      </nav>
+
+      {/* Opposite side: social + search + language + mobile menu */}
       <div className="flex items-center gap-5">
         {/* Social icons */}
         <div className="hidden lg:flex items-center gap-3">
@@ -49,7 +83,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="text-white/30 hover:text-white transition-colors duration-300"
+              className="text-white/40 hover:text-white transition-colors duration-300"
               data-cursor-hover
             >
               <svg
@@ -69,11 +103,11 @@ export function Navbar() {
 
         {/* Search */}
         <button
-          className="text-white/35 hover:text-white transition-colors duration-300"
+          className="text-white/45 hover:text-white transition-colors duration-300"
           aria-label="Search"
           data-cursor-hover
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <circle cx="11" cy="11" r="8" />
             <path d="M21 21l-4.35-4.35" />
           </svg>
@@ -83,43 +117,11 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <button className="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu" data-cursor-hover>
-          <span className="block w-5 h-px bg-white/60" />
-          <span className="block w-5 h-px bg-white/60" />
-          <span className="block w-3 h-px bg-white/60" />
+          <span className="block w-5 h-px bg-white/70" />
+          <span className="block w-5 h-px bg-white/70" />
+          <span className="block w-3 h-px bg-white/70" />
         </button>
       </div>
-
-      {/* Centre: Nav links */}
-      <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.href}
-            href={item.href}
-            labelEn={item.labelEn}
-            labelAr={item.labelAr}
-            lang={lang}
-            color={item.color}
-          />
-        ))}
-      </nav>
-
-      {/* Right: Logo */}
-      <a href="/" className="flex items-center shrink-0" data-cursor-hover>
-        <Image
-          src="/images/skyexpo-logo.png"
-          alt="Sky Expo"
-          width={160}
-          height={60}
-          className="object-contain"
-          style={{
-            height: "44px",
-            width: "auto",
-            filter: "brightness(0) invert(1)",
-            opacity: 0.95,
-          }}
-          priority
-        />
-      </a>
     </header>
   );
 }
