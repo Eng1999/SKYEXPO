@@ -21,9 +21,10 @@ const ITEMS = [
 ];
 
 /* ── Tilt card ─────────────────────────────────────────────────────── */
-function GalleryCard({ item, isAr }: {
+function GalleryCard({ item, isAr, soundOn }: {
   item: typeof ITEMS[0];
   isAr: boolean;
+  soundOn: boolean;
 }) {
   const cardRef    = useRef<HTMLDivElement>(null);
   const videoRef   = useRef<HTMLVideoElement>(null);
@@ -44,13 +45,19 @@ function GalleryCard({ item, isAr }: {
     return () => obs.disconnect();
   }, []);
 
-  /* Play / pause on hover */
+  /* Play / pause on hover + sync mute state */
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !loaded) return;
-    if (hovered) v.play().catch(() => {});
-    else { v.pause(); v.currentTime = 0; }
-  }, [hovered, loaded]);
+    if (hovered) {
+      v.muted = !soundOn;
+      v.play().catch(() => {});
+    } else {
+      v.muted = true;
+      v.pause();
+      v.currentTime = 0;
+    }
+  }, [hovered, loaded, soundOn]);
 
   /* Throttled tilt via rAF */
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -174,6 +181,7 @@ function GalleryCard({ item, isAr }: {
 export function WorkGallery() {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
+  const [soundOn, setSoundOn] = useState(false);
 
   return (
     <div className="bg-black min-h-screen" dir={isAr ? "rtl" : "ltr"}>
@@ -190,11 +198,42 @@ export function WorkGallery() {
           >
             {isAr ? "أعمالنا" : "Our Work"}
           </h1>
-          <p className="text-sm text-white/30 max-w-xs font-light leading-relaxed md:pb-2">
-            {isAr
-              ? "لحظات حقيقية من مشاريع SKY EXPO — من المفهوم إلى التنفيذ."
-              : "Real moments from SKY EXPO projects — from concept to execution."}
-          </p>
+          <div className="flex items-center gap-6 md:pb-2">
+            <p className="text-sm text-white/30 max-w-xs font-light leading-relaxed">
+              {isAr
+                ? "لحظات حقيقية من مشاريع SKY EXPO — من المفهوم إلى التنفيذ."
+                : "Real moments from SKY EXPO projects — from concept to execution."}
+            </p>
+            {/* Sound toggle */}
+            <button
+              onClick={() => setSoundOn(s => !s)}
+              className="flex items-center gap-2 shrink-0 group"
+              aria-label={soundOn ? "Mute" : "Enable sound"}
+            >
+              <span className="text-[10px] tracking-[0.35em] uppercase transition-colors duration-300"
+                style={{ color: soundOn ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.3)" }}>
+                {soundOn ? (isAr ? "الصوت شغال" : "SOUND ON") : (isAr ? "الصوت مكتوم" : "SOUND OFF")}
+              </span>
+              <span className="flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-400"
+                style={{
+                  borderColor: soundOn ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.15)",
+                  background: soundOn ? "rgba(255,255,255,0.08)" : "transparent",
+                }}>
+                {soundOn ? (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" strokeLinecap="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                ) : (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" />
+                  </svg>
+                )}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -202,27 +241,27 @@ export function WorkGallery() {
       <div className="px-3 sm:px-5 md:px-8 pb-24">
         {/* Row 1 */}
         <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
-          <div className="col-span-4"><GalleryCard item={ITEMS[0]}  isAr={isAr} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[2]}  isAr={isAr} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[1]}  isAr={isAr} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[0]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[2]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[1]}  isAr={isAr} soundOn={soundOn} /></div>
         </div>
         {/* Row 2 */}
         <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
-          <div className="col-span-3"><GalleryCard item={ITEMS[4]}  isAr={isAr} /></div>
-          <div className="col-span-4"><GalleryCard item={ITEMS[3]}  isAr={isAr} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[7]}  isAr={isAr} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[4]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[3]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[7]}  isAr={isAr} soundOn={soundOn} /></div>
         </div>
         {/* Row 3 */}
         <div className="grid grid-cols-12 gap-2 md:gap-3 mb-2 md:mb-3">
-          <div className="col-span-5"><GalleryCard item={ITEMS[5]}  isAr={isAr} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[6]}  isAr={isAr} /></div>
-          <div className="col-span-4"><GalleryCard item={ITEMS[8]}  isAr={isAr} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[5]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[6]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[8]}  isAr={isAr} soundOn={soundOn} /></div>
         </div>
         {/* Row 4 */}
         <div className="grid grid-cols-12 gap-2 md:gap-3">
-          <div className="col-span-4"><GalleryCard item={ITEMS[9]}  isAr={isAr} /></div>
-          <div className="col-span-3"><GalleryCard item={ITEMS[10]} isAr={isAr} /></div>
-          <div className="col-span-5"><GalleryCard item={ITEMS[11]} isAr={isAr} /></div>
+          <div className="col-span-4"><GalleryCard item={ITEMS[9]}  isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-3"><GalleryCard item={ITEMS[10]} isAr={isAr} soundOn={soundOn} /></div>
+          <div className="col-span-5"><GalleryCard item={ITEMS[11]} isAr={isAr} soundOn={soundOn} /></div>
         </div>
       </div>
 
