@@ -90,13 +90,13 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
           : PANELS[activeIdx].numEn;
       }
 
-      // Switch active video: bring active panel's video to front, fade others
+      // If multiple videos exist, switch the active one; single video stays always visible
       PANELS.forEach((_, vi) => {
         const vid = document.getElementById(`story-video-${vi}`) as HTMLVideoElement | null;
-        if (vid) {
-          vid.style.zIndex = String(vi === activeIdx ? 5 : vi);
-          vid.style.opacity = vi === activeIdx ? "1" : "0";
-        }
+        if (!vid) return;
+        // video-0 is always the single background — keep it visible
+        vid.style.opacity = "1";
+        vid.style.zIndex = "1";
       });
 
       // Text panels: static position, just fade active one in/out
