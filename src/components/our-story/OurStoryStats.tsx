@@ -31,14 +31,14 @@ export function OurStoryStats() {
   return (
     <section
       ref={ref}
-      className="relative bg-black border-t border-white/[0.06] py-28 px-16"
+      className="relative bg-black border-t border-white/[0.06] py-14 md:py-28 px-5 sm:px-8 lg:px-16"
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* Subtle grid background */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
 
-      <div className="relative grid grid-cols-2 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
+      <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 md:gap-12 max-w-6xl mx-auto">
         {STATS.map((s, i) => (
           <AnimatedStat
             key={i}

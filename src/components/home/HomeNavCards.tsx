@@ -37,7 +37,7 @@ const CARDS = [
     labelAr: "تواصل معنا",
     descEn: "Have a vision? Let's build it together.",
     descAr: "لديك رؤية؟ دعنا نبنيها معاً.",
-    color: "#612E37",
+    color: "#4CC8E8",
     num: "04",
   },
   {
@@ -46,7 +46,7 @@ const CARDS = [
     labelAr: "انضم إلى سكاي إكسبو",
     descEn: "Shape the future of exhibitions — join our world.",
     descAr: "شكّل مستقبل المعارض — انضم إلى عالمنا.",
-    color: "#231650",
+    color: "#FED172",
     num: "05",
   },
 ];
@@ -57,12 +57,9 @@ export function HomeNavCards() {
   const isAr = lang === "ar";
 
   return (
-    <section
-      className="relative bg-black"
-      dir={isAr ? "rtl" : "ltr"}
-    >
+    <section className="relative bg-black" dir={isAr ? "rtl" : "ltr"}>
       {/* Section label */}
-      <div className="px-16 pt-20 pb-10">
+      <div className="px-5 sm:px-8 lg:px-16 pt-12 md:pt-20 pb-6 md:pb-10">
         <p className="text-xs tracking-[0.5em] uppercase text-white/55">
           {isAr ? "استكشف" : "Explore"}
         </p>
@@ -76,10 +73,8 @@ export function HomeNavCards() {
             <a
               key={card.href}
               href={card.href}
-              className="relative flex items-center justify-between px-16 py-10 border-t border-white/[0.07] group overflow-hidden transition-colors duration-500"
-              style={{
-                background: isHov ? `${card.color}08` : "transparent",
-              }}
+              className="relative flex items-center justify-between px-5 sm:px-8 lg:px-16 py-5 md:py-10 border-t border-white/[0.07] group overflow-hidden transition-colors duration-500"
+              style={{ background: isHov ? `${card.color}08` : "transparent" }}
               onMouseEnter={() => setHovered(card.href)}
               onMouseLeave={() => setHovered(null)}
               data-cursor-hover
@@ -97,7 +92,7 @@ export function HomeNavCards() {
 
               {/* Number */}
               <span
-                className="text-xs tracking-widest text-white/55 transition-colors duration-500 w-12 shrink-0"
+                className="hidden sm:inline text-xs tracking-widest text-white/55 transition-colors duration-500 w-10 shrink-0"
                 style={{ color: isHov ? `${card.color}80` : undefined }}
               >
                 {card.num}
@@ -105,15 +100,15 @@ export function HomeNavCards() {
 
               {/* Title */}
               <h3
-                className="flex-1 text-3xl md:text-4xl font-extralight tracking-wide uppercase transition-colors duration-500"
+                className="flex-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extralight tracking-wide uppercase transition-colors duration-500"
                 style={{ color: isHov ? card.color : "rgba(255,255,255,0.7)" }}
               >
                 {isAr ? card.labelAr : card.labelEn}
               </h3>
 
-              {/* Description — appears on hover */}
+              {/* Description — desktop hover only */}
               <p
-                className="hidden md:block max-w-xs text-sm font-light text-white/40 text-right transition-all duration-500"
+                className="hidden lg:block max-w-xs text-sm font-light text-white/40 text-right transition-all duration-500"
                 style={{
                   opacity: isHov ? 1 : 0,
                   transform: isHov ? "translateX(0)" : "translateX(10px)",
@@ -122,17 +117,17 @@ export function HomeNavCards() {
                 {isAr ? card.descAr : card.descEn}
               </p>
 
-              {/* Arrow */}
+              {/* Arrow — minimum 44px touch target */}
               <span
-                className="ml-8 shrink-0 flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-500"
+                className="ms-4 md:ms-8 shrink-0 flex items-center justify-center w-11 h-11 rounded-full border transition-all duration-500"
                 style={{
                   borderColor: isHov ? card.color : "rgba(255,255,255,0.15)",
                   color: isHov ? card.color : "rgba(255,255,255,0.3)",
                   transform: isHov ? "translateX(4px)" : "translateX(0)",
                 }}
               >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 6h8M7 3l3 3-3 3" />
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d={isAr ? "M10 6H2M5 9l-3-3 3-3" : "M2 6h8M7 3l3 3-3 3"} />
                 </svg>
               </span>
             </a>
@@ -141,7 +136,7 @@ export function HomeNavCards() {
       </div>
 
       {/* Bottom padding */}
-      <div className="h-20" />
+      <div className="h-10 md:h-20" />
     </section>
   );
 }

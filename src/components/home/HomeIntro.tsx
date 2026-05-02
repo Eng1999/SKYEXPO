@@ -46,8 +46,8 @@ export function HomeIntro() {
         style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(76,200,232,0.05) 0%, transparent 70%)" }} />
 
       {/* ── TOP: text block ─────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-12 pt-28 pb-16
-                      grid md:grid-cols-2 gap-16 items-end border-b border-white/[0.06]">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-10 md:pb-16
+                      grid md:grid-cols-2 gap-8 md:gap-16 items-end border-b border-white/[0.06]">
 
         {/* Left */}
         <div style={fadeIn(0)}>
@@ -86,7 +86,7 @@ export function HomeIntro() {
       </div>
 
       {/* ── BOTTOM: creative stats row ───────────────────────────────────── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-12 py-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12 md:py-20">
 
         {/* Decorative label */}
         <p className="text-[10px] tracking-[0.65em] uppercase font-medium mb-14"
@@ -96,13 +96,13 @@ export function HomeIntro() {
 
         {/* Stats grid */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-0"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-0"
           style={fadeIn(0.45)}
         >
           {STATS.map((s, i) => (
             <div
               key={s.labelEn}
-              className="relative px-10 first:ps-0"
+              className="relative px-5 md:px-8 lg:px-10 first:ps-0"
               style={{
                 borderInlineStart: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
               }}

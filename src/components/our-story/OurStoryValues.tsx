@@ -31,7 +31,7 @@ export function OurStoryValues() {
   return (
     <section
       ref={ref}
-      className="relative bg-black py-24 px-16 border-t border-white/[0.06]"
+      className="relative bg-black py-12 md:py-24 px-5 sm:px-8 lg:px-16 border-t border-white/[0.06]"
       dir={isAr ? "rtl" : "ltr"}
     >
       <div className="max-w-6xl mx-auto">
@@ -53,7 +53,7 @@ export function OurStoryValues() {
         </div>
 
         {/* Values grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {VALUES.map((v, i) => (
             <ValueCard key={i} value={v} isAr={isAr} index={i} inView={inView} />
           ))}
@@ -67,7 +67,7 @@ export function OurStoryValues() {
             transition: "opacity 1.5s ease 0.6s",
           }}
         >
-          <blockquote className="text-2xl md:text-4xl font-light text-white/60 leading-relaxed border-l-2 pl-8"
+          <blockquote className="text-xl sm:text-2xl md:text-4xl font-light text-white/60 leading-relaxed border-l-2 pl-5 md:pl-8"
             style={{ borderColor: "#FED172" }}
           >
             {isAr

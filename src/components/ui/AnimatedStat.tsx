@@ -54,7 +54,7 @@ export function AnimatedStat({
       {/* Number */}
       <div
         style={{
-          fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
+          fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
           fontWeight: 800,
           letterSpacing: "-0.03em",
           lineHeight: 1,
