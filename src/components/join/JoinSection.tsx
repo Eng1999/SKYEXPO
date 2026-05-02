@@ -69,22 +69,23 @@ export function JoinSection() {
         </svg>
 
         <div className="relative z-10">
-          <p className="text-[10px] tracking-[0.6em] uppercase text-white/20 mb-6">
+          <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-6"
+             style={{ color: ACCENT }}>
             {isAr ? "الانضمام إلى سكاي اكسبو" : "Join SKY EXPO"}
           </p>
           <h1
-            className="font-extralight uppercase leading-[0.88] mb-8"
+            className="font-bold uppercase leading-[0.88] mb-8"
             style={{
               fontSize: "clamp(3.5rem, 9vw, 10rem)",
-              color: ACCENT,
-              textShadow: `0 0 120px ${ACCENT}60, 0 0 40px ${ACCENT}30`,
+              color: "#ffffff",
+              textShadow: "0 2px 40px rgba(0,0,0,0.6)",
             }}
           >
             {isAr ? (
               <>
                 اصنع
                 <br />
-                شيئاً
+                <span style={{ color: ACCENT }}>شيئاً</span>
                 <br />
                 يدوم
               </>
@@ -92,13 +93,13 @@ export function JoinSection() {
               <>
                 BUILD
                 <br />
-                WHAT
+                <span style={{ color: ACCENT }}>WHAT</span>
                 <br />
                 LASTS
               </>
             )}
           </h1>
-          <p className="text-sm text-white/30 max-w-md font-light leading-relaxed">
+          <p className="text-base text-white/70 max-w-md font-light leading-relaxed">
             {isAr
               ? "لسنا مجرد شركة فعاليات — نحن بيت إبداعي يصنع لحظات تبقى في الذاكرة. إذا كنت تؤمن بالتميّز، فمكانك هنا."
               : "We're not just an events company — we're a creative house that builds moments that endure. If you believe in excellence, you belong here."}
@@ -108,22 +109,21 @@ export function JoinSection() {
 
       {/* ── Why join ──────────────────────────────────────────────────── */}
       <div className="px-16 py-24 border-t border-white/[0.06]">
-        <p className="text-[10px] tracking-[0.6em] uppercase text-white/20 mb-16">
+        <p className="text-[11px] tracking-[0.6em] uppercase font-medium mb-16"
+           style={{ color: ACCENT }}>
           {isAr ? "لماذا سكاي اكسبو؟" : "Why SKY EXPO"}
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {WHY.map((w) => (
             <div key={w.numEn} className="group">
-              <p
-                className="text-[10px] tracking-[0.4em] mb-6 font-light"
-                style={{ color: `${ACCENT}80` }}
-              >
+              <p className="text-[11px] tracking-[0.4em] mb-6 font-medium"
+                 style={{ color: ACCENT }}>
                 {isAr ? w.numAr : w.numEn}
               </p>
-              <p className="text-sm font-light text-white mb-3">
+              <p className="text-base font-semibold text-white mb-3">
                 {isAr ? w.titleAr : w.titleEn}
               </p>
-              <p className="text-xs text-white/30 leading-relaxed font-light">
+              <p className="text-sm text-white/65 leading-relaxed font-light">
                 {isAr ? w.bodyAr : w.bodyEn}
               </p>
             </div>

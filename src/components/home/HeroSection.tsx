@@ -50,7 +50,7 @@ export function HeroSection() {
         <img
           src="/images/skyexpo-logo.png"
           alt="Sky Expo"
-          style={{ height: 100, width: "auto", display: "block" }}
+          style={{ height: 100, width: "auto", display: "block", mixBlendMode: "screen" }}
         />
       </div>
 
