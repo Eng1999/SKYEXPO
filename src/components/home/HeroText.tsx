@@ -86,47 +86,31 @@ export function HeroText() {
           </p>
         </div>
 
-        {/* BIG cinematic title — staggered lines */}
-        {/* No overflow-hidden — Arabic glyphs extend beyond em-box and get clipped */}
-        <div className="mb-1 pb-2">
-          <h1
-            className="font-bold leading-[1.05] tracking-tight uppercase text-white"
-            style={{
-              ...fadeUp("title1"),
-              fontSize: isAr ? "clamp(3rem,8vw,8rem)" : "clamp(3.5rem,10vw,10rem)",
-              textShadow: "0 2px 30px rgba(0,0,0,0.7)",
-              wordBreak: "keep-all",
-            }}
-          >
+        {/* BIG cinematic title — individual block lines, no overflow-hidden */}
+        <div
+          className="font-bold tracking-tight uppercase mb-8"
+          style={{
+            fontSize: isAr ? "clamp(3rem,8vw,8rem)" : "clamp(3.5rem,10vw,10rem)",
+            lineHeight: isAr ? 1.15 : 0.9,
+            textShadow: "0 2px 30px rgba(0,0,0,0.7)",
+          }}
+        >
+          <span className="block text-white" style={fadeUp("title1")}>
             {isAr ? "حيث" : "Where"}
-          </h1>
-        </div>
-        <div className="mb-1 pb-2">
-          <h1
-            className="font-bold leading-[1.05] tracking-tight uppercase"
-            style={{
-              ...fadeUp("title2"),
-              fontSize: isAr ? "clamp(3rem,8vw,8rem)" : "clamp(3.5rem,10vw,10rem)",
-              color: "var(--accent)",
-              textShadow: "0 2px 40px rgba(0,0,0,0.5)",
-              wordBreak: "keep-all",
-            }}
-          >
+          </span>
+          <span className="block" style={{ ...fadeUp("title2"), color: "var(--accent)" }}>
             {isAr ? "تتحول" : "Moments"}
-          </h1>
-        </div>
-        <div className="mb-8 pb-2">
-          <h1
-            className="font-light leading-[1.05] tracking-tight uppercase text-white/80"
+          </span>
+          <span
+            className="block"
             style={{
               ...fadeUp("title3"),
-              fontSize: isAr ? "clamp(2rem,5.5vw,5.5rem)" : "clamp(3.5rem,10vw,10rem)",
-              textShadow: "0 2px 30px rgba(0,0,0,0.7)",
-              wordBreak: "keep-all",
+              color: "rgba(255,255,255,0.80)",
+              fontSize: isAr ? "clamp(1.8rem,5vw,5rem)" : undefined,
             }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}
-          </h1>
+          </span>
         </div>
 
         {/* Bottom row: description + play button */}
