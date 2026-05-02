@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 /* ─── Content ─────────────────────────────────────────────────────────── */
@@ -56,6 +56,16 @@ const PANELS = [
 export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos?: string[] }) {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
+  const [muted, setMuted] = useState(true);
+  const bgVideoRef = useRef<HTMLVideoElement>(null);
+
+  /* sync mute to bg video */
+  useEffect(() => {
+    const v = bgVideoRef.current;
+    if (!v) return;
+    v.muted = muted;
+    if (!muted) v.play().catch(() => {});
+  }, [muted]);
 
   const sectionRef  = useRef<HTMLElement>(null);
   const panelRefs   = useRef<(HTMLDivElement | null)[]>([]);
@@ -167,6 +177,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
         <div className="absolute inset-0">
           {bgSrc ? (
             <video
+              ref={bgVideoRef}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: "brightness(0.6) saturate(0.8)" }}
               autoPlay muted loop playsInline
@@ -298,6 +309,35 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
             }}
           />
         </div>
+
+        {/* ── Sound toggle ── */}
+        {bgSrc && (
+          <button
+            onClick={() => setMuted((m) => !m)}
+            className="absolute bottom-8 z-30 flex items-center gap-2"
+            style={{ [isAr ? "left" : "right"]: "1.25rem" }}
+            aria-label={muted ? "Enable sound" : "Mute"}
+          >
+            <span className="text-[10px] tracking-[0.35em] uppercase transition-colors duration-300"
+              style={{ color: muted ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.75)" }}>
+              {muted ? "SOUND OFF" : "SOUND ON"}
+            </span>
+            <span className="flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-400"
+              style={{ borderColor: muted ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.5)", background: muted ? "transparent" : "rgba(255,255,255,0.08)" }}>
+              {muted ? (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" />
+                </svg>
+              ) : (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" strokeLinecap="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </svg>
+              )}
+            </span>
+          </button>
+        )}
 
         {/* ── Scroll hint ── */}
         <div

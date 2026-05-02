@@ -33,7 +33,7 @@ export function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
       {/* Real video background */}
-      {contentVisible && <HeroVideo src="/videos/sirc.mp4" />}
+      {contentVisible && <HeroVideo src="/videos/hero-main.mp4" />}
 
       {/* Initial logo reveal — real logo */}
       <div
