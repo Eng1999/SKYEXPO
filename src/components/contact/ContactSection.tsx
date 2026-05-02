@@ -167,7 +167,9 @@ export function ContactSection() {
             <div className="hidden sm:block mb-10 md:mb-14 relative inline-block">
               <GeometricElement />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                <p className="text-[9px] tracking-[0.5em] uppercase text-white/40 font-medium">SKY EXPO</p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/skyexpo-logo.png" alt="Sky Expo"
+                  style={{ height: "28px", width: "auto", opacity: 0.55, filter: "brightness(10)" }} />
               </div>
             </div>
 
