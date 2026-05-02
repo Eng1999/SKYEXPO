@@ -3,17 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 interface AnimatedStatProps {
-  /** numeric target, e.g. 15 */
   value: number;
-  /** suffix shown after the number, e.g. "+" or "K+" */
   suffix?: string;
-  /** label below the number */
   label: string;
-  /** accent colour for the number */
   color?: string;
-  /** delay before counting starts (ms) */
   delay?: number;
-  /** whether to trigger immediately or wait for inView */
   inView: boolean;
 }
 
@@ -21,83 +15,102 @@ export function AnimatedStat({
   value,
   suffix = "+",
   label,
-  color = "var(--accent)",
+  color = "#4CC8E8",
   delay = 0,
   inView,
 }: AnimatedStatProps) {
   const [count, setCount] = useState(0);
+  const [filled, setFilled] = useState(false);
   const started = useRef(false);
 
   useEffect(() => {
     if (!inView || started.current) return;
     started.current = true;
 
-    const timeout = setTimeout(() => {
-      const duration = 1400; // ms
+    const t = setTimeout(() => {
+      const duration = 1600;
       const steps = 60;
-      const increment = value / steps;
-      let current = 0;
       let step = 0;
 
-      const interval = setInterval(() => {
+      const iv = setInterval(() => {
         step++;
-        // ease-out cubic
         const progress = 1 - Math.pow(1 - step / steps, 3);
-        current = Math.round(value * progress);
-        setCount(current);
+        setCount(Math.round(value * progress));
         if (step >= steps) {
           setCount(value);
-          clearInterval(interval);
+          clearInterval(iv);
+          setTimeout(() => setFilled(true), 180);
         }
       }, duration / steps);
-
-      return () => clearInterval(interval);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(t);
   }, [inView, value, delay]);
 
   return (
-    <div className="group flex flex-col">
-      {/* Number row */}
-      <div className="flex items-end gap-1 mb-3">
+    <div className="relative flex flex-col items-start">
+
+      {/* Number container */}
+      <div className="relative mb-4" style={{ lineHeight: 1 }}>
+
+        {/* Ghost outline — always visible as backdrop */}
         <span
-          className="tabular-nums leading-none font-bold"
+          aria-hidden
           style={{
-            fontSize: "clamp(3rem, 5vw, 4.5rem)",
-            color,
-            fontVariantNumeric: "tabular-nums",
-            letterSpacing: "-0.02em",
+            display: "block",
+            fontSize: "clamp(4rem, 6.5vw, 6rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            color: "transparent",
+            WebkitTextStroke: `1.5px ${color}`,
+            opacity: 0.22,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            userSelect: "none",
           }}
         >
-          {count.toLocaleString()}
+          {value.toLocaleString()}{suffix}
         </span>
+
+        {/* Solid counted number — fades + slides in */}
         <span
-          className="font-light mb-1"
           style={{
-            fontSize: "clamp(1.5rem, 2.5vw, 2.2rem)",
+            display: "block",
+            fontSize: "clamp(4rem, 6.5vw, 6rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
             color,
-            opacity: 0.7,
+            opacity: filled ? 1 : 0,
+            transform: filled ? "translateY(0)" : "translateY(8px)",
+            transition: "opacity 0.55s ease, transform 0.55s ease",
+            textShadow: `0 0 50px ${color}44`,
           }}
         >
-          {suffix}
+          {count.toLocaleString()}{suffix}
         </span>
       </div>
 
-      {/* Thin accent line */}
+      {/* Gradient accent line */}
       <div
-        className="h-px mb-3 transition-all duration-700"
         style={{
-          width: inView ? "2.5rem" : "0px",
-          background: color,
-          transitionDelay: `${delay + 600}ms`,
+          height: "2px",
+          width: inView ? "2.5rem" : "0",
+          background: `linear-gradient(90deg, ${color} 0%, transparent 100%)`,
+          transition: `width 0.8s cubic-bezier(0.77,0,0.175,1) ${delay + 900}ms`,
+          marginBottom: "0.55rem",
         }}
       />
 
       {/* Label */}
       <span
-        className="text-[11px] tracking-[0.45em] uppercase font-medium"
-        style={{ color: "rgba(255,255,255,0.55)" }}
+        style={{
+          fontSize: "0.62rem",
+          letterSpacing: "0.48em",
+          textTransform: "uppercase",
+          fontWeight: 600,
+          color: "rgba(255,255,255,0.58)",
+        }}
       >
         {label}
       </span>
