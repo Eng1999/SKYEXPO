@@ -32,10 +32,10 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
-      {/* Cinematic video background */}
-      {contentVisible && <HeroVideo />}
+      {/* Real video background */}
+      {contentVisible && <HeroVideo src="/videos/sirc.mp4" />}
 
-      {/* Initial logo reveal */}
+      {/* Initial logo reveal — real logo */}
       <div
         ref={logoRef}
         className="absolute z-20 flex flex-col items-center"
@@ -46,10 +46,19 @@ export function HeroSection() {
           pointerEvents: "none",
         }}
       >
-        <div className="text-5xl font-light tracking-[0.5em] uppercase text-white">
-          <span style={{ color: "var(--accent)" }}>SKY</span>
-          <span className="text-white/70"> EXPO</span>
-        </div>
+        {/* White logo — transparent PNG looks clean on black */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/skyexpo-logo.png"
+          alt="Sky Expo"
+          style={{
+            height: 90,
+            width: "auto",
+            filter: "brightness(0) invert(1)",
+            opacity: 0.92,
+            dropShadow: "0 0 40px rgba(255,255,255,0.15)",
+          }}
+        />
       </div>
 
       {/* Main hero content */}
