@@ -43,29 +43,48 @@ const FEATURED = [
 ];
 
 function FeaturedCard({ item, isAr }: { item: typeof FEATURED[0]; isAr: boolean }) {
-  const [hovered, setHovered] = useState(false);
+  const cardRef  = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [inView,  setInView]  = useState(false);
 
+  /* Lazy-load: set src only when card enters viewport */
   useEffect(() => {
-    if (hovered) videoRef.current?.play().catch(() => {});
-  }, [hovered]);
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { rootMargin: "150px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Play when hovered (video already loaded) */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !inView) return;
+    if (hovered) v.play().catch(() => {});
+    else { v.pause(); v.currentTime = 0; }
+  }, [hovered, inView]);
 
   return (
     <div
+      ref={cardRef}
       className="relative overflow-hidden rounded-lg cursor-none group"
       style={{ aspectRatio: "16/9" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-cursor-hover
     >
-      {/* Video */}
+      {/* Video — lazy src, hover-play */}
       <video
         ref={videoRef}
-        src={item.video}
+        src={inView ? item.video : undefined}
         muted
         loop
         playsInline
-        autoPlay
+        preload="none"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: hovered ? "brightness(0.65) saturate(0.9)" : "brightness(0.45) saturate(0.7)",

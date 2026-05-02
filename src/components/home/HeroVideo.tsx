@@ -40,6 +40,7 @@ export function HeroVideo({ src }: HeroVideoProps) {
           muted
           loop
           playsInline
+          preload="metadata"
         >
           <source src={src} type="video/mp4" />
         </video>
