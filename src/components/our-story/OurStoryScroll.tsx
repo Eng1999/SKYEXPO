@@ -271,12 +271,12 @@ export function OurStoryScroll({ videoSrc }: { videoSrc?: string }) {
         {/* ── Top bar: logo area already in Navbar, skip. Add panel counter ── */}
         <div className="absolute top-28 left-16 flex items-center gap-4" style={{ right: isAr ? "auto" : undefined }}>
           <span
-            className="text-xs tracking-[0.4em] uppercase text-white/25"
+            className="text-xs tracking-[0.4em] uppercase text-white/55"
           >
             {isAr ? "قصتنا" : "Our Story"}
           </span>
           <span className="block w-8 h-px bg-white/15" />
-          <span ref={counterRef} className="text-xs tracking-widest text-white/25">
+          <span ref={counterRef} className="text-xs tracking-widest text-white/55">
             {isAr ? PANELS[0].numAr : PANELS[0].numEn}
           </span>
         </div>

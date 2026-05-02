@@ -182,7 +182,7 @@ export function HeroText() {
 
       {/* ── Bottom-right "Click and hold" hint ── */}
       <div
-        className="absolute bottom-8 right-8 text-[10px] tracking-[0.35em] uppercase text-white/20"
+        className="absolute bottom-8 right-8 text-[10px] tracking-[0.35em] uppercase text-white/55"
         style={{
           opacity: visible["cta"] ? 1 : 0,
           transition: "opacity 2s ease",

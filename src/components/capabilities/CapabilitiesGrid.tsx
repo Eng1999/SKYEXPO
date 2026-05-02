@@ -95,7 +95,7 @@ export function CapabilitiesGrid() {
       </div>
 
       {/* Hint text */}
-      <p className="text-center text-xs tracking-widest text-white/20 uppercase mt-12">
+      <p className="text-center text-xs tracking-widest text-white/55 uppercase mt-12">
         {lang === "en" ? "Move cursor · Hold to expand" : "حرك المؤشر · اضغط للتوسيع"}
       </p>
     </section>

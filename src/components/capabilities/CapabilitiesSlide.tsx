@@ -406,7 +406,7 @@ export function CapabilitiesSlide() {
                   }}
                 />
               </div>
-              <span className="text-[10px] tracking-widest text-white/25 text-right">
+              <span className="text-[10px] tracking-widest text-white/55 text-right">
                 {String(SERVICES.length).padStart(2, "0")}
               </span>
             </div>

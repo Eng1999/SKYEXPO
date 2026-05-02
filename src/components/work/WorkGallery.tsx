@@ -154,7 +154,7 @@ export function WorkGallery() {
     <div className="bg-black min-h-screen" dir={isAr ? "rtl" : "ltr"}>
       {/* Header */}
       <div className="pt-32 pb-12 px-16">
-        <p className="text-xs tracking-[0.5em] uppercase text-white/25 mb-4">
+        <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-4">
           {isAr ? "معرض الأعمال" : "Portfolio"}
         </p>
         <div className="flex items-end justify-between">
@@ -217,7 +217,7 @@ const CLIENTS = [
 function ClientsStrip({ isAr }: { isAr: boolean }) {
   return (
     <div className="border-t border-white/[0.06] py-10 overflow-hidden">
-      <p className="text-[10px] tracking-[0.5em] uppercase text-white/20 text-center mb-8">
+      <p className="text-[10px] tracking-[0.5em] uppercase text-white/55 text-center mb-8">
         {isAr ? "عملاؤنا" : "Trusted by"}
       </p>
       {/* Auto-scrolling ticker */}
@@ -229,7 +229,7 @@ function ClientsStrip({ isAr }: { isAr: boolean }) {
           {CLIENTS.map((c, i) => (
             <span
               key={i}
-              className="text-xs tracking-[0.5em] uppercase text-white/25 whitespace-nowrap font-light hover:text-white/60 transition-colors duration-300 cursor-default"
+              className="text-xs tracking-[0.5em] uppercase text-white/55 whitespace-nowrap font-light hover:text-white/60 transition-colors duration-300 cursor-default"
             >
               {c}
             </span>

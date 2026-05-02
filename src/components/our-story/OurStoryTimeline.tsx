@@ -57,7 +57,7 @@ export function OurStoryTimeline() {
     >
       {/* Section label */}
       <div className="max-w-6xl mx-auto mb-16">
-        <p className="text-xs tracking-[0.5em] uppercase text-white/25 mb-3">
+        <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
           {isAr ? "رحلتنا" : "Our Journey"}
         </p>
         <h2 className="text-3xl md:text-5xl font-extralight text-white">

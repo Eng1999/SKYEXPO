@@ -44,7 +44,7 @@ export function OurStoryValues() {
           }}
           className="mb-16"
         >
-          <p className="text-xs tracking-[0.5em] uppercase text-white/25 mb-3">
+          <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
             {isAr ? "قيمنا" : "Our Values"}
           </p>
           <h2 className="text-3xl md:text-5xl font-extralight text-white">
@@ -74,7 +74,7 @@ export function OurStoryValues() {
               ? '"نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."'
               : '"We don\'t produce events — we craft moments that endure."'}
           </blockquote>
-          <p className="mt-4 text-xs tracking-widest uppercase text-white/25 pl-8">
+          <p className="mt-4 text-xs tracking-widest uppercase text-white/55 pl-8">
             {isAr ? "— رؤية سكاي إكسبو التأسيسية" : "— Sky Expo Founding Vision"}
           </p>
         </div>
