@@ -164,7 +164,7 @@ export function HomeFeaturedWork() {
         }}
       >
         <div>
-          <p className="text-[10px] tracking-[0.6em] uppercase text-white/20 mb-3">
+          <p className="text-[10px] tracking-[0.6em] uppercase text-white/55 mb-3">
             {isAr ? "من أعمالنا" : "Selected Work"}
           </p>
           <h2 className="text-4xl md:text-5xl font-extralight text-white leading-none">

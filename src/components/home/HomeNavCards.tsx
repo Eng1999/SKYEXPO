@@ -63,7 +63,7 @@ export function HomeNavCards() {
     >
       {/* Section label */}
       <div className="px-16 pt-20 pb-10">
-        <p className="text-xs tracking-[0.5em] uppercase text-white/20">
+        <p className="text-xs tracking-[0.5em] uppercase text-white/55">
           {isAr ? "استكشف" : "Explore"}
         </p>
       </div>
@@ -97,7 +97,7 @@ export function HomeNavCards() {
 
               {/* Number */}
               <span
-                className="text-xs tracking-widest text-white/20 transition-colors duration-500 w-12 shrink-0"
+                className="text-xs tracking-widest text-white/55 transition-colors duration-500 w-12 shrink-0"
                 style={{ color: isHov ? `${card.color}80` : undefined }}
               >
                 {card.num}
