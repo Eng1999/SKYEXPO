@@ -20,7 +20,6 @@ export function AnimatedStat({
   inView,
 }: AnimatedStatProps) {
   const [count, setCount] = useState(0);
-  const [filled, setFilled] = useState(false);
   const started = useRef(false);
 
   useEffect(() => {
@@ -28,88 +27,67 @@ export function AnimatedStat({
     started.current = true;
 
     const t = setTimeout(() => {
-      const duration = 1600;
-      const steps = 60;
+      const duration = 1800;
+      const steps = 70;
       let step = 0;
 
       const iv = setInterval(() => {
         step++;
+        // ease-out cubic
         const progress = 1 - Math.pow(1 - step / steps, 3);
         setCount(Math.round(value * progress));
         if (step >= steps) {
           setCount(value);
           clearInterval(iv);
-          setTimeout(() => setFilled(true), 180);
         }
       }, duration / steps);
+
+      return () => clearInterval(iv);
     }, delay);
 
     return () => clearTimeout(t);
   }, [inView, value, delay]);
 
   return (
-    <div className="relative flex flex-col items-start">
+    <div className="flex flex-col items-start">
 
-      {/* Number container */}
-      <div className="relative mb-4" style={{ lineHeight: 1 }}>
-
-        {/* Ghost outline — always visible as backdrop */}
-        <span
-          aria-hidden
-          style={{
-            display: "block",
-            fontSize: "clamp(4rem, 6.5vw, 6rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            color: "transparent",
-            WebkitTextStroke: `1.5px ${color}`,
-            opacity: 0.22,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            userSelect: "none",
-          }}
-        >
-          {value.toLocaleString()}{suffix}
-        </span>
-
-        {/* Solid counted number — fades + slides in */}
-        <span
-          style={{
-            display: "block",
-            fontSize: "clamp(4rem, 6.5vw, 6rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            color,
-            opacity: filled ? 1 : 0,
-            transform: filled ? "translateY(0)" : "translateY(8px)",
-            transition: "opacity 0.55s ease, transform 0.55s ease",
-            textShadow: `0 0 50px ${color}44`,
-          }}
-        >
-          {count.toLocaleString()}{suffix}
-        </span>
+      {/* Number */}
+      <div
+        style={{
+          fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
+          fontWeight: 800,
+          letterSpacing: "-0.03em",
+          lineHeight: 1,
+          color,
+          textShadow: `0 0 60px ${color}55, 0 0 20px ${color}33`,
+          marginBottom: "0.6rem",
+          fontVariantNumeric: "tabular-nums",
+        }}
+      >
+        {count.toLocaleString()}{suffix}
       </div>
 
-      {/* Gradient accent line */}
+      {/* Accent line */}
       <div
         style={{
           height: "2px",
-          width: inView ? "2.5rem" : "0",
-          background: `linear-gradient(90deg, ${color} 0%, transparent 100%)`,
-          transition: `width 0.8s cubic-bezier(0.77,0,0.175,1) ${delay + 900}ms`,
-          marginBottom: "0.55rem",
+          width: inView ? "2rem" : "0",
+          background: color,
+          opacity: 0.75,
+          borderRadius: "2px",
+          transition: `width 0.7s cubic-bezier(0.77,0,0.175,1) ${delay + 800}ms`,
+          marginBottom: "0.7rem",
         }}
       />
 
       {/* Label */}
       <span
         style={{
-          fontSize: "0.62rem",
-          letterSpacing: "0.48em",
+          fontSize: "0.6rem",
+          letterSpacing: "0.42em",
           textTransform: "uppercase",
           fontWeight: 600,
-          color: "rgba(255,255,255,0.58)",
+          color: "rgba(255,255,255,0.52)",
         }}
       >
         {label}

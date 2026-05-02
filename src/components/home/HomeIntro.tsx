@@ -5,9 +5,10 @@ import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 const STATS = [
-  { value: 15,   suffix: "+", labelEn: "Years",   labelAr: "عاماً",  color: "#4CC8E8" },
-  { value: 60,   suffix: "+", labelEn: "Clients",  labelAr: "عميل",  color: "#F3742B" },
-  { value: 70,   suffix: "+", labelEn: "Experts",  labelAr: "متخصص", color: "#FED172" },
+  { value: 15,   suffix: "+", labelEn: "Years of Experience", labelAr: "عاماً من الخبرة",   color: "#4CC8E8" },
+  { value: 60,   suffix: "+", labelEn: "Satisfied Clients",   labelAr: "عميل راضٍ",         color: "#F3742B" },
+  { value: 70,   suffix: "+", labelEn: "Team Members",        labelAr: "عضو في الفريق",      color: "#FED172" },
+  { value: 1500, suffix: "+", labelEn: "Tools & Equipment",   labelAr: "أداة ومعدة متخصصة", color: "#ffffff" },
 ];
 
 export function HomeIntro() {
@@ -95,13 +96,13 @@ export function HomeIntro() {
 
         {/* Stats grid */}
         <div
-          className="grid grid-cols-3 gap-0"
+          className="grid grid-cols-2 md:grid-cols-4 gap-0"
           style={fadeIn(0.45)}
         >
           {STATS.map((s, i) => (
             <div
               key={s.labelEn}
-              className="relative px-8 first:ps-0"
+              className="relative px-10 first:ps-0"
               style={{
                 borderInlineStart: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
               }}
@@ -111,7 +112,7 @@ export function HomeIntro() {
                 suffix={s.suffix}
                 label={isAr ? s.labelAr : s.labelEn}
                 color={s.color}
-                delay={i * 180}
+                delay={i * 160}
                 inView={inView}
               />
             </div>
