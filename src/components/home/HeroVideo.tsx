@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroVideoProps {
   src?: string;
@@ -9,6 +10,8 @@ interface HeroVideoProps {
 export function HeroVideo({ src }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  const { lang } = useLanguage();
+  const isAr = lang === "ar";
 
   /* sync mute state to video element */
   useEffect(() => {
@@ -55,7 +58,8 @@ export function HeroVideo({ src }: HeroVideoProps) {
       {src && (
         <button
           onClick={() => setMuted((m) => !m)}
-          className="absolute bottom-8 right-5 md:right-16 z-30 flex items-center gap-2 group"
+          className="absolute bottom-8 z-30 flex items-center gap-2 group"
+          style={{ [isAr ? "left" : "right"]: "clamp(1.25rem,4vw,4rem)" }}
           aria-label={muted ? "Enable sound" : "Mute"}
           data-cursor-hover
         >
@@ -63,7 +67,9 @@ export function HeroVideo({ src }: HeroVideoProps) {
             className="text-[10px] tracking-[0.35em] uppercase transition-colors duration-300"
             style={{ color: muted ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.75)" }}
           >
-            {muted ? "SOUND OFF" : "SOUND ON"}
+            {muted
+            ? (isAr ? "الصوت مكتوم" : "SOUND OFF")
+            : (isAr ? "الصوت شغال" : "SOUND ON")}
           </span>
           <span
             className="flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-400"

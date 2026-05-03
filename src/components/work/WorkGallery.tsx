@@ -68,10 +68,15 @@ function GalleryCard({ item, isAr, soundOn }: {
     v.muted = !soundOn;
   }, [soundOn]);
 
-  /* Lock body scroll when expanded */
+  /* Lock body scroll + Escape to close */
   useEffect(() => {
     document.body.style.overflow = expanded ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setExpanded(false); };
+    if (expanded) window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [expanded]);
 
   /* Throttled tilt */

@@ -247,7 +247,11 @@ export function HomeFeaturedWork() {
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
-            className="transition-transform duration-500 group-hover:translate-x-1"
+            style={{
+              transform: isAr ? "scaleX(-1)" : undefined,
+              transition: "transform 0.5s ease",
+            }}
+            className={isAr ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"}
           >
             <path d="M1 7h12M8 2l5 5-5 5" />
           </svg>

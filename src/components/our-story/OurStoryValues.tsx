@@ -47,7 +47,7 @@ export function OurStoryValues() {
           <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
             {isAr ? "قيمنا" : "Our Values"}
           </p>
-          <h2 className="text-3xl md:text-5xl font-extralight text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white">
             {isAr ? "ما يُعرّفنا" : "What defines us"}
           </h2>
         </div>
@@ -67,14 +67,21 @@ export function OurStoryValues() {
             transition: "opacity 1.5s ease 0.6s",
           }}
         >
-          <blockquote className="text-xl sm:text-2xl md:text-4xl font-light text-white/60 leading-relaxed border-l-2 pl-5 md:pl-8"
-            style={{ borderColor: "#FED172" }}
+          <blockquote
+            className="text-xl sm:text-2xl md:text-4xl font-light text-white/60 leading-relaxed"
+            style={{
+              borderColor: "#FED172",
+              borderInlineStartWidth: "2px",
+              borderInlineStartStyle: "solid",
+              paddingInlineStart: "clamp(1.25rem,3vw,2rem)",
+            }}
           >
             {isAr
               ? '"نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."'
               : '"We don\'t produce events — we craft moments that endure."'}
           </blockquote>
-          <p className="mt-4 text-xs tracking-widest uppercase text-white/55 pl-8">
+          <p className="mt-4 text-xs tracking-widest uppercase text-white/55"
+             style={{ paddingInlineStart: "clamp(1.25rem,3vw,2rem)" }}>
             {isAr ? "— رؤية سكاي إكسبو التأسيسية" : "— Sky Expo Founding Vision"}
           </p>
         </div>

@@ -162,14 +162,14 @@ export function CEOMessage() {
             </div>
 
             {/* Title block */}
-            <div className="mt-6 text-center" dir="ltr">
+            <div className="mt-6 text-center">
               <p
                 className="text-sm font-semibold text-white"
-                style={{ letterSpacing: isAr ? "0.04em" : "0.1em", fontFamily: isAr ? "inherit" : undefined }}
+                style={{ letterSpacing: isAr ? "0.04em" : "0.1em" }}
               >
                 {isAr ? "المالك والرئيس التنفيذي" : "CEO & Chairman"}
               </p>
-              <p className="text-[10px] tracking-[0.45em] uppercase mt-1" style={{ color: "#B83A14" }}>
+              <p className="text-[10px] tracking-[0.45em] uppercase mt-1" style={{ color: "#B83A14", direction: "ltr" }}>
                 SKY EXPO
               </p>
               <div className="mx-auto mt-4 h-px" style={{
