@@ -1,5 +1,6 @@
 import { OurStoryScroll } from "@/components/our-story/OurStoryScroll";
 import { OurStoryStats } from "@/components/our-story/OurStoryStats";
+import { CEOMessage } from "@/components/our-story/CEOMessage";
 import { OurStoryValues } from "@/components/our-story/OurStoryValues";
 import { ClientLogos } from "@/components/shared/ClientLogos";
 
@@ -16,6 +17,9 @@ export default function OurStoryPage() {
 
       {/* Stats strip */}
       <OurStoryStats />
+
+      {/* CEO / Chairman message */}
+      <CEOMessage />
 
       {/* Client logos */}
       <ClientLogos />
