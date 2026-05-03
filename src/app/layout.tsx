@@ -7,7 +7,6 @@ import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { SmoothScroller } from "@/components/ui/SmoothScroller";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Sky Expo — Where moments become legacy",
@@ -31,7 +30,6 @@ export default function RootLayout({
             <NoiseOverlay />
             <Navbar />
             <main>{children}</main>
-            <Footer />
           </ColorProvider>
         </LanguageProvider>
       </body>
