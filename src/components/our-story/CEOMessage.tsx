@@ -83,7 +83,7 @@ export function CEOMessage() {
           <div className="mt-3 h-px w-16" style={{ background: "linear-gradient(to right, #B83A14, transparent)" }} />
         </div>
 
-        <div className={`flex flex-col ${isAr ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-start`}>
+        <div className={`flex flex-col ${isAr ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}>
 
           {/* ── PHOTO COLUMN ── */}
           <div
@@ -97,7 +97,7 @@ export function CEOMessage() {
             {/* Frame */}
             <div
               className="relative"
-              style={{ width: "clamp(200px,24vw,300px)", maxWidth: "300px" }}
+              style={{ width: "clamp(210px,24vw,300px)", maxWidth: "300px" }}
             >
               {/* Glow */}
               <div style={{
@@ -114,60 +114,59 @@ export function CEOMessage() {
                 style={{ background: "linear-gradient(145deg, #B83A14 0%, #FED172 45%, #231650 100%)", opacity: 0.7 }}
               />
 
-              {/* Photo or fallback */}
-              {!imgErr ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src="/images/ceo.jpg"
-                  alt="CEO & Chairman — Sky Expo"
-                  onError={() => setImgErr(true)}
-                  className="relative rounded-2xl w-full block"
-                  style={{
-                    aspectRatio: "3/4",
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                    filter: "brightness(0.93) contrast(1.04)",
-                  }}
-                />
-              ) : (
-                /* Artistic fallback */
-                <div
-                  className="relative rounded-2xl w-full flex flex-col items-center justify-end"
-                  style={{
-                    aspectRatio: "3/4",
-                    background: "linear-gradient(160deg, #1a0e08 0%, #0d0810 60%, #090610 100%)",
-                  }}
-                >
-                  {/* Abstract CEO silhouette */}
-                  <div style={{
-                    position: "absolute", top: "18%", left: "50%",
-                    transform: "translateX(-50%)",
-                    width: 80, height: 80,
-                    borderRadius: "50%",
-                    background: "linear-gradient(135deg, rgba(184,58,20,0.3), rgba(254,209,114,0.2))",
-                    border: "1px solid rgba(184,58,20,0.3)",
-                  }} />
-                  <div style={{
-                    position: "absolute", top: "42%", left: "50%",
-                    transform: "translateX(-50%)",
-                    width: 120, height: 90,
-                    borderRadius: "60px 60px 0 0",
-                    background: "linear-gradient(180deg, rgba(184,58,20,0.2), transparent)",
-                    border: "1px solid rgba(184,58,20,0.2)",
-                    borderBottom: "none",
-                  }} />
-                  <div className="relative pb-6 text-center">
-                    <p className="text-[9px] tracking-[0.4em] uppercase" style={{ color: "rgba(184,58,20,0.6)" }}>
-                      PHOTO COMING SOON
-                    </p>
-                  </div>
-                </div>
-              )}
+              {/* Fallback — always rendered behind the photo */}
+              <div
+                className="relative rounded-2xl w-full flex flex-col items-center justify-end overflow-hidden"
+                style={{
+                  aspectRatio: "3/4",
+                  background: "linear-gradient(160deg, #1c0e06 0%, #100810 55%, #07060f 100%)",
+                }}
+              >
+                {/* Silhouette shapes */}
+                <div style={{
+                  position: "absolute", top: "15%", left: "50%",
+                  transform: "translateX(-50%)",
+                  width: 88, height: 88, borderRadius: "50%",
+                  background: "linear-gradient(135deg, rgba(184,58,20,0.35), rgba(254,209,114,0.15))",
+                  border: "1px solid rgba(184,58,20,0.25)",
+                }} />
+                <div style={{
+                  position: "absolute", top: "40%", left: "50%",
+                  transform: "translateX(-50%)",
+                  width: 130, height: 100, borderRadius: "65px 65px 0 0",
+                  background: "linear-gradient(180deg, rgba(184,58,20,0.18), transparent)",
+                  border: "1px solid rgba(184,58,20,0.18)",
+                  borderBottom: "none",
+                }} />
+                <p className="relative pb-5 text-[8px] tracking-[0.5em] uppercase"
+                   style={{ color: "rgba(184,58,20,0.45)" }}>
+                  {isAr ? "الصورة قريبًا" : "PHOTO COMING SOON"}
+                </p>
+              </div>
+
+              {/* Real photo — overlays fallback when loaded */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/ceo.jpg"
+                alt=""
+                aria-hidden="true"
+                onError={() => setImgErr(true)}
+                className="absolute inset-0 rounded-2xl w-full h-full"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  filter: "brightness(0.93) contrast(1.04)",
+                  display: imgErr ? "none" : "block",
+                }}
+              />
             </div>
 
             {/* Title block */}
-            <div className="mt-6 text-center">
-              <p className="text-sm font-semibold text-white" style={{ letterSpacing: "0.1em" }}>
+            <div className="mt-6 text-center" dir="ltr">
+              <p
+                className="text-sm font-semibold text-white"
+                style={{ letterSpacing: isAr ? "0.04em" : "0.1em", fontFamily: isAr ? "inherit" : undefined }}
+              >
                 {isAr ? "المالك والرئيس التنفيذي" : "CEO & Chairman"}
               </p>
               <p className="text-[10px] tracking-[0.45em] uppercase mt-1" style={{ color: "#B83A14" }}>
@@ -195,12 +194,12 @@ export function CEOMessage() {
               style={{
                 fontSize: "clamp(4rem,8vw,7rem)",
                 lineHeight: 0.8,
-                color: "rgba(184,58,20,0.18)",
+                color: "rgba(184,58,20,0.2)",
                 fontFamily: "Georgia, 'Times New Roman', serif",
-                marginInlineStart: isAr ? 0 : "-0.1em",
+                textAlign: isAr ? "right" : "left",
               }}
             >
-              &ldquo;
+              {isAr ? "\u201D" : "\u201C"}
             </div>
 
             {/* Message paragraphs */}
