@@ -6,7 +6,7 @@ import { ClientLogos } from "@/components/shared/ClientLogos";
 
 /* ── Gallery items ─────────────────────────────────────────────────── */
 const ITEMS = [
-  { id: 1,  ratio: "4/5",  labelEn: "SIRC Event",                       labelAr: "فعالية SIRC",                         year: "2024", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/sirc.mp4" },
+  { id: 1,  ratio: "4/5",  labelEn: "Flynas Event",                      labelAr: "فعالية طيران ناس",                    year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#B83A14", video: "/videos/flynas-event.mp4" },
   { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
   { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olya",                    labelAr: "أبراج العليا",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
   { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },

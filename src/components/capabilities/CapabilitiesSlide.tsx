@@ -25,7 +25,7 @@ const SERVICES = [
     color: "#FED172",
     bg: "radial-gradient(ellipse at 40% 60%, #2a3d1a 0%, #0d1808 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 40% 60%, #3a5020 0%, #182410 45%, #080808 100%)",
-    video: "/videos/sirc.mp4",
+    video: "/videos/abraj-alolaya.mp4",
   },
   {
     id: 2,
