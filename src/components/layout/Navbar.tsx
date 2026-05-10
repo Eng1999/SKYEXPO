@@ -63,7 +63,7 @@ export function Navbar() {
             width={160}
             height={60}
             className="object-contain"
-            style={{ height: "38px", width: "auto", display: "block" }}
+            style={{ height: "46px", width: "auto", display: "block" }}
             priority
           />
         </a>

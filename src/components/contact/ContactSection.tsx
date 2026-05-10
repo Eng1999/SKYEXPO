@@ -193,7 +193,7 @@ export function ContactSection() {
             </div>
 
             {/* Social */}
-            <div className="flex items-center gap-3 mb-8 md:mb-16">
+            <div className="flex items-center gap-3 mb-8 md:mb-10">
               {SOCIAL.map((s) => (
                 <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
                   className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center
@@ -204,6 +204,66 @@ export function ContactSection() {
                     dangerouslySetInnerHTML={{ __html: s.icon }} />
                 </a>
               ))}
+            </div>
+
+            {/* ── Profile Download ── */}
+            <div className="mb-8 md:mb-16">
+              <p className="text-[10px] tracking-[0.5em] uppercase mb-4"
+                 style={{ color: "rgba(255,255,255,0.3)" }}>
+                {isAr ? "ملف التعريف" : "Company Profile"}
+              </p>
+              <a
+                href="/SKY-EXPO-Profile.pdf"
+                download="SKY-EXPO-Profile.pdf"
+                className="group inline-flex items-center gap-4 transition-all duration-400"
+                data-cursor-hover
+              >
+                {/* Icon box */}
+                <span
+                  className="w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-400 group-hover:scale-105"
+                  style={{
+                    borderColor: `${ACCENT}40`,
+                    background: `${ACCENT}10`,
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = `${ACCENT}20`;
+                    (e.currentTarget as HTMLElement).style.borderColor = `${ACCENT}80`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = `${ACCENT}10`;
+                    (e.currentTarget as HTMLElement).style.borderColor = `${ACCENT}40`;
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke={ACCENT} strokeWidth="1.8" strokeLinecap="round">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="12" y1="18" x2="12" y2="12" />
+                    <polyline points="9 15 12 18 15 15" />
+                  </svg>
+                </span>
+
+                {/* Label */}
+                <div>
+                  <p className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300">
+                    {isAr ? "تحميل البروفايل" : "Download Profile"}
+                  </p>
+                  <p className="text-[10px] tracking-widest uppercase mt-0.5"
+                     style={{ color: "rgba(255,255,255,0.3)" }}>
+                    PDF · 33 MB
+                  </p>
+                </div>
+
+                {/* Arrow */}
+                <svg
+                  width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round"
+                  className="opacity-0 group-hover:opacity-100 transition-all duration-400 -translate-x-2 group-hover:translate-x-0"
+                  style={{ transform: isAr ? "scaleX(-1)" : undefined }}
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </div>
 
