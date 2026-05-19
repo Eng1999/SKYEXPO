@@ -82,7 +82,7 @@ export function VideoLens({ lensX, lensY, visible, expanded }: VideoLensProps) {
       {/* Center label */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <div
-          className="text-6xl font-light tracking-widest uppercase"
+          className="text-6xl font-semibold tracking-widest uppercase"
           style={{ color: "#F3742B" }}
         >
           Capabilities

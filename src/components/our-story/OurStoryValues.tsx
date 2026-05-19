@@ -47,7 +47,7 @@ export function OurStoryValues() {
           <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
             {isAr ? "قيمنا" : "Our Values"}
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white">
             {isAr ? "ما يُعرّفنا" : "What defines us"}
           </h2>
         </div>
@@ -68,7 +68,7 @@ export function OurStoryValues() {
           }}
         >
           <blockquote
-            className="text-xl sm:text-2xl md:text-4xl font-light text-white/60 leading-relaxed"
+            className="text-xl sm:text-2xl md:text-4xl font-normal text-white/75 leading-relaxed"
             style={{
               borderColor: "#FED172",
               borderInlineStartWidth: "2px",

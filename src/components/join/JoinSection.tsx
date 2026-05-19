@@ -86,8 +86,8 @@ export function JoinSection() {
           </div>
 
           {/* Description */}
-          <p className="text-sm md:text-base max-w-lg font-light leading-relaxed"
-             style={{ color: "rgba(255,255,255,0.75)" }}>
+          <p className="text-sm md:text-base max-w-lg leading-relaxed"
+             style={{ color: "rgba(255,255,255,0.82)" }}>
             {isAr
               ? "لسنا مجرد شركة فعاليات — نحن بيت إبداعي يصنع لحظات تبقى في الذاكرة. إذا كنت تؤمن بالتميّز، فمكانك هنا."
               : "We're not just an events company — we're a creative house that builds moments that endure. If you believe in excellence, you belong here."}
@@ -112,8 +112,8 @@ export function JoinSection() {
               <p className="text-lg font-semibold text-white mb-3 leading-snug">
                 {isAr ? w.titleAr : w.titleEn}
               </p>
-              <p className="text-sm leading-relaxed font-light"
-                 style={{ color: "rgba(255,255,255,0.70)" }}>
+              <p className="text-sm leading-relaxed"
+                 style={{ color: "rgba(255,255,255,0.78)" }}>
                 {isAr ? w.bodyAr : w.bodyEn}
               </p>
               <div className="mt-4 md:mt-5 h-px w-8" style={{ background: ACCENT, opacity: 0.5 }} />
@@ -128,7 +128,7 @@ export function JoinSection() {
       {/* ── Quote strip ───────────────────────────────────────────────── */}
       <div className="px-5 sm:px-8 lg:px-16 py-14 md:py-20 border-t border-white/[0.06]"
            style={{ background: "rgba(76,200,232,0.04)" }}>
-        <p className="text-xl sm:text-2xl md:text-4xl font-light text-center leading-relaxed text-white">
+        <p className="text-xl sm:text-2xl md:text-4xl font-medium text-center leading-relaxed text-white">
           {isAr
             ? '"نحن لا نبني فعاليات — نحن نبني ذكريات لا تُنسى."'
             : '"We don\'t build events — we build memories."'}

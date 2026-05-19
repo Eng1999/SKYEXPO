@@ -69,8 +69,8 @@ export function HomeIntro() {
 
         {/* Right */}
         <div style={fadeIn(0.2)}>
-          <p className="text-base font-light leading-relaxed mb-8"
-             style={{ color: "rgba(255,255,255,0.72)" }}>
+          <p className="text-base leading-relaxed mb-8"
+             style={{ color: "rgba(255,255,255,0.82)" }}>
             {isAr
               ? "سكاي إكسبو شركة سعودية رائدة في تصميم وتنفيذ المعارض والفعاليات الدولية. نحن لا نُقيم فعاليات — بل نصنع لحظات تُعمَّر."
               : "Sky Expo — Saudi Arabia's premier exhibitions and events company. We don't produce events, we craft moments that endure."}

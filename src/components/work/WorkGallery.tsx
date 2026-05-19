@@ -6,7 +6,7 @@ import { ClientLogos } from "@/components/shared/ClientLogos";
 
 /* ── Gallery items ─────────────────────────────────────────────────── */
 const ITEMS = [
-  { id: 1,  ratio: "4/5",  labelEn: "Flynas Event",                      labelAr: "فعالية طيران ناس",                    year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#B83A14", video: "/videos/flynas-event.mp4" },
+  { id: 1,  ratio: "4/5",  labelEn: "TETCO — Saudi Founding Day",        labelAr: "تتكو — يوم التأسيس السعودي",          year: "2026", catEn: "Corporate",   catAr: "شركات",     color: "#38BDF8", video: "/videos/tetco-founding-day.mp4" },
   { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
   { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olya",                    labelAr: "أبراج العليا",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
   { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },
@@ -279,13 +279,13 @@ export function WorkGallery() {
         </p>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <h1
-            className="text-[clamp(3rem,8vw,8rem)] font-extralight uppercase leading-none"
+            className="text-[clamp(3rem,8vw,8rem)] font-semibold uppercase leading-none"
             style={{ color: "#B83A14" }}
           >
             {isAr ? "أعمالنا" : "Our Work"}
           </h1>
           <div className="flex items-center gap-6 md:pb-2">
-            <p className="text-sm text-white/30 max-w-xs font-light leading-relaxed">
+            <p className="text-sm text-white/55 max-w-xs leading-relaxed">
               {isAr
                 ? "لحظات حقيقية من مشاريع SKY EXPO — من المفهوم إلى التنفيذ."
                 : "Real moments from SKY EXPO projects — from concept to execution."}

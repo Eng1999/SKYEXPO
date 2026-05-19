@@ -69,7 +69,7 @@ export function ParallaxDepth() {
         <p className="text-xs tracking-[0.5em] uppercase text-white/30 mb-6">
           {lang === "en" ? "Our Story" : "قصتنا"}
         </p>
-        <h2 className="text-5xl md:text-7xl font-light text-white leading-tight mb-8">
+        <h2 className="text-5xl md:text-7xl font-semibold text-white leading-tight mb-8">
           {lang === "en" ? (
             <>
               We turn

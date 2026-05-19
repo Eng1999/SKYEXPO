@@ -64,7 +64,7 @@ export function CapabilitiesGrid() {
         <p className="text-xs tracking-[0.5em] uppercase text-white/30 mb-4">
           {lang === "en" ? "What we do" : "ما نفعله"}
         </p>
-        <h2 className="text-5xl md:text-7xl font-light text-white tracking-tight">
+        <h2 className="text-5xl md:text-7xl font-semibold text-white tracking-tight">
           {lang === "en" ? "Capabilities" : "قدراتنا"}
         </h2>
       </div>

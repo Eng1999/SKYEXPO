@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { CONTACT, SOCIAL } from "@/lib/social";
 
@@ -32,17 +33,15 @@ export function Footer() {
 
           {/* Brand col */}
           <div>
-            {/* Logo text */}
+            {/* Logo image */}
             <div className="mb-6">
-              <p className="text-xs tracking-[0.55em] uppercase font-light text-white/30 mb-1">
-                {isAr ? "سكاي" : "SKY"}
-              </p>
-              <p
-                className="text-2xl font-bold tracking-wider uppercase"
-                style={{ color: "#B83A14", letterSpacing: "0.2em" }}
-              >
-                EXPO
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/skyexpo-logo.png?v=2"
+                alt="Sky Expo"
+                className="opacity-85"
+                style={{ height: "48px", width: "auto" }}
+              />
             </div>
 
             <p

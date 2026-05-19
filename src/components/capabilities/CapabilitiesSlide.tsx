@@ -299,8 +299,8 @@ export function CapabilitiesSlide() {
             {isAr ? "إبداعية متكاملة" : "Creative Ecosystem"}
           </span>
         </h1>
-        <p className="text-base font-light max-w-lg leading-relaxed"
-           style={{ color: "rgba(255,255,255,0.75)" }}>
+        <p className="text-base max-w-lg leading-relaxed"
+           style={{ color: "rgba(255,255,255,0.82)" }}>
           {isAr
             ? "منظومة داخلية متكاملة تجمع بين الاستراتيجية والتصميم والإنتاج والتنفيذ."
             : "In-house ecosystem — strategy, design, production, and execution in one seamless process."}
@@ -391,7 +391,7 @@ export function CapabilitiesSlide() {
           {/* Current / Total */}
           <div className="flex items-center gap-4">
             <span
-              className="font-extralight tabular-nums"
+              className="font-light tabular-nums"
               style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", color: active.color, lineHeight: 1 }}
             >
               {String(displayIdx + 1).padStart(2, "0")}
@@ -501,7 +501,7 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
 
         {/* Big ghost number — top decoration */}
         <span
-          className="absolute select-none font-extralight leading-none"
+          className="absolute select-none font-light leading-none"
           style={{
             fontSize: "clamp(5rem, 14vw, 11rem)",
             color: service.color,

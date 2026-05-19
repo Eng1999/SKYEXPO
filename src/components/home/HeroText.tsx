@@ -98,7 +98,7 @@ export function HeroText() {
         <div
           className="font-bold tracking-tight uppercase mb-4 md:mb-6"
           style={{
-            fontSize: isAr ? "clamp(1.8rem,4.5vw,4.8rem)" : "clamp(2.2rem,7.5vw,7.5rem)",
+            fontSize: isAr ? "clamp(2.2rem,6vw,6.5rem)" : "clamp(2.2rem,7.5vw,7.5rem)",
             lineHeight: isAr ? 1.18 : 0.92,
             textShadow: "0 2px 30px rgba(0,0,0,0.7)",
           }}
@@ -114,7 +114,7 @@ export function HeroText() {
             style={{
               ...fadeUp("title3"),
               color: "rgba(255,255,255,0.80)",
-              fontSize: isAr ? "clamp(1.1rem,3vw,3.2rem)" : undefined,
+              fontSize: isAr ? "clamp(1.5rem,3.5vw,4rem)" : undefined,
             }}
           >
             {isAr ? "اللحظات إلى إرث" : "Become Legacy"}

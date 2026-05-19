@@ -30,45 +30,62 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menu on route change / resize
+  // Close menu on resize to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Prevent body scroll when menu open
+  // Lock body scroll when menu open — touch-safe method
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (menuOpen) {
+      const y = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${y}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+    } else {
+      const y = Math.abs(parseInt(document.body.style.top || "0"));
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      window.scrollTo(0, y);
+    }
   }, [menuOpen]);
+
+  // Escape key closes menu
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <>
+      {/* ── Top Bar ── */}
       <header
         ref={navRef}
         dir={isAr ? "rtl" : "ltr"}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-3 transition-all duration-700",
+          "fixed top-0 left-0 right-0 z-[70] flex items-center justify-between px-4 md:px-8 py-3 transition-all duration-700",
           scrolled || menuOpen
             ? "bg-black/95 backdrop-blur-xl border-b border-white/[0.07]"
             : "bg-gradient-to-b from-black/75 to-transparent"
         )}
       >
-        {/* ── Logo ── */}
+        {/* Logo */}
         <a href="/" className="flex items-center shrink-0" data-cursor-hover onClick={() => setMenuOpen(false)}>
-          <Image
-            src="/images/skyexpo-logo.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/skyexpo-logo.png?v=2"
             alt="Sky Expo"
-            width={160}
-            height={60}
-            className="object-contain"
             style={{ height: "46px", width: "auto", display: "block" }}
-            priority
           />
         </a>
 
-        {/* ── Centre: Nav links (desktop) ── */}
+        {/* Desktop nav links */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-10">
           {NAV_ITEMS.map((item) => (
             <NavLink
@@ -82,8 +99,8 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* ── Right: social + lang + hamburger ── */}
-        <div className="flex items-center gap-4">
+        {/* Right side: social + lang + hamburger */}
+        <div className="flex items-center gap-3 md:gap-4">
           <div className="hidden lg:flex items-center gap-3">
             {SOCIAL.map((s) => (
               <a
@@ -100,38 +117,36 @@ export function Navbar() {
               </a>
             ))}
           </div>
-
           <span className="hidden lg:block w-px h-4 bg-white/10" />
-
           <LanguageToggle />
 
-          {/* Hamburger — large touch target */}
+          {/* Hamburger button */}
           <button
-            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-11 h-11 rounded-sm"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="md:hidden relative flex flex-col justify-center items-center w-12 h-12 -mr-1"
+            aria-label={menuOpen ? "إغلاق القائمة" : "فتح القائمة"}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setMenuOpen((v) => !v)}
           >
             <span
-              className="block h-[1.5px] bg-white/80 transition-all duration-300 origin-center"
+              className="absolute block h-[2px] bg-white rounded-full transition-all duration-300 origin-center"
               style={{
-                width: menuOpen ? "20px" : "20px",
-                transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none",
+                width: 22,
+                transform: menuOpen ? "translateY(0) rotate(45deg)" : "translateY(-6px)",
               }}
             />
             <span
-              className="block h-[1.5px] bg-white/80 transition-all duration-300"
+              className="absolute block h-[2px] bg-white rounded-full transition-all duration-300"
               style={{
-                width: "20px",
+                width: menuOpen ? 0 : 22,
                 opacity: menuOpen ? 0 : 1,
-                transform: menuOpen ? "scaleX(0)" : "scaleX(1)",
               }}
             />
             <span
-              className="block h-[1.5px] bg-white/80 transition-all duration-300 origin-center"
+              className="absolute block h-[2px] bg-white rounded-full transition-all duration-300 origin-center"
               style={{
-                width: menuOpen ? "20px" : "12px",
-                transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none",
+                width: menuOpen ? 22 : 14,
+                transform: menuOpen ? "translateY(0) rotate(-45deg)" : "translateY(6px)",
               }}
             />
           </button>
@@ -139,53 +154,91 @@ export function Navbar() {
       </header>
 
       {/* ── Mobile Menu Drawer ── */}
+      {/* z-[60]: above page content (z-0) but below header (z-[70]) */}
       <div
-        className={cn(
-          "fixed inset-0 z-40 bg-black flex flex-col transition-all duration-500 md:hidden",
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
+        id="mobile-menu"
         dir={isAr ? "rtl" : "ltr"}
-        aria-hidden={!menuOpen}
+        className="md:hidden fixed inset-0 z-[60] bg-[#080808] flex flex-col"
+        style={{
+          opacity: menuOpen ? 1 : 0,
+          visibility: menuOpen ? "visible" : "hidden",
+          transition: "opacity 0.35s ease, visibility 0.35s ease",
+          WebkitOverflowScrolling: "touch",
+        }}
       >
-        {/* Top spacer for navbar */}
-        <div className="h-16 shrink-0" />
+        {/* Accent glow top */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at 50% 0%, rgba(184,58,20,0.2) 0%, transparent 70%)",
+          }}
+        />
 
-        {/* Nav links */}
-        <nav className="flex flex-col flex-1 justify-center px-8 gap-2">
+        {/* Spacer for header */}
+        <div className="h-[60px] shrink-0" />
+
+        {/* Nav Links */}
+        <nav className="flex flex-col flex-1 justify-center px-6 sm:px-10 gap-1 overflow-y-auto">
           {NAV_ITEMS.map((item, i) => (
             <a
               key={item.href}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-between py-4 border-b border-white/[0.07] group"
+              className="flex items-center justify-between py-5 border-b group"
               style={{
+                borderColor: "rgba(255,255,255,0.06)",
                 opacity: menuOpen ? 1 : 0,
-                transform: menuOpen ? "translateY(0)" : "translateY(20px)",
-                transition: `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`,
+                transform: menuOpen ? "translateX(0)" : isAr ? "translateX(20px)" : "translateX(-20px)",
+                transition: `opacity 0.4s ease ${i * 0.06 + 0.05}s, transform 0.4s ease ${i * 0.06 + 0.05}s`,
               }}
             >
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] tracking-widest text-white/30">{String(i + 1).padStart(2, "0")}</span>
+              <div className="flex items-center gap-5">
                 <span
-                  className="text-2xl font-extralight uppercase tracking-wide text-white/85 group-hover:text-white transition-colors duration-300"
+                  className="text-[11px] tracking-widest tabular-nums"
+                  style={{ color: "rgba(255,255,255,0.2)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className="text-[1.6rem] font-semibold uppercase leading-none text-white/85 group-hover:text-white transition-colors duration-300"
+                  style={{ color: undefined }}
                 >
                   {isAr ? item.labelAr : item.labelEn}
                 </span>
               </div>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2">
-                <path d={isAr ? "M12 8H4M7 4l-4 4 4 4" : "M4 8h8M9 4l4 4-4 4"} />
+              {/* Arrow */}
+              <svg
+                width="18" height="18" viewBox="0 0 18 18" fill="none"
+                stroke="rgba(255,255,255,0.25)" strokeWidth="1.5"
+                style={{ transform: isAr ? "scaleX(-1)" : undefined, flexShrink: 0 }}
+              >
+                <path d="M3.5 9h11M9.5 4l5 5-5 5" />
               </svg>
             </a>
           ))}
         </nav>
 
-        {/* Bottom: social + lang */}
-        <div className="px-8 pb-12 flex items-center justify-between border-t border-white/[0.07] pt-6">
+        {/* Bottom bar */}
+        <div
+          className="px-6 sm:px-10 pb-10 pt-6 flex items-center justify-between"
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            opacity: menuOpen ? 1 : 0,
+            transition: "opacity 0.4s ease 0.35s",
+          }}
+        >
+          {/* Social */}
           <div className="flex items-center gap-4">
             {SOCIAL.map((s) => (
-              <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                className="text-white/40 hover:text-white transition-colors duration-300">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"
+              <a
+                key={s.id}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white/40 transition-all duration-300"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"
                   dangerouslySetInnerHTML={{ __html: s.icon }} />
               </a>
             ))}

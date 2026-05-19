@@ -244,7 +244,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
 
                   {/* Title */}
                   <h2
-                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-extralight leading-[0.9] uppercase -mt-4"
+                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-semibold leading-[0.9] uppercase -mt-4"
                     style={{ color: "rgba(255,255,255,0.95)", textShadow: "0 2px 20px rgba(0,0,0,0.7)" }}
                   >
                     {isAr ? panel.titleAr : panel.titleEn}
@@ -252,7 +252,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
 
                   {/* Subtitle */}
                   <h2
-                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-extralight leading-[0.9] uppercase"
+                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-semibold leading-[0.9] uppercase"
                     style={{ color: panel.color, textShadow: `0 2px 30px ${panel.color}55` }}
                   >
                     {isAr ? panel.subtitleAr : panel.subtitleEn}

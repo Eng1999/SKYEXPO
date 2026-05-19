@@ -61,7 +61,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
 
   const labelClass = "block text-[11px] tracking-[0.4em] uppercase font-medium mb-3";
   const inputClass =
-    "w-full bg-transparent border-b border-white/20 focus:border-white/60 outline-none text-white text-sm font-light py-4 placeholder-white/30 transition-colors duration-400";
+    "w-full bg-transparent border-b border-white/20 focus:border-white/60 outline-none text-white text-sm py-4 placeholder-white/40 transition-colors duration-400";
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-10">
@@ -179,7 +179,7 @@ export function ContactSection() {
                 { href: `tel:${CONTACT.phone2.replace(/\s/g,"")}`, label: CONTACT.phone2, icon: <path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.08 4.18 2 2 0 015.09 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />, box: false },
               ].map((item, i) => (
                 <a key={i} href={item.href}
-                  className="flex items-center gap-4 text-sm font-light text-white/70 hover:text-white transition-colors duration-400"
+                  className="flex items-center gap-4 text-sm text-white/80 hover:text-white transition-colors duration-400"
                   data-cursor-hover>
                   <span className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center shrink-0">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5">

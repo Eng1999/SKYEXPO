@@ -25,7 +25,19 @@ body {
   background: var(--bg-base);
   cursor: none;
   overflow-x: hidden;
-  font-family: var(--font-sans, system-ui, sans-serif);
+  /* English font by default */
+  font-family: var(--font-en, system-ui, sans-serif);
+  font-weight: 400;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Arabic font when RTL is active */
+html[dir="rtl"] body {
+  font-family: var(--font-ar, system-ui, sans-serif);
+  letter-spacing: 0;
 }
 
 ::-webkit-scrollbar {
@@ -189,3 +201,14 @@ body {
     text-wrap: balance;
   }
 }
+
+/*
+ * ── Font-weight boost ──────────────────────────────────────────────────
+ * Remap Tailwind's ultra-thin classes to heavier values so all text is
+ * crisp and readable.  These rules appear after @tailwind utilities, so
+ * they take precedence without needing !important.
+ * -----------------------------------------------------------------------
+ */
+.font-thin       { font-weight: 300; }   /* was 100 → now 300 */
+.font-extralight { font-weight: 300; }   /* was 200 → now 300 */
+.font-light      { font-weight: 400; }   /* was 300 → now 400 */

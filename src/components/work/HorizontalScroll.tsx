@@ -117,8 +117,8 @@ function ProjectCard({
 
       {/* Content */}
       <div className="absolute bottom-10 left-10 right-10">
-        <p className="text-xs tracking-widest text-white/30 uppercase mb-3">{project.year}</p>
-        <h3 className="text-3xl font-light text-white leading-tight">
+        <p className="text-xs tracking-widest text-white/50 uppercase mb-3">{project.year}</p>
+        <h3 className="text-3xl font-normal text-white leading-tight">
           {lang === "en" ? project.titleEn : project.titleAr}
         </h3>
       </div>

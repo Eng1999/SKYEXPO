@@ -100,15 +100,15 @@ export function HomeNavCards() {
 
               {/* Title */}
               <h3
-                className="flex-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extralight tracking-wide uppercase transition-colors duration-500"
-                style={{ color: isHov ? card.color : "rgba(255,255,255,0.7)" }}
+                className="flex-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide uppercase transition-colors duration-500"
+                style={{ color: isHov ? card.color : "rgba(255,255,255,0.85)" }}
               >
                 {isAr ? card.labelAr : card.labelEn}
               </h3>
 
               {/* Description — desktop hover only */}
               <p
-                className="hidden lg:block max-w-xs text-sm font-light text-white/40 text-right transition-all duration-500"
+                className="hidden lg:block max-w-xs text-sm text-white/55 text-right transition-all duration-500"
                 style={{
                   opacity: isHov ? 1 : 0,
                   transform: isHov ? "translateX(0)" : "translateX(10px)",

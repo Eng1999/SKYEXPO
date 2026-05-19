@@ -74,7 +74,7 @@ export function OurStoryHero() {
         {/* Big headline */}
         <div style={in2}>
           <div
-            className="font-extralight tracking-tight uppercase text-white mb-6"
+            className="font-semibold tracking-tight uppercase text-white mb-6"
             style={{
               fontSize: "clamp(3rem,8vw,9rem)",
               lineHeight: isAr ? 1.2 : 0.9,
@@ -98,7 +98,7 @@ export function OurStoryHero() {
 
         {/* Sub-description */}
         <div style={in3} className="max-w-xl">
-          <p className="text-base font-light leading-relaxed text-white/45">
+          <p className="text-base leading-relaxed text-white/65">
             {isAr
               ? "سكاي إكسبو شركة سعودية رائدة في صناعة المعارض وإدارة الفعاليات، تأسست عام ٢٠٠٩ بهدف تقديم تجارب استثنائية تجمع بين الإبداع والكفاءة والأمان. نعمل من الرياض وجدة والدمام لنخدم عملاءنا في المملكة والعالم."
               : "Sky Expo is a leading Saudi company in exhibition production and event management, founded in 2009 with a mission to deliver extraordinary experiences that combine creativity, efficiency, and safety. We operate from Riyadh, Jeddah, and Dammam — serving clients across the Kingdom and beyond."}

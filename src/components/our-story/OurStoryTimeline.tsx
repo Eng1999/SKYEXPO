@@ -60,7 +60,7 @@ export function OurStoryTimeline() {
         <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
           {isAr ? "رحلتنا" : "Our Journey"}
         </p>
-        <h2 className="text-3xl md:text-5xl font-extralight text-white">
+        <h2 className="text-3xl md:text-5xl font-semibold text-white">
           {isAr ? "المحطات التي شكّلتنا" : "Milestones that shaped us"}
         </h2>
       </div>
@@ -133,10 +133,10 @@ function TimelineItem({
 
       {/* Content */}
       <div className="flex-1 pb-2">
-        <h3 className="text-xl md:text-2xl font-light text-white mb-3">
+        <h3 className="text-xl md:text-2xl font-medium text-white mb-3">
           {isAr ? item.titleAr : item.titleEn}
         </h3>
-        <p className="text-sm font-light leading-relaxed text-white/40">
+        <p className="text-sm leading-relaxed text-white/60">
           {isAr ? item.descAr : item.descEn}
         </p>
       </div>
