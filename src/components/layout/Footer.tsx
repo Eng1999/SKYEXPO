@@ -1,17 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { CONTACT, SOCIAL } from "@/lib/social";
-
-const NAV = [
-  { href: "/",             labelEn: "Home",         labelAr: "الرئيسية" },
-  { href: "/our-story",   labelEn: "Our Story",    labelAr: "قصتنا" },
-  { href: "/capabilities",labelEn: "Capabilities", labelAr: "قدراتنا" },
-  { href: "/work",        labelEn: "Our Work",     labelAr: "أعمالنا" },
-  { href: "/contact",     labelEn: "Contact",      labelAr: "تواصل معنا" },
-  { href: "/join",        labelEn: "Join Us",      labelAr: "انضم إلينا" },
-];
 
 export function Footer() {
   const { lang } = useLanguage();
@@ -23,159 +12,74 @@ export function Footer() {
       className="relative border-t"
       style={{ background: "#060608", borderColor: "rgba(255,255,255,0.06)" }}
     >
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 md:px-16 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-
-          {/* Brand col */}
-          <div>
-            {/* Logo image */}
-            <div className="mb-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/skyexpo-logo.png?v=2"
-                alt="Sky Expo"
-                className="opacity-85"
-                style={{ height: "48px", width: "auto" }}
-              />
-            </div>
-
-            <p
-              className="text-sm font-light leading-relaxed mb-6"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: 280 }}
-            >
-              {isAr
-                ? "شركة سعودية رائدة في تصميم وتنفيذ المعارض والمؤتمرات والفعاليات منذ ٢٠٠٩."
-                : "Saudi Arabia's premier exhibitions, conferences & events company since 2009."}
-            </p>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-3 flex-wrap">
-              {SOCIAL.map((s) => (
-                <a
-                  key={s.id}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300"
-                  style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.4)" }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(184,58,20,0.6)";
-                    (e.currentTarget as HTMLElement).style.color = "#B83A14";
-                    (e.currentTarget as HTMLElement).style.background = "rgba(184,58,20,0.08)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)";
-                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)";
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                  }}
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
-                    dangerouslySetInnerHTML={{ __html: s.icon }}
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation col */}
-          <div>
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-6"
-               style={{ color: "rgba(255,255,255,0.3)" }}>
-              {isAr ? "الصفحات" : "Navigation"}
-            </p>
-            <ul className="space-y-3">
-              {NAV.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm font-light transition-colors duration-300 hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
-                  >
-                    {isAr ? link.labelAr : link.labelEn}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact col */}
-          <div>
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-6"
-               style={{ color: "rgba(255,255,255,0.3)" }}>
-              {isAr ? "تواصل معنا" : "Contact"}
-            </p>
-
-            <div className="space-y-4">
-              {/* Phone */}
-              <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase mb-1" style={{ color: "rgba(255,255,255,0.25)" }}>
-                  {isAr ? "الهاتف" : "Phone"}
-                </p>
-                <a href={`tel:${CONTACT.phone1}`}
-                   className="text-sm font-light block transition-colors duration-300 hover:text-white"
-                   style={{ color: "rgba(255,255,255,0.55)", direction: "ltr", textAlign: isAr ? "right" : "left" }}>
-                  {CONTACT.phone1}
-                </a>
-                <a href={`tel:${CONTACT.phone2}`}
-                   className="text-sm font-light block transition-colors duration-300 hover:text-white"
-                   style={{ color: "rgba(255,255,255,0.55)", direction: "ltr", textAlign: isAr ? "right" : "left" }}>
-                  {CONTACT.phone2}
-                </a>
-              </div>
-
-              {/* Email */}
-              <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase mb-1" style={{ color: "rgba(255,255,255,0.25)" }}>
-                  {isAr ? "البريد الإلكتروني" : "Email"}
-                </p>
-                <a href={`mailto:${CONTACT.email}`}
-                   className="text-sm font-light transition-colors duration-300 hover:text-white"
-                   style={{ color: "rgba(255,255,255,0.55)" }}>
-                  {CONTACT.email}
-                </a>
-              </div>
-
-              {/* Cities */}
-              <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: "rgba(255,255,255,0.25)" }}>
-                  {isAr ? "مواقعنا" : "Locations"}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {CONTACT.locations.map((loc) => (
-                    <span
-                      key={loc.cityEn}
-                      className="text-[10px] tracking-[0.3em] uppercase px-2 py-1 border"
-                      style={{ color: "rgba(255,255,255,0.4)", borderColor: "rgba(255,255,255,0.1)" }}
-                    >
-                      {isAr ? loc.cityAr : loc.cityEn}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 md:px-16 py-6">
 
         {/* ── Bottom bar ── */}
-        <div
-          className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-        >
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] font-light" style={{ color: "rgba(255,255,255,0.25)" }}>
             © {new Date().getFullYear()}{" "}
-            {isAr ? "سكاي إكسبو لحلول الفعاليات. جميع الحقوق محفوظة." : "SKY EXPO Event Solutions. All rights reserved."}
+            {isAr
+              ? "سكاي إكسبو لحلول الفعاليات. جميع الحقوق محفوظة."
+              : "SKY EXPO Event Solutions. All rights reserved."}
           </p>
           <p className="text-[11px] font-light" style={{ color: "rgba(255,255,255,0.2)" }}>
             {isAr ? "السجل التجاري" : "CR"}: 7002257322
           </p>
         </div>
 
-        {/* Hidden ownership signature — not visible to users */}
-        <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", top: "-9999px", width: 0, height: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <span data-owner="ENG-ALHASSAN-AHMED" data-contact="0502230233" data-cr="7002257322" data-year="2026" />
+        {/* ── Developer Signature ── */}
+        <div className="mt-8 flex justify-center">
+          <a
+            href="tel:0502230235"
+            className="group relative flex items-center gap-4 px-6 py-3 transition-all duration-500"
+            style={{ borderTop: "none" }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = "transparent";
+            }}
+          >
+            {/* Left line */}
+            <span
+              className="block h-px w-8 transition-all duration-500 group-hover:w-12"
+              style={{ background: "rgba(255,255,255,0.12)" }}
+            />
+
+            {/* Monogram */}
+            <span
+              className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-semibold tracking-wide shrink-0 transition-all duration-500 group-hover:scale-110"
+              style={{
+                border: "1px solid rgba(255,255,255,0.12)",
+                color: "rgba(255,255,255,0.35)",
+                letterSpacing: "0.05em",
+              }}
+            >
+              AH
+            </span>
+
+            {/* Text block */}
+            <div className="text-center">
+              <p
+                className="text-[9px] tracking-[0.5em] uppercase font-light transition-colors duration-500 group-hover:text-white/40"
+                style={{ color: "rgba(255,255,255,0.2)" }}
+              >
+                {isAr ? "تصميم وبرمجة" : "Designed & Developed by"}
+              </p>
+              <p
+                className="text-[11px] tracking-[0.25em] uppercase font-medium mt-1 transition-colors duration-500 group-hover:text-white/60"
+                style={{ color: "rgba(255,255,255,0.3)" }}
+              >
+                Eng. Alhassan Ahmed
+              </p>
+            </div>
+
+            {/* Right line */}
+            <span
+              className="block h-px w-8 transition-all duration-500 group-hover:w-12"
+              style={{ background: "rgba(255,255,255,0.12)" }}
+            />
+          </a>
         </div>
 
       </div>
