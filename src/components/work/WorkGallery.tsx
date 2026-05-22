@@ -6,18 +6,18 @@ import { ClientLogos } from "@/components/shared/ClientLogos";
 
 /* ── Gallery items ─────────────────────────────────────────────────── */
 const ITEMS = [
-  { id: 1,  ratio: "4/5",  labelEn: "TETCO — Saudi Founding Day",        labelAr: "تتكو — يوم التأسيس السعودي",          year: "2026", catEn: "Corporate",   catAr: "شركات",     color: "#38BDF8", video: "/videos/tetco-founding-day.mp4" },
-  { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
-  { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olya",                    labelAr: "أبراج العليا",                         year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
-  { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },
-  { id: 5,  ratio: "1/1",  labelEn: "King Abdullah City for Energy",    labelAr: "مدينة الملك عبد الله للطاقة",          year: "2024", catEn: "Exhibition",  catAr: "معرض",      color: "#231650", video: "/videos/kacare.mp4" },
-  { id: 6,  ratio: "4/5",  labelEn: "ANB Celebration",                  labelAr: "احتفالية بنك العربي الوطني",           year: "2024", catEn: "Corporate",   catAr: "شركات",     color: "#B83A14", video: "/videos/anb-celebration.mp4" },
-  { id: 7,  ratio: "9/16", labelEn: "Flag Ceremony",                    labelAr: "حفل العلم",                            year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/flag.mp4" },
-  { id: 8,  ratio: "16/9", labelEn: "Fairmont Ramadan",                 labelAr: "فيرمونت رمضان",                        year: "2024", catEn: "Hospitality", catAr: "ضيافة",     color: "#F3742B", video: "/videos/fairmont-ramadan.mp4" },
+  { id: 1,  ratio: "4/5",  labelEn: "TETCO — Saudi Founding Day",        labelAr: "تتكو — يوم التأسيس السعودي",          year: "2025", catEn: "Corporate",   catAr: "شركات",     color: "#38BDF8", video: "/videos/tetco-founding-day.mp4" },
   { id: 9,  ratio: "3/4",  labelEn: "Misk MGF 25",                      labelAr: "منتدى مسك MGF 25",                     year: "2025", catEn: "Conference",  catAr: "مؤتمر",     color: "#612E37", video: "/videos/misk-mgf25.mp4" },
-  { id: 10, ratio: "1/1",  labelEn: "Mawhiba",                          labelAr: "موهبة",                                year: "2024", catEn: "Corporate",   catAr: "شركات",     color: "#231650", video: "/videos/mawhiba.mp4" },
-  { id: 11, ratio: "4/5",  labelEn: "Oxford Center",                    labelAr: "مركز أكسفورد",                         year: "2024", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/oxford-center.mp4" },
-  { id: 12, ratio: "16/9", labelEn: "Roshn",                            labelAr: "واجهة روشن",                           year: "2024", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/roshn.mp4" },
+  { id: 2,  ratio: "1/1",  labelEn: "SKY EXPO Showreel 2025",           labelAr: "شوريل SKY EXPO 2025",                 year: "2025", catEn: "Production",  catAr: "إنتاج",     color: "#FED172", video: "/videos/skyexpo-work-2025.mp4" },
+  { id: 3,  ratio: "16/9", labelEn: "Abraj Al Olya",                    labelAr: "أبراج العليا",                         year: "2025", catEn: "Exhibition",  catAr: "معرض",      color: "#F3742B", video: "/videos/abraj-alolaya.mp4" },
+  { id: 4,  ratio: "3/4",  labelEn: "Martyrs & Wounded Fund",           labelAr: "صندوق الشهداء والمصابين",              year: "2025", catEn: "Event",       catAr: "فعالية",    color: "#612E37", video: "/videos/shuhada-fund.mp4" },
+  { id: 5,  ratio: "1/1",  labelEn: "King Abdullah City for Energy",    labelAr: "مدينة الملك عبد الله للطاقة",          year: "2025", catEn: "Exhibition",  catAr: "معرض",      color: "#231650", video: "/videos/kacare.mp4" },
+  { id: 6,  ratio: "4/5",  labelEn: "ANB Celebration",                  labelAr: "احتفالية بنك العربي الوطني",           year: "2025", catEn: "Corporate",   catAr: "شركات",     color: "#B83A14", video: "/videos/anb-celebration.mp4" },
+  { id: 7,  ratio: "9/16", labelEn: "Flag Ceremony",                    labelAr: "حفل العلم",                            year: "2025", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/flag.mp4" },
+  { id: 8,  ratio: "16/9", labelEn: "Fairmont Ramadan",                 labelAr: "فيرمونت رمضان",                        year: "2025", catEn: "Hospitality", catAr: "ضيافة",     color: "#F3742B", video: "/videos/fairmont-ramadan.mp4" },
+  { id: 10, ratio: "1/1",  labelEn: "Mawhiba",                          labelAr: "موهبة",                                year: "2025", catEn: "Corporate",   catAr: "شركات",     color: "#231650", video: "/videos/mawhiba.mp4" },
+  { id: 11, ratio: "4/5",  labelEn: "Oxford Center",                    labelAr: "مركز أكسفورد",                         year: "2025", catEn: "Conference",  catAr: "مؤتمر",     color: "#B83A14", video: "/videos/oxford-center.mp4" },
+  { id: 12, ratio: "16/9", labelEn: "Roshn",                            labelAr: "واجهة روشن",                           year: "2025", catEn: "Event",       catAr: "فعالية",    color: "#FED172", video: "/videos/roshn.mp4" },
 ];
 
 /* ── Tilt card ─────────────────────────────────────────────────────── */
@@ -41,7 +41,7 @@ function GalleryCard({ item, isAr, soundOn }: {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setLoaded(true); obs.disconnect(); } },
-      { rootMargin: "200px" }
+      { rootMargin: "100px" }
     );
     obs.observe(el);
     return () => obs.disconnect();

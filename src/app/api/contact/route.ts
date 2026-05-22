@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,28 +14,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      host:   process.env.SMTP_HOST     || "mail.skyexpo.com.sa",
-      port:   Number(process.env.SMTP_PORT || 465),
-      secure: process.env.SMTP_SECURE !== "false",
-      auth: {
-        user: process.env.SMTP_USER || "info@skyexpo.com.sa",
-        pass: process.env.SMTP_PASS || "",
-      },
-    });
-
-    await transporter.sendMail({
-      from:    `"SKY EXPO Website" <${process.env.SMTP_USER || "info@skyexpo.com.sa"}>`,
-      to:      "info@skyexpo.com.sa",
+    const { error } = await resend.emails.send({
+      from:    "SKY EXPO Website <onboarding@resend.dev>",
+      to:      ["info@skyexpo.com.sa"],
       replyTo: email,
       subject: `رسالة جديدة من الموقع — ${name}`,
       html: `
         <div dir="rtl" style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff;border-radius:8px;">
           <div style="border-bottom:2px solid #C0392B;padding-bottom:16px;margin-bottom:24px;">
-            <img src="https://skyexpo.com.sa/images/skyexpo-logo.png" alt="SKY EXPO" height="40" style="margin-bottom:8px;" />
-            <h2 style="margin:0;color:#fff;font-size:20px;">رسالة جديدة من الموقع الإلكتروني</h2>
+            <h2 style="margin:0;color:#fff;font-size:20px;">📩 رسالة جديدة من الموقع الإلكتروني</h2>
           </div>
-
           <table style="width:100%;border-collapse:collapse;">
             <tr>
               <td style="padding:10px 0;color:#aaa;width:120px;vertical-align:top;">الاسم</td>
@@ -52,7 +42,6 @@ export async function POST(req: NextRequest) {
               <td style="padding:10px 0;color:#fff;white-space:pre-wrap;">${message}</td>
             </tr>
           </table>
-
           <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;color:#555;font-size:12px;">
             SKY EXPO Event Solutions &nbsp;·&nbsp; skyexpo.com.sa
           </div>
@@ -60,11 +49,20 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    if (error) {
+      console.error("[Resend Error]", error);
+      return NextResponse.json(
+        { error: "Failed to send", detail: error.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("[Contact API]", err);
+  } catch (err: unknown) {
+    const e = err as Error;
+    console.error("[Contact API Error]", e.message);
     return NextResponse.json(
-      { error: "Failed to send message" },
+      { error: "Failed to send", detail: e.message },
       { status: 500 }
     );
   }

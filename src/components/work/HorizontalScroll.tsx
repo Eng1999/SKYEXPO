@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const PROJECTS = [
-  { id: 1, titleEn: "GITEX Global", titleAr: "جيتكس العالمي", year: "2024", colorHex: "#F3742B" },
-  { id: 2, titleEn: "Saudi Vision Summit", titleAr: "قمة رؤية السعودية", year: "2024", colorHex: "#FED172" },
-  { id: 3, titleEn: "Future Minerals Forum", titleAr: "منتدى المعادن المستقبلية", year: "2023", colorHex: "#B83A14" },
-  { id: 4, titleEn: "Cityscape Global", titleAr: "سيتي سكيب العالمي", year: "2023", colorHex: "#612E37" },
-  { id: 5, titleEn: "Biban Forum", titleAr: "منتدى بيبان", year: "2023", colorHex: "#231650" },
-  { id: 6, titleEn: "World Defense Show", titleAr: "معرض الدفاع العالمي", year: "2022", colorHex: "#F3742B" },
+  { id: 1, titleEn: "GITEX Global", titleAr: "جيتكس العالمي", year: "2025", colorHex: "#F3742B" },
+  { id: 2, titleEn: "Saudi Vision Summit", titleAr: "قمة رؤية السعودية", year: "2025", colorHex: "#FED172" },
+  { id: 3, titleEn: "Future Minerals Forum", titleAr: "منتدى المعادن المستقبلية", year: "2025", colorHex: "#B83A14" },
+  { id: 4, titleEn: "Cityscape Global", titleAr: "سيتي سكيب العالمي", year: "2025", colorHex: "#E07B6B" },
+  { id: 5, titleEn: "Biban Forum", titleAr: "منتدى بيبان", year: "2025", colorHex: "#7C6FCD" },
+  { id: 6, titleEn: "World Defense Show", titleAr: "معرض الدفاع العالمي", year: "2025", colorHex: "#F3742B" },
 ];
 
 export function HorizontalScroll() {
