@@ -23,11 +23,6 @@ export function Footer() {
       className="relative border-t"
       style={{ background: "#060608", borderColor: "rgba(255,255,255,0.06)" }}
     >
-      {/* Top accent line */}
-      <div className="h-px w-full" style={{
-        background: "linear-gradient(to right, transparent, rgba(184,58,20,0.5), rgba(254,209,114,0.3), transparent)"
-      }} />
-
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10 md:px-16 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
 
@@ -164,19 +159,25 @@ export function Footer() {
 
         </div>
 
-        {/* Bottom bar */}
+        {/* ── Bottom bar ── */}
         <div
-          className="mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+          className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
-          <p className="text-[10px] tracking-[0.3em] uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>
-            © {new Date().getFullYear()} SKY EXPO.{" "}
-            {isAr ? "جميع الحقوق محفوظة." : "All rights reserved."}
+          <p className="text-[11px] font-light" style={{ color: "rgba(255,255,255,0.25)" }}>
+            © {new Date().getFullYear()}{" "}
+            {isAr ? "سكاي إكسبو لحلول الفعاليات. جميع الحقوق محفوظة." : "SKY EXPO Event Solutions. All rights reserved."}
           </p>
-          <p className="text-[10px] tracking-[0.25em] uppercase" style={{ color: "rgba(255,255,255,0.15)" }}>
-            {isAr ? "صُنع بشغف في المملكة العربية السعودية 🇸🇦" : "Made with passion in Saudi Arabia 🇸🇦"}
+          <p className="text-[11px] font-light" style={{ color: "rgba(255,255,255,0.2)" }}>
+            {isAr ? "السجل التجاري" : "CR"}: 7002257322
           </p>
         </div>
+
+        {/* Hidden ownership signature — not visible to users */}
+        <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", top: "-9999px", width: 0, height: 0, overflow: "hidden", pointerEvents: "none" }}>
+          <span data-owner="ENG-ALHASSAN-AHMED" data-contact="0502230233" data-cr="7002257322" data-year="2026" />
+        </div>
+
       </div>
     </footer>
   );

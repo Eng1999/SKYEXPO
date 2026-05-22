@@ -35,9 +35,15 @@ export const SOCIAL = [
     icon: `<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>`,
   },
   {
-    id: "google",
-    href: "https://share.google/Qi3MZe5Ca8MqYnt87",
-    label: "Google",
-    icon: `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.32.13.65.15.99L13 11V10zm0 3l6.87.01A8 8 0 0113 19.93V13z"/>`,
+    id: "linkedin",
+    href: "https://www.linkedin.com/company/sky-expo-sa/posts/?feedView=all",
+    label: "LinkedIn",
+    icon: `<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>`,
+  },
+  {
+    id: "twitter",
+    href: "https://x.com/SYexpo",
+    label: "X (Twitter)",
+    icon: `<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>`,
   },
 ];

@@ -31,14 +31,35 @@ function GeometricElement() {
 function ContactForm({ isAr }: { isAr: boolean }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSending(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    setSent(true);
+    setError(false);
+
+    const form = formRef.current!;
+    const data = {
+      name:    (form.elements.namedItem("name")    as HTMLInputElement).value,
+      email:   (form.elements.namedItem("email")   as HTMLInputElement).value,
+      phone:   (form.elements.namedItem("phone")   as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSent(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
@@ -69,7 +90,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
         <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
           {isAr ? "الاسم الكامل" : "Full Name"}
         </label>
-        <input type="text" required placeholder={isAr ? "اسمك هنا" : "Your name"}
+        <input name="name" type="text" required placeholder={isAr ? "اسمك هنا" : "Your name"}
           className={inputClass} dir={isAr ? "rtl" : "ltr"} />
       </div>
 
@@ -79,14 +100,14 @@ function ContactForm({ isAr }: { isAr: boolean }) {
           <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
             {isAr ? "البريد الإلكتروني" : "Email"}
           </label>
-          <input type="email" required placeholder={isAr ? "بريدك@مثال.com" : "you@example.com"}
+          <input name="email" type="email" required placeholder={isAr ? "بريدك@مثال.com" : "you@example.com"}
             className={inputClass} dir="ltr" />
         </div>
         <div>
           <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
             {isAr ? "الهاتف" : "Phone"}
           </label>
-          <input type="tel" placeholder="+966 5x xxxx xxxx" className={inputClass} dir="ltr" />
+          <input name="phone" type="tel" placeholder="+966 5x xxxx xxxx" className={inputClass} dir="ltr" />
         </div>
       </div>
 
@@ -94,10 +115,18 @@ function ContactForm({ isAr }: { isAr: boolean }) {
         <label className={labelClass} style={{ color: "rgba(255,255,255,0.55)" }}>
           {isAr ? "رسالتك" : "Message"}
         </label>
-        <textarea required rows={4}
+        <textarea name="message" required rows={4}
           placeholder={isAr ? "أخبرنا عن مشروعك..." : "Tell us about your project..."}
           className={`${inputClass} resize-none leading-relaxed`} dir={isAr ? "rtl" : "ltr"} />
       </div>
+
+      {error && (
+        <p className="text-sm" style={{ color: "#C0392B" }}>
+          {isAr
+            ? "حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل مباشرة عبر info@skyexpo.com.sa"
+            : "Failed to send. Please try again or email us directly at info@skyexpo.com.sa"}
+        </p>
+      )}
 
       <button type="submit" disabled={sending}
         className="group flex items-center gap-5 self-start text-sm tracking-[0.3em] uppercase font-medium text-white/70 hover:text-white transition-colors duration-400"

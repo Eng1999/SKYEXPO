@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Cairo } from "next/font/google";
+import { Outfit, Cairo, El_Messiri } from "next/font/google";
 import "./globals.css";
 import { ColorProvider } from "@/context/ColorContext";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -25,10 +25,34 @@ const cairo = Cairo({
   display: "swap",
 });
 
+const elMessiri = El_Messiri({
+  subsets: ["arabic", "latin"],
+  variable: "--font-ar-heading",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Sky Expo — Where moments become legacy",
   description: "حيث تتحول اللحظات إلى إرث | Sky Expo — Saudi-based world-class exhibitions & events.",
-  keywords: "sky expo, exhibitions, events, conferences, saudi arabia, riyadh, معارض, فعاليات, مؤتمرات",
+  keywords: "sky expo, exhibitions, events, conferences, saudi arabia, riyadh, معارض, فعاليات, مؤتمرات, سكاي اكسبو",
+  metadataBase: new URL("https://skyexpo.com.sa"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://skyexpo.com.sa",
+    siteName: "Sky Expo",
+    title: "Sky Expo — Where moments become legacy",
+    description: "Saudi Arabia's premier exhibitions, conferences & events company since 2009.",
+    locale: "ar_SA",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sky Expo",
+    description: "Saudi Arabia's premier exhibitions & events company.",
+  },
+  robots: { index: true, follow: true },
+  other: { "theme-color": "#000000" },
 };
 
 export default function RootLayout({
@@ -37,8 +61,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className={`${outfit.variable} ${cairo.variable} antialiased`}>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
+      <body className={`${outfit.variable} ${cairo.variable} ${elMessiri.variable} antialiased`}>
         <LanguageProvider>
           <ColorProvider>
             <HtmlDirSync />
