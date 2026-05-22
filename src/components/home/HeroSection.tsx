@@ -48,7 +48,7 @@ export function HeroSection() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/skyexpo-logo.png"
+          src="/images/skyexpo-logo.png?v=2"
           alt="Sky Expo"
           style={{ height: 100, width: "auto", display: "block" }}
         />

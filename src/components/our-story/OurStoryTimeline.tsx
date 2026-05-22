@@ -34,7 +34,7 @@ const MILESTONES = [
     titleAr: "عقد من التميز",
     descEn: "Celebrating 10 years with over 60 satisfied clients, a team of 70+ professionals, and a fleet of 1,500+ specialized tools and equipment.",
     descAr: "الاحتفال بـ١٠ سنوات مع أكثر من ٦٠ عميلاً راضياً، وفريق من أكثر من ٧٠ محترفاً، وأسطول من أكثر من ١٥٠٠ أداة ومعدة متخصصة.",
-    color: "#612E37",
+    color: "#E07B6B",
   },
   {
     year: "Today",
@@ -42,7 +42,7 @@ const MILESTONES = [
     titleAr: "نصنع المستقبل",
     descEn: "Leading Saudi Arabia's exhibition industry into a new era — where every moment becomes a legacy that endures.",
     descAr: "نقود صناعة المعارض السعودية إلى حقبة جديدة — حيث تتحول كل لحظة إلى إرث يدوم.",
-    color: "#231650",
+    color: "#7C6FCD",
   },
 ];
 
@@ -60,7 +60,7 @@ export function OurStoryTimeline() {
         <p className="text-xs tracking-[0.5em] uppercase text-white/55 mb-3">
           {isAr ? "رحلتنا" : "Our Journey"}
         </p>
-        <h2 className="text-3xl md:text-5xl font-semibold text-white">
+        <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight">
           {isAr ? "المحطات التي شكّلتنا" : "Milestones that shaped us"}
         </h2>
       </div>
@@ -133,7 +133,7 @@ function TimelineItem({
 
       {/* Content */}
       <div className="flex-1 pb-2">
-        <h3 className="text-xl md:text-2xl font-medium text-white mb-3">
+        <h3 className="text-2xl md:text-4xl font-bold text-white mb-3">
           {isAr ? item.titleAr : item.titleEn}
         </h3>
         <p className="text-sm leading-relaxed text-white/60">

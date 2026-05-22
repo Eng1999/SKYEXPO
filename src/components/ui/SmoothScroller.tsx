@@ -8,9 +8,12 @@ export function SmoothScroller() {
     let rafId: number;
 
     const init = async () => {
+      // Disable Lenis on touch/mobile — use native scroll for better performance
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+
       const { default: Lenis } = await import("lenis");
       lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.0,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         touchMultiplier: 2,
       });

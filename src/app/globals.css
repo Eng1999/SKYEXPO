@@ -40,6 +40,27 @@ html[dir="rtl"] body {
   letter-spacing: 0;
 }
 
+/* Arabic heading font — El Messiri for majestic Saudi style */
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4 {
+  font-family: var(--font-ar-heading, var(--font-ar, system-ui)) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Force El Messiri on large Arabic text elements */
+html[dir="rtl"] [style*="clamp(2"],
+html[dir="rtl"] [style*="clamp(3"],
+html[dir="rtl"] [style*="clamp(4"],
+html[dir="rtl"] [style*="clamp(5"],
+html[dir="rtl"] [style*="clamp(6"] {
+  font-family: var(--font-ar-heading, var(--font-ar, system-ui)) !important;
+  letter-spacing: 0 !important;
+}
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -212,3 +233,134 @@ html[dir="rtl"] body {
 .font-thin       { font-weight: 300; }   /* was 100 → now 300 */
 .font-extralight { font-weight: 300; }   /* was 200 → now 300 */
 .font-light      { font-weight: 400; }   /* was 300 → now 400 */
+
+/* Boost text clarity — raise low-opacity white text to readable levels */
+.text-white\/30 { color: rgba(255,255,255,0.55) !important; }
+.text-white\/35 { color: rgba(255,255,255,0.55) !important; }
+.text-white\/45 { color: rgba(255,255,255,0.65) !important; }
+.text-white\/55 { color: rgba(255,255,255,0.72) !important; }
+.text-white\/60 { color: rgba(255,255,255,0.78) !important; }
+.text-white\/65 { color: rgba(255,255,255,0.82) !important; }
+
+/* ══ Cross-platform & Performance fixes ══════════════════════════════════ */
+
+/* iOS: prevent font size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* iOS safe area insets */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Safari: backdrop-filter prefix */
+.backdrop-blur-xl,
+.backdrop-blur-sm,
+.backdrop-blur {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* All browsers: smooth tap on touch devices */
+a, button, [data-cursor-hover] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Minimum touch target size (iOS/Android guidelines) */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Firefox: hide scrollbar */
+* {
+  scrollbar-width: none;
+}
+
+/* iOS: momentum scroll */
+.overflow-y-auto, .overflow-auto, main {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Windows: fix font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Force GPU acceleration on animated elements */
+.will-change-transform,
+[style*="translateZ"],
+[style*="translate3d"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Video: fill correctly on all browsers */
+video {
+  object-fit: cover;
+  -o-object-fit: cover;
+}
+
+/* Image: prevent drag */
+img, video {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* High-DPI screens: sharper rendering */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body { -webkit-font-smoothing: subpixel-antialiased; }
+}
+
+/* Reduced motion: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  video[autoplay] { display: none; }
+}
+
+/* ══ Speed & Rendering optimizations ══════════════════════════════════════ */
+
+/* GPU compositing for video elements */
+video {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: auto;
+}
+
+/* Contain paint for off-screen sections */
+section {
+  contain: layout style;
+}
+
+/* Mobile: disable heavy animations, use native scroll */
+@media (pointer: coarse) {
+  * {
+    transition-duration: 0.2s !important;
+    animation-duration: 0.2s !important;
+  }
+  .will-change-transform {
+    will-change: auto !important;
+  }
+}
+
+/* Prevent layout shifts from fonts loading */
+html {
+  font-display: swap;
+}
+
+/* Faster tap response on mobile */
+a, button {
+  touch-action: manipulation;
+}

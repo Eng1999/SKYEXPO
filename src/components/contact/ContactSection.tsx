@@ -32,6 +32,7 @@ function ContactForm({ isAr }: { isAr: boolean }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -53,9 +54,12 @@ function ContactForm({ isAr }: { isAr: boolean }) {
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Failed");
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.detail || "Failed");
       setSent(true);
-    } catch {
+    } catch (err: unknown) {
+      const e = err as Error;
+      setErrorMsg(e.message || "Unknown error");
       setError(true);
     } finally {
       setSending(false);
@@ -121,11 +125,16 @@ function ContactForm({ isAr }: { isAr: boolean }) {
       </div>
 
       {error && (
-        <p className="text-sm" style={{ color: "#C0392B" }}>
-          {isAr
-            ? "حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل مباشرة عبر info@skyexpo.com.sa"
-            : "Failed to send. Please try again or email us directly at info@skyexpo.com.sa"}
-        </p>
+        <div style={{ color: "#C0392B" }}>
+          <p className="text-sm">
+            {isAr
+              ? "حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل مباشرة عبر info@skyexpo.com.sa"
+              : "Failed to send. Please try again or email us directly at info@skyexpo.com.sa"}
+          </p>
+          {errorMsg && (
+            <p className="text-xs mt-1 font-mono opacity-70">{errorMsg}</p>
+          )}
+        </div>
       )}
 
       <button type="submit" disabled={sending}

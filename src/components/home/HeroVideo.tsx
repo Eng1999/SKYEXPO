@@ -44,6 +44,7 @@ export function HeroVideo({ src }: HeroVideoProps) {
           loop
           playsInline
           preload="metadata"
+          {...({ "x-webkit-airplay": "allow", "webkit-playsinline": "" } as Record<string, string>)}
         >
           <source src={src} type="video/mp4" />
         </video>

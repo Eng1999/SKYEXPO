@@ -5,10 +5,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 const STATS = [
-  { value: 15,   suffix: "+", labelEn: "Years of Experience", labelAr: "عاماً من الخبرة",   color: "#4CC8E8" },
-  { value: 60,   suffix: "+", labelEn: "Satisfied Clients",   labelAr: "عميل راضٍ",         color: "#F3742B" },
-  { value: 70,   suffix: "+", labelEn: "Team Members",        labelAr: "عضو في الفريق",      color: "#FED172" },
-  { value: 1500, suffix: "+", labelEn: "Tools & Equipment",   labelAr: "أداة ومعدة متخصصة", color: "#ffffff" },
+  { value: 900, suffix: "+", labelEn: "Projects Delivered",  labelAr: "مشروعاً منفذاً",    color: "#F3742B" },
+  { value: 70,  suffix: "+", labelEn: "Specialist Team",     labelAr: "كادر متخصص",         color: "#FED172" },
+  { value: 17,  suffix: "+", labelEn: "Years of Experience", labelAr: "سنة من الخبرة",      color: "#4CC8E8" },
 ];
 
 export function OurStoryStats() {
@@ -38,7 +37,7 @@ export function OurStoryStats() {
       <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
 
-      <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 md:gap-12 max-w-6xl mx-auto">
+      <div className="relative grid grid-cols-3 gap-y-10 gap-x-6 md:gap-12 max-w-3xl mx-auto justify-items-center">
         {STATS.map((s, i) => (
           <AnimatedStat
             key={i}

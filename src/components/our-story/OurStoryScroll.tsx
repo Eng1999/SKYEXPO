@@ -48,7 +48,7 @@ const PANELS = [
       "منطلقة من جذور راسخة، ومتوافقة مع طموحات رؤية السعودية 2030، تواصل SKY EXPO توسيع حضورها الإبداعي. نقدّم فعاليات عالمية المستوى وسردًا بصريًا يصل إلى الجمهور عالميًا، دون أن يفقد ارتباطه بهويته.",
     taglineEn: "Global resonance. Saudi soul.",
     taglineAr: "حضور عالمي. روح سعودية.",
-    color: "#231650",
+    color: "#7C6FCD",
   },
 ];
 
@@ -190,7 +190,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
               ref={bgVideoRef}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: "brightness(0.6) saturate(0.8)" }}
-              autoPlay muted loop playsInline preload="metadata"
+              autoPlay muted loop playsInline preload="none"
             >
               <source src={bgSrc} type="video/mp4" />
             </video>
@@ -244,7 +244,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
 
                   {/* Title */}
                   <h2
-                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-semibold leading-[0.9] uppercase -mt-4"
+                    className="text-[clamp(3.5rem,7.5vw,9.5rem)] font-bold leading-[0.88] uppercase -mt-4"
                     style={{ color: "rgba(255,255,255,0.95)", textShadow: "0 2px 20px rgba(0,0,0,0.7)" }}
                   >
                     {isAr ? panel.titleAr : panel.titleEn}
@@ -252,7 +252,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
 
                   {/* Subtitle */}
                   <h2
-                    className="text-[clamp(2.4rem,5.5vw,6.5rem)] font-semibold leading-[0.9] uppercase"
+                    className="text-[clamp(3.5rem,7.5vw,9.5rem)] font-bold leading-[0.88] uppercase"
                     style={{ color: panel.color, textShadow: `0 2px 30px ${panel.color}55` }}
                   >
                     {isAr ? panel.subtitleAr : panel.subtitleEn}

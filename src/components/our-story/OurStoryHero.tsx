@@ -76,8 +76,8 @@ export function OurStoryHero() {
           <div
             className="font-semibold tracking-tight uppercase text-white mb-6"
             style={{
-              fontSize: "clamp(3rem,8vw,9rem)",
-              lineHeight: isAr ? 1.2 : 0.9,
+              fontSize: "clamp(4rem,11vw,13rem)",
+              lineHeight: isAr ? 1.05 : 0.9,
             }}
           >
             {isAr ? (

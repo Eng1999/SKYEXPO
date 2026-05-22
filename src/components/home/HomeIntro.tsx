@@ -5,10 +5,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 const STATS = [
-  { value: 15,   suffix: "+", labelEn: "Years of Experience", labelAr: "عاماً من الخبرة",   color: "#4CC8E8" },
-  { value: 60,   suffix: "+", labelEn: "Satisfied Clients",   labelAr: "عميل راضٍ",         color: "#F3742B" },
-  { value: 70,   suffix: "+", labelEn: "Team Members",        labelAr: "عضو في الفريق",      color: "#FED172" },
-  { value: 1500, suffix: "+", labelEn: "Tools & Equipment",   labelAr: "أداة ومعدة متخصصة", color: "#ffffff" },
+  { value: 900, suffix: "+", labelEn: "Projects Delivered",  labelAr: "مشروعاً منفذاً",    color: "#F3742B" },
+  { value: 70,  suffix: "+", labelEn: "Specialist Team",     labelAr: "كادر متخصص",         color: "#FED172" },
+  { value: 17,  suffix: "+", labelEn: "Years of Experience", labelAr: "سنة من الخبرة",      color: "#4CC8E8" },
 ];
 
 export function HomeIntro() {
@@ -57,7 +56,7 @@ export function HomeIntro() {
           </p>
           <h2
             className="font-bold text-white leading-[1.05]"
-            style={{ fontSize: "clamp(2.4rem,4.5vw,4rem)" }}
+            style={{ fontSize: "clamp(3.2rem,6vw,6.5rem)" }}
           >
             {isAr ? (
               <>تجارب تتجاوز<br /><span style={{ color: "#4CC8E8" }}>الحدود</span></>
@@ -96,7 +95,7 @@ export function HomeIntro() {
 
         {/* Stats grid */}
         <div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-0"
+          className="relative grid grid-cols-3 gap-y-10 gap-x-6 md:gap-12 max-w-3xl mx-auto justify-items-center"
           style={fadeIn(0.45)}
         >
           {STATS.map((s, i) => (

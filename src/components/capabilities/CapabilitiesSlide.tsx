@@ -14,7 +14,7 @@ const SERVICES = [
     color: "#F3742B",
     bg: "radial-gradient(ellipse at 35% 65%, #6b2d0a 0%, #2a1000 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 30% 70%, #8B3A0A 0%, #3A1500 45%, #080808 100%)",
-    video: "/videos/flynas-event.mp4",
+    video: "/videos/cap-events-interactive.mp4",
   },
   {
     id: 1,
@@ -25,7 +25,7 @@ const SERVICES = [
     color: "#FED172",
     bg: "radial-gradient(ellipse at 40% 60%, #2a3d1a 0%, #0d1808 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 40% 60%, #3a5020 0%, #182410 45%, #080808 100%)",
-    video: "/videos/abraj-alolaya.mp4",
+    video: "/videos/cap-experience-dev.mp4",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const SERVICES = [
     color: "#F3742B",
     bg: "radial-gradient(ellipse at 50% 45%, #0f2040 0%, #060d20 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 50% 45%, #162a50 0%, #0a1428 45%, #080808 100%)",
-    video: "/videos/misk-mgf25.mp4",
+    video: "/videos/cap-conferences-exhibitions.mp4",
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const SERVICES = [
     color: "#FED172",
     bg: "radial-gradient(ellipse at 60% 40%, #3d1a2a 0%, #1a0a12 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 60% 40%, #4d2035 0%, #22101a 45%, #080808 100%)",
-    video: "/videos/promo-alt.mp4",
+    video: "/videos/cap-identity-design.mp4",
   },
   {
     id: 4,
@@ -58,51 +58,40 @@ const SERVICES = [
     color: "#F3742B",
     bg: "radial-gradient(ellipse at 50% 30%, #12103a 0%, #07061d 45%, #000 100%)",
     lightBg: "radial-gradient(ellipse at 50% 30%, #1a1850 0%, #0c0a28 45%, #000 100%)",
-    video: "/videos/skyexpo-work-2025.mp4",
+    video: "/videos/cap-media-production.mp4",
   },
   {
     id: 5,
-    titleEn: "Social\nMedia",
+    titleEn: "Digital Content\nManagement",
     titleAr: "إدارة المحتوى\nالرقمي",
     descEn: "Curated digital presence defined by relevance, consistency, and cultural awareness.",
     descAr: "حضور رقمي مُنسّق يعكس الملاءمة واتساقًا وفهمًا عميقًا للمشهد الثقافي.",
     color: "#FED172",
     bg: "radial-gradient(ellipse at 45% 55%, #3a1015 0%, #180608 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 45% 55%, #4a1520 0%, #200a0d 45%, #080808 100%)",
-    video: "/videos/anb-celebration.mp4",
+    video: "/videos/cap-content-management.mp4",
   },
   {
     id: 6,
-    titleEn: "Website\nDevelopment",
-    titleAr: "تطوير المواقع\nالإلكترونية",
-    descEn: "Digital platforms crafted with attention to form, function, and performance.",
-    descAr: "منصات رقمية تُبنى بعناية، تجمع بين الجمال والوظيفة والأداء.",
-    color: "#F3742B",
-    bg: "radial-gradient(ellipse at 50% 50%, #0a1a30 0%, #040d18 45%, #000 100%)",
-    lightBg: "radial-gradient(ellipse at 50% 50%, #102240 0%, #061020 45%, #000 100%)",
-    video: "/videos/fairmont-ramadan.mp4",
-  },
-  {
-    id: 7,
     titleEn: "Printing\nSolutions",
     titleAr: "حلول\nالطباعة",
     descEn: "High-quality physical outputs translating vision into tangible detail.",
     descAr: "مخرجات مادية عالية الجودة تُجسّد الرؤية وتمنحها حضورًا ملموسًا.",
-    color: "#FED172",
+    color: "#F3742B",
     bg: "radial-gradient(ellipse at 50% 60%, #2a1f10 0%, #120d06 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 50% 60%, #382a14 0%, #1a1108 45%, #080808 100%)",
-    video: "/videos/abraj-alolaya.mp4",
+    video: "/videos/cap-printing.mp4",
   },
   {
-    id: 8,
+    id: 7,
     titleEn: "Catering\nServices",
     titleAr: "خدمات\nالضيافة",
     descEn: "Refined catering solutions delivered with precision and care, designed to complement each event.",
     descAr: "حلول ضيافة راقية تُقدَّم بعناية عالية، مصممة لتتكامل مع طبيعة الحدث.",
-    color: "#F3742B",
+    color: "#FED172",
     bg: "radial-gradient(ellipse at 35% 65%, #0f2415 0%, #071008 45%, #080808 100%)",
     lightBg: "radial-gradient(ellipse at 35% 65%, #142e1a 0%, #09150a 45%, #080808 100%)",
-    video: "/videos/flag.mp4",
+    video: "/videos/cap-hospitality.mp4",
   },
 ];
 
@@ -290,8 +279,8 @@ export function CapabilitiesSlide() {
         </p>
         <h1
           className="font-bold leading-[0.9] uppercase mb-6"
-          style={{ fontSize: "clamp(3rem,6vw,6.5rem)", color: "#ffffff",
-                   textShadow: "0 2px 30px rgba(0,0,0,0.8)" }}
+          style={{ fontSize: "clamp(4rem,8.5vw,9rem)", color: "#ffffff",
+                   textShadow: "0 2px 30px rgba(0,0,0,0.8)", lineHeight: 0.88 }}
         >
           {isAr ? "منظومة" : "A Complete"}
           <br />
@@ -310,7 +299,7 @@ export function CapabilitiesSlide() {
       {/* ── 3D Fan Carousel ───────────────────────────────────────── */}
       <div
         className="relative select-none"
-        style={{ height: "56vh", perspective: "1400px", perspectiveOrigin: "50% 50%", overflow: "visible" }}
+        style={{ height: "70vh", perspective: "1400px", perspectiveOrigin: "50% 50%", overflow: "visible" }}
       >
         {/* ── Hover zone LEFT → scroll left ── */}
         <div
@@ -342,8 +331,8 @@ export function CapabilitiesSlide() {
                 key={svc.id}
                 className="absolute"
                 style={{
-                  width: "clamp(160px, 18vw, 260px)",
-                  height: "clamp(230px, 30vw, 400px)",
+                  width: "clamp(180px, 20vw, 300px)",
+                  height: "clamp(280px, 38vw, 480px)",
                   transform: `translateX(${geo.translateX}px) translateZ(${geo.translateZ}px) rotateY(${geo.rotateY}deg) scale(${geo.scale})`,
                   opacity: geo.opacity,
                   zIndex: geo.zIndex,
@@ -453,7 +442,7 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
     <div
       className="relative mx-4 md:mx-8 mt-10 mb-16 rounded-2xl overflow-hidden"
       style={{
-        minHeight: "clamp(260px, 42vh, 520px)",
+        minHeight: "clamp(320px, 52vh, 640px)",
         border: `1px solid ${service.color}30`,
         boxShadow: `0 0 100px ${service.color}18, 0 40px 80px rgba(0,0,0,0.8)`,
         transition: "border-color 0.7s ease, box-shadow 0.7s ease",
@@ -469,6 +458,7 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
         loop
         playsInline
         autoPlay
+        preload="none"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: "brightness(0.55) saturate(0.85)",
@@ -527,7 +517,7 @@ function DetailPanel({ service, isAr }: { service: typeof SERVICES[0]; isAr: boo
         <h2
           className="font-bold leading-tight whitespace-pre-line mb-4"
           style={{
-            fontSize: "clamp(1.8rem, 3.5vw, 3.2rem)",
+            fontSize: "clamp(2.4rem, 5vw, 5rem)",
             color: "#ffffff",
             textShadow: `0 2px 24px rgba(0,0,0,0.9), 0 0 60px ${service.color}30`,
             transition: "color 0.6s ease",
