@@ -78,7 +78,7 @@ export function CEOMessage() {
         >
           <p className="text-[10px] tracking-[0.6em] uppercase font-medium"
              style={{ color: "#B83A14" }}>
-            {isAr ? "كلمة القيادة" : "Chairman's Message"}
+            {isAr ? "رسالة مجلس الإدارة" : "Board of Directors' Message"}
           </p>
           <div className="mt-3 h-px w-16" style={{ background: "linear-gradient(to right, #B83A14, transparent)" }} />
         </div>

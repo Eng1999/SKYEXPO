@@ -7,6 +7,26 @@
   --bg-base: #000000;
   --bg-layer1: #0a0a0a;
   --bg-layer2: #111111;
+
+  /* Ticker speed — desktop default */
+  --ticker-dur:     50s;
+  --ticker-dur-rev: 60s;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --ticker-dur:     85s;
+    --ticker-dur-rev: 100s;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  :root {
+    --ticker-dur:     110s;
+    --ticker-dur-rev: 130s;
+  }
 }
 
 * {
@@ -344,15 +364,21 @@ section {
   contain: layout style;
 }
 
-/* Mobile: disable heavy animations, use native scroll */
+/* Mobile: reduce heavy animations for better performance */
 @media (pointer: coarse) {
-  * {
+  *:not(.animate-spin) {
     transition-duration: 0.2s !important;
-    animation-duration: 0.2s !important;
   }
   .will-change-transform {
     will-change: auto !important;
   }
+}
+
+/* content-visibility: skip off-screen rendering cost */
+section + section,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
 }
 
 /* Prevent layout shifts from fonts loading */

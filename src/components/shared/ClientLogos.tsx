@@ -67,9 +67,9 @@ export function ClientLogos({ showLabel = true }: { showLabel?: boolean }) {
           }}
         >
           <div
-            className="flex items-center gap-14 shrink-0"
+            className="flex items-center gap-14 shrink-0 ticker-forward"
             style={{
-              animation: "ticker 50s linear infinite",
+              animation: "ticker var(--ticker-dur, 50s) linear infinite",
               paddingRight: "3.5rem",
               willChange: "transform",
             }}
@@ -91,9 +91,9 @@ export function ClientLogos({ showLabel = true }: { showLabel?: boolean }) {
           }}
         >
           <div
-            className="flex items-center gap-14 shrink-0"
+            className="flex items-center gap-14 shrink-0 ticker-reverse"
             style={{
-              animation: "ticker_reverse 60s linear infinite",
+              animation: "ticker_reverse var(--ticker-dur-rev, 60s) linear infinite",
               paddingRight: "3.5rem",
               willChange: "transform",
             }}
