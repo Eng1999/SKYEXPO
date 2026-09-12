@@ -19,7 +19,9 @@ export function ColorProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const target = PAGE_COLORS[pathname] ?? DEFAULT_COLOR;
+    const target =
+      PAGE_COLORS[pathname] ??
+      (pathname.startsWith("/blog") ? PAGE_COLORS["/blog"] : DEFAULT_COLOR);
     setColor(target);
 
     // Tween the CSS variable smoothly — never sudden
