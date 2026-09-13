@@ -43,7 +43,6 @@ html {
 
 body {
   background: var(--bg-base);
-  cursor: none;
   overflow-x: hidden;
   /* English font by default */
   font-family: var(--font-en, system-ui, sans-serif);

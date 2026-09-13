@@ -7,18 +7,20 @@ import type { BlogPost, ContentBlock } from "@/data/blog-posts";
 
 const ACCENT = "#2FA8D9";
 
-function Block({ block }: { block: ContentBlock }) {
+function Block({ block, isAr }: { block: ContentBlock; isAr: boolean }) {
+  const t = (l: { ar: string; en: string }) => (isAr ? l.ar : l.en);
+
   switch (block.type) {
     case "h2":
       return (
         <h2 className="text-2xl md:text-3xl font-bold text-white mt-12 md:mt-16 mb-5">
-          {block.text}
+          {t(block.text)}
         </h2>
       );
     case "h3":
       return (
         <h3 className="text-lg md:text-xl font-semibold text-white mt-9 md:mt-11 mb-4">
-          {block.text}
+          {t(block.text)}
         </h3>
       );
     case "p":
@@ -27,7 +29,7 @@ function Block({ block }: { block: ContentBlock }) {
           className="text-base md:text-lg leading-loose mb-5"
           style={{ color: "rgba(255,255,255,0.82)" }}
         >
-          {block.text}
+          {t(block.text)}
         </p>
       );
     case "ul":
@@ -43,7 +45,7 @@ function Block({ block }: { block: ContentBlock }) {
                 className="text-base md:text-lg leading-relaxed"
                 style={{ color: "rgba(255,255,255,0.82)" }}
               >
-                {item}
+                {t(item)}
               </span>
             </li>
           ))}
@@ -61,7 +63,7 @@ function Block({ block }: { block: ContentBlock }) {
                     className="text-start px-4 py-3 font-semibold text-white border-b"
                     style={{ borderColor: "rgba(255,255,255,0.1)" }}
                   >
-                    {h}
+                    {t(h)}
                   </th>
                 ))}
               </tr>
@@ -82,7 +84,7 @@ function Block({ block }: { block: ContentBlock }) {
                         borderColor: "rgba(255,255,255,0.06)",
                       }}
                     >
-                      {cell}
+                      {t(cell)}
                     </td>
                   ))}
                 </tr>
@@ -114,13 +116,12 @@ export function BlogArticle({
 
   return (
     <div className="bg-black min-h-screen">
-      {/* Article content is always Arabic — these posts are authored in Arabic only */}
-      <article dir="rtl" className="min-h-screen">
+      <article dir={isAr ? "rtl" : "ltr"} className="min-h-screen">
         {/* ── Hero ── */}
         <div className="relative min-h-[46vh] md:min-h-[56vh] flex flex-col justify-end overflow-hidden">
           <Image
             src={post.cover}
-            alt={post.title}
+            alt={isAr ? post.title.ar : post.title.en}
             fill
             priority
             sizes="100vw"
@@ -141,7 +142,7 @@ export function BlogArticle({
               style={{ color: ACCENT }}
               data-cursor-hover
             >
-              <span>→</span>
+              <span>{isAr ? "→" : "←"}</span>
               {isAr ? "المدونة" : "Blog"}
             </Link>
 
@@ -149,7 +150,7 @@ export function BlogArticle({
               className="text-[11px] tracking-[0.4em] uppercase font-semibold mb-4"
               style={{ color: ACCENT }}
             >
-              {post.category}
+              {isAr ? post.category.ar : post.category.en}
             </p>
 
             <h1
@@ -160,14 +161,14 @@ export function BlogArticle({
                 textShadow: "0 2px 40px rgba(0,0,0,0.7)",
               }}
             >
-              {post.title}
+              {isAr ? post.title.ar : post.title.en}
             </h1>
 
             <p
               className="text-base md:text-lg max-w-2xl mb-5"
               style={{ color: "rgba(255,255,255,0.75)" }}
             >
-              {post.subtitle}
+              {isAr ? post.subtitle.ar : post.subtitle.en}
             </p>
 
             <div
@@ -176,7 +177,7 @@ export function BlogArticle({
             >
               <time dateTime={post.date}>{formattedDate}</time>
               <span className="w-1 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.3)" }} />
-              <span>{post.readTime}</span>
+              <span>{isAr ? post.readTime.ar : post.readTime.en}</span>
             </div>
           </div>
         </div>
@@ -185,7 +186,7 @@ export function BlogArticle({
         <div className="px-5 sm:px-8 lg:px-16 py-14 md:py-20">
           <div className="max-w-[760px] mx-auto">
             {post.content.map((block, i) => (
-              <Block key={i} block={block} />
+              <Block key={i} block={block} isAr={isAr} />
             ))}
           </div>
         </div>
@@ -202,10 +203,10 @@ export function BlogArticle({
                   data-cursor-hover
                 >
                   <p className="text-[11px] tracking-[0.3em] uppercase font-semibold mb-2" style={{ color: ACCENT }}>
-                    التالي
+                    {isAr ? "التالي" : "Next"}
                   </p>
                   <p className="text-white font-semibold leading-snug group-hover:text-white/80 transition-colors">
-                    {next.title}
+                    {isAr ? next.title.ar : next.title.en}
                   </p>
                 </Link>
               ) : (
@@ -219,10 +220,10 @@ export function BlogArticle({
                   data-cursor-hover
                 >
                   <p className="text-[11px] tracking-[0.3em] uppercase font-semibold mb-2" style={{ color: ACCENT }}>
-                    السابق
+                    {isAr ? "السابق" : "Previous"}
                   </p>
                   <p className="text-white font-semibold leading-snug group-hover:text-white/80 transition-colors">
-                    {prev.title}
+                    {isAr ? prev.title.ar : prev.title.en}
                   </p>
                 </Link>
               ) : (

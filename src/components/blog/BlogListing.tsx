@@ -58,17 +58,6 @@ export function BlogListing() {
         </div>
       </div>
 
-      {isAr ? null : (
-        <div className="px-5 sm:px-8 lg:px-16">
-          <p
-            className="text-xs mb-8 md:mb-10 rounded-lg px-4 py-3 inline-block"
-            style={{ color: "rgba(255,255,255,0.6)", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-          >
-            These articles are currently published in Arabic only.
-          </p>
-        </div>
-      )}
-
       {/* ── Article grid ─────────────────────────────────────────────── */}
       <div className="px-5 sm:px-8 lg:px-16 pb-20 md:pb-28 border-t border-white/[0.06] pt-12 md:pt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
@@ -82,7 +71,7 @@ export function BlogListing() {
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl mb-5 bg-white/5">
                 <Image
                   src={post.cover}
-                  alt={post.title}
+                  alt={isAr ? post.title.ar : post.title.en}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -97,18 +86,18 @@ export function BlogListing() {
                 className="text-[11px] tracking-[0.3em] uppercase font-semibold mb-3"
                 style={{ color: ACCENT }}
               >
-                {post.category}
+                {isAr ? post.category.ar : post.category.en}
               </p>
 
               <h2 className="text-lg md:text-xl font-semibold text-white mb-3 leading-snug transition-colors duration-300 group-hover:text-white/80">
-                {post.title}
+                {isAr ? post.title.ar : post.title.en}
               </h2>
 
               <p
                 className="text-sm leading-relaxed mb-4 flex-1"
                 style={{ color: "rgba(255,255,255,0.68)" }}
               >
-                {post.excerpt}
+                {isAr ? post.excerpt.ar : post.excerpt.en}
               </p>
 
               <div
@@ -123,7 +112,7 @@ export function BlogListing() {
                   })}
                 </time>
                 <span className="w-1 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.3)" }} />
-                <span>{post.readTime}</span>
+                <span>{isAr ? post.readTime.ar : post.readTime.en}</span>
               </div>
             </Link>
           ))}

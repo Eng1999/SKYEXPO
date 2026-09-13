@@ -12,21 +12,21 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!post) return {};
 
   return {
-    title: `${post.title} — Sky Expo`,
-    description: post.excerpt,
+    title: `${post.title.ar} — Sky Expo`,
+    description: post.excerpt.ar,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.excerpt,
+      title: post.title.ar,
+      description: post.excerpt.ar,
       url: `https://skyexpo.com.sa/blog/${post.slug}`,
       images: [{ url: post.cover }],
       publishedTime: post.date,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title: post.title.ar,
+      description: post.excerpt.ar,
       images: [post.cover],
     },
   };
@@ -41,8 +41,8 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
+    headline: post.title.ar,
+    description: post.excerpt.ar,
     image: `https://skyexpo.com.sa${post.cover}`,
     datePublished: post.date,
     inLanguage: "ar",
