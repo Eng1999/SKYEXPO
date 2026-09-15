@@ -5,6 +5,7 @@ import { ColorProvider } from "@/context/ColorContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { HtmlDirSync } from "@/components/ui/HtmlDirSync";
 import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { SmoothScroller } from "@/components/ui/SmoothScroller";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -135,6 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <WhatsAppButton />
           </ColorProvider>
         </LanguageProvider>
       </body>
