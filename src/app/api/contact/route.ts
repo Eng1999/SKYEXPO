@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend) resend = new Resend(process.env.RESEND_API_KEY);
+  return resend;
+}
 
 /* ── Simple in-memory rate limit: max 3 submissions per IP per 10 min ── */
 const rateMap = new Map<string, { count: number; reset: number }>();
@@ -168,14 +172,14 @@ export async function POST(req: NextRequest) {
 
     /* ── Send both emails in parallel ── */
     const [notif, confirm] = await Promise.allSettled([
-      resend.emails.send({
+      getResend().emails.send({
         from:    "SKY EXPO Website <onboarding@resend.dev>",
         to:      ["info@skyexpo.com.sa"],
         replyTo: email.trim(),
         subject: `رسالة جديدة من الموقع — ${name.trim()}`,
         html:    buildNotificationEmail(name.trim(), email.trim(), phone?.trim() ?? "", message.trim()),
       }),
-      resend.emails.send({
+      getResend().emails.send({
         from:    "SKY EXPO <onboarding@resend.dev>",
         to:      [email.trim()],
         subject: isAr ? "شكراً لتواصلك — SKY EXPO" : "Thank you for reaching out — SKY EXPO",

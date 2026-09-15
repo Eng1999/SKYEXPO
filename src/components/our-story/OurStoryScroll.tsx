@@ -59,13 +59,17 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
   const [muted, setMuted] = useState(true);
   const bgVideoRef = useRef<HTMLVideoElement>(null);
 
-  /* sync mute to bg video */
-  useEffect(() => {
+  /* Toggle synchronously inside the click handler — Safari/iOS only allow
+     programmatic unmute+play within the original user-gesture call stack. */
+  const handleToggleMute = () => {
     const v = bgVideoRef.current;
-    if (!v) return;
-    v.muted = muted;
-    if (!muted) v.play().catch(() => {});
-  }, [muted]);
+    const next = !muted;
+    if (v) {
+      v.muted = next;
+      if (!next) v.play().catch(() => {});
+    }
+    setMuted(next);
+  };
 
   const sectionRef  = useRef<HTMLElement>(null);
   const panelRefs   = useRef<(HTMLDivElement | null)[]>([]);
@@ -323,7 +327,7 @@ export function OurStoryScroll({ videoSrc, videos }: { videoSrc?: string; videos
         {/* ── Sound toggle ── */}
         {bgSrc && (
           <button
-            onClick={() => setMuted((m) => !m)}
+            onClick={handleToggleMute}
             className="absolute bottom-8 z-30 flex items-center gap-2"
             style={{ [isAr ? "left" : "right"]: "1.25rem" }}
             aria-label={muted ? "Enable sound" : "Mute"}

@@ -18,8 +18,19 @@ Options +FollowSymLinks
   RewriteCond %{HTTP_HOST} ^www\.skyexpo\.com\.sa$ [NC]
   RewriteRule ^ https://skyexpo.com.sa%{REQUEST_URI} [L,R=301]
 
-  # ── Serve existing files/dirs as-is ─────────
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  # ── Serve existing files as-is ───────────────
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # ── Directory with an index.html → serve it explicitly
+  #    (don't rely on the server's own DirectoryIndex resolution —
+  #    some hosts 403 a bare directory request even when Options
+  #    -Indexes is set and an index.html exists inside it) ──
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+
+  # ── Directory with no index.html: serve as-is (e.g. asset dirs) ──
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 

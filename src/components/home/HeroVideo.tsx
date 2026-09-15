@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroVideoProps {
@@ -13,13 +13,19 @@ export function HeroVideo({ src }: HeroVideoProps) {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
 
-  /* sync mute state to video element */
-  useEffect(() => {
+  /* Toggle must happen synchronously inside the click handler — some
+     browsers (notably Safari/iOS) only allow programmatic unmute+play
+     when it runs within the original user-gesture call stack, not from
+     a useEffect fired after the state update commits. */
+  const handleToggle = () => {
     const v = videoRef.current;
-    if (!v) return;
-    v.muted = muted;
-    if (!muted) v.play().catch(() => {});
-  }, [muted]);
+    const next = !muted;
+    if (v) {
+      v.muted = next;
+      if (!next) v.play().catch(() => {});
+    }
+    setMuted(next);
+  };
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -58,7 +64,7 @@ export function HeroVideo({ src }: HeroVideoProps) {
       {/* ── Sound toggle ── */}
       {src && (
         <button
-          onClick={() => setMuted((m) => !m)}
+          onClick={handleToggle}
           className="absolute bottom-8 z-30 flex items-center gap-2 group"
           style={{ [isAr ? "left" : "right"]: "clamp(1.25rem,4vw,4rem)" }}
           aria-label={muted ? "Enable sound" : "Mute"}
