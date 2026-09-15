@@ -15,8 +15,12 @@ export function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label={isAr ? "تواصل معنا عبر واتساب" : "Chat with us on WhatsApp"}
       data-cursor-hover
-      className="fixed bottom-6 right-6 z-[55] flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-300 hover:scale-110"
-      style={{ background: "#25D366", boxShadow: "0 6px 24px rgba(0,0,0,0.35)" }}
+      className="fixed bottom-6 z-[55] flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-300 hover:scale-110"
+      style={{
+        [isAr ? "left" : "right"]: "1.5rem",
+        background: "#25D366",
+        boxShadow: "0 6px 24px rgba(0,0,0,0.35)",
+      }}
     >
       <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path
